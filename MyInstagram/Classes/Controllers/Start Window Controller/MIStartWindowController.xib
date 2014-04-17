@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MIStartWindowController">
@@ -21,20 +21,20 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="400" height="493"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
             <value key="minSize" type="size" width="157" height="300"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="400" height="493"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <progressIndicator maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="wpF-gb-T2x" userLabel=" Progress Indicator">
+                    <progressIndicator hidden="YES" maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="wpF-gb-T2x" userLabel=" Progress Indicator">
                         <rect key="frame" x="109" y="19" width="96" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="96" id="wB4-bp-k4Q"/>
                         </constraints>
                     </progressIndicator>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hN6-vW-Agy" userLabel="Connecting Button">
+                    <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hN6-vW-Agy" userLabel="Connecting Button">
                         <rect key="frame" x="20" y="19" width="81" height="19"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="roundRect" title="Connecting" bezelStyle="roundedRect" alignment="center" enabled="NO" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ltn-fc-P25">
@@ -56,7 +56,7 @@
                             </connections>
                         </buttonCell>
                     </button>
-                    <scrollView autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mtz-4r-gpY" userLabel="Collection View">
+                    <scrollView autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mtz-4r-gpY" userLabel="Collection View">
                         <rect key="frame" x="20" y="46" width="360" height="427"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" id="wCx-hc-wxU">
@@ -83,9 +83,9 @@
                         </scroller>
                     </scrollView>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UfQ-oy-uPS">
-                        <rect key="frame" x="304" y="10" width="82" height="32"/>
+                        <rect key="frame" x="14" y="12" width="94" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oho-Ii-osK">
+                        <buttonCell key="cell" type="push" title="Get feed" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oho-Ii-osK">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -101,14 +101,14 @@
                 <constraints>
                     <constraint firstItem="mtz-4r-gpY" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="3bh-cr-4WP"/>
                     <constraint firstAttribute="bottom" secondItem="wpF-gb-T2x" secondAttribute="bottom" constant="20" id="69q-tW-pgY"/>
+                    <constraint firstItem="UfQ-oy-uPS" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="CPF-pL-YC7"/>
                     <constraint firstItem="gFO-AE-SHX" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="CWa-hg-w91"/>
-                    <constraint firstAttribute="trailing" secondItem="UfQ-oy-uPS" secondAttribute="trailing" constant="20" id="GWQ-NL-BOa"/>
                     <constraint firstItem="gFO-AE-SHX" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="Ku0-FE-ody"/>
                     <constraint firstItem="hN6-vW-Agy" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="OEv-AJ-XkH"/>
                     <constraint firstItem="wpF-gb-T2x" firstAttribute="leading" secondItem="hN6-vW-Agy" secondAttribute="trailing" constant="8" id="OoI-BW-5jq"/>
                     <constraint firstAttribute="trailing" secondItem="gFO-AE-SHX" secondAttribute="trailing" id="Qx2-DM-p8J"/>
                     <constraint firstItem="To6-dd-1lA" firstAttribute="top" secondItem="mtz-4r-gpY" secondAttribute="bottom" constant="8" id="ZYI-VZ-pYe"/>
-                    <constraint firstAttribute="bottom" secondItem="UfQ-oy-uPS" secondAttribute="bottom" constant="17" id="lcc-PX-Fbq"/>
+                    <constraint firstAttribute="bottom" secondItem="UfQ-oy-uPS" secondAttribute="bottom" constant="19" id="lcc-PX-Fbq"/>
                     <constraint firstAttribute="bottom" secondItem="To6-dd-1lA" secondAttribute="bottom" constant="20" id="m78-UW-dbA"/>
                     <constraint firstItem="To6-dd-1lA" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="ngC-WQ-feQ"/>
                     <constraint firstItem="mtz-4r-gpY" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="qMe-cg-WtM"/>

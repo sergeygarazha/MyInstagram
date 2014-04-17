@@ -134,9 +134,13 @@
 }
 
 - (IBAction)getFeed:(id)sender {
+    [self.progressBar setHidden:NO];
+    [self.progressBar startAnimation:self];
 	[[MINetworkManager sharedInstance] getFeedAndExecute: ^(BOOL success, NSArray *resultArray) {
 	    if (success) {
             [arrayController setContent:resultArray];
+            [self.progressBar stopAnimation:self];
+            [self.progressBar setHidden:YES];
 		} else {
             
         }

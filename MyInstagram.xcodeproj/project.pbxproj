@@ -473,6 +473,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = self;
 				TargetAttributes = {
+					D225738318E3029300D0C276 = {
+						DevelopmentTeam = GDTL7HS4E2;
+					};
 					D22573A718E3029400D0C276 = {
 						TestTargetID = D225738318E3029300D0C276;
 					};
@@ -774,6 +777,7 @@
 			baseConfigurationReference = 9CC38572A04645B88CCB5969 /* Pods-MyInstagram.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyInstagram/MyInstagram-Prefix.pch";
@@ -788,6 +792,7 @@
 			baseConfigurationReference = 9CC38572A04645B88CCB5969 /* Pods-MyInstagram.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyInstagram/MyInstagram-Prefix.pch";
