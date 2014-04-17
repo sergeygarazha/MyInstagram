@@ -7,6 +7,9 @@
 //
 
 #import "MIAppDelegate.h"
+#import "MIStartViewController.h"
+#import "MIStartWindowController.h"
+#import <RKLog.h>
 
 @implementation MIAppDelegate
 
@@ -14,9 +17,14 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize managedObjectContext = _managedObjectContext;
 
+@synthesize startWC;
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+    RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
+    self.startWC = [[MIStartWindowController alloc] init];
+    self.window = startWC.window;
+    [startWC showWindow:self];
 }
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "self.MyInstagram" in the user's Application Support directory.
