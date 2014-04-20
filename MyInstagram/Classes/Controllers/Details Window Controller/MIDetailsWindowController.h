@@ -15,5 +15,6 @@
 @property (weak) IBOutlet NSImageView *image;
 
 - (instancetype)initWithPost:(Post *)post_;
+- (void)updateWithPost:(Post *)post;
 
 @end
