@@ -91,14 +91,6 @@
     window.inactiveTitleBarStartColor     = [NSColor colorWithCalibratedWhite: 0.8  alpha: 1.0];
     window.inactiveBaselineSeparatorColor = [NSColor colorWithCalibratedWhite: 1.0  alpha: 1.0];
     
-//    [window setTitleTextColor:[NSColor whiteColor]];
-//    NSShadow *shadow = [[NSShadow alloc] init];
-//    [shadow setShadowColor:[NSColor lightGrayColor]];
-//    [shadow setShadowBlurRadius:7.0];
-//    [window setTitleTextShadow:shadow];
-//    [window setVerticallyCenterTitle:YES];
-//    [window setShowsTitle:YES];
-    
     [window setShowsBaselineSeparator:YES];
     
     window.titleBarDrawingBlock = ^(BOOL drawsAsMainWindow, CGRect drawingRect, CGPathRef clippingPath) {
@@ -120,6 +112,8 @@
 		[gradient drawInRect:drawingRect angle:90];
 		NSRectFill(NSMakeRect(NSMinX(drawingRect), NSMinY(drawingRect), NSWidth(drawingRect), 1));
 	};
+    
+//    window.titleBarView = 
 }
 
 - (void)windowDidLoad {
