@@ -9,7 +9,6 @@
 #ifndef MyInstagram_Common_h
 #define MyInstagram_Common_h
 
-#define TOKEN       @"token"
-#define BASE_URL    @"https://api.instagram.com/v1/users/"
+#define TOKEN @"token"
 
 #endif

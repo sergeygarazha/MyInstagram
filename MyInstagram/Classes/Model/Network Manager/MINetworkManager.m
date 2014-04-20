@@ -13,12 +13,6 @@
 #import <RKEntityMapping.h>
 #import <RKErrorMessage.h>
 
-@interface MINetworkManager () {
-    NSURL *nextPageURL;
-}
-
-@end
-
 @implementation MINetworkManager
 
 @synthesize token, manager;
@@ -40,109 +34,53 @@
 }
 
 - (RKObjectManager *)manager {
-    if (!manager) {
-        manager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:BASE_URL]];
-        manager.managedObjectStore = [MIDatabaseManager sharedInstance].managedObjectStore;
-        
-        [RKObjectManager setSharedManager:manager];
-        
-        // mapping for posts
-        RKEntityMapping *articleMapping = [RKEntityMapping mappingForEntityForName:@"Post" inManagedObjectStore:[MIDatabaseManager sharedInstance].managedObjectStore];
-        [articleMapping addAttributeMappingsFromDictionary:@{ @"images.thumbnail.url":              @"thumbnail",
-                                                              @"images.standard_resolution.url":    @"standard"
-                                                              }];
-        // mapping for next page string
-        RKObjectMapping *nextPageMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
-        [nextPageMapping addAttributeMappingsFromDictionary:@{@"next_url": @"next_url"}];
-        RKResponseDescriptor *nextPageDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:nextPageMapping
-                                                                                                method:RKRequestMethodAny
-                                                                                           pathPattern:nil
-                                                                                               keyPath:@"pagination"
-                                                                                           statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-        
-        //!!!: обработка истекшего срока годности токена
-        RKObjectMapping *errorMapping = [RKObjectMapping mappingForClass:[RKErrorMessage class]];
-        // The entire value at the source key path containing the errors maps to the message
-        [errorMapping addAttributeMappingsFromDictionary:@{ @"error_message":   @"errorMessage",
-                                                            @"error_type":      @"userInfo"
-                                                            }];
-        NSIndexSet *errorStatusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassClientError);
-        // Any response in the 4xx status code range with an "errors" key path uses this mapping
-        RKResponseDescriptor *errorDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:errorMapping method:RKRequestMethodAny pathPattern:nil keyPath:nil statusCodes:errorStatusCodes];
-        
-        NSIndexSet *statusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful); // Anything in 2xx
-        RKResponseDescriptor *articleDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:articleMapping method:RKRequestMethodAny pathPattern:nil keyPath:@"data" statusCodes:statusCodes];
-        
-        [manager addResponseDescriptorsFromArray:@[articleDescriptor, errorDescriptor, nextPageDescriptor]];
-    }
+    manager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:@"https://api.instagram.com/v1/users/"]];
+    manager.managedObjectStore = [MIDatabaseManager sharedInstance].managedObjectStore;
+    
+    [RKObjectManager setSharedManager:manager];
     
     return manager;
 }
 
 #pragma mark - Methods
 
-- (void)getFeedAndExecute:(feedReturnBlockType)block {
-    __block NSMutableArray *resultArray = [NSMutableArray array];
+- (NSArray *)getFeedAndExecute:(feedReturnBlockType)block {
+	RKEntityMapping *articleMapping = [RKEntityMapping mappingForEntityForName:@"Post" inManagedObjectStore:[MIDatabaseManager sharedInstance].managedObjectStore];
+	[articleMapping addAttributeMappingsFromDictionary:@{ @"images.thumbnail.url":          @"thumbnail",
+                                                          @"images.standard_resolution.url":    @"standard"
+                                                          }];
+
+    //!!!: обработка истекшего срока годности токена
+    RKObjectMapping *errorMapping = [RKObjectMapping mappingForClass:[RKErrorMessage class]];
+    // The entire value at the source key path containing the errors maps to the message
+    [errorMapping addAttributeMappingsFromDictionary:@{ @"error_message":   @"errorMessage",
+                                                        @"error_type":      @"userInfo"
+                                                       }];
+    NSIndexSet *errorStatusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassClientError);
+    // Any response in the 4xx status code range with an "errors" key path uses this mapping
+    RKResponseDescriptor *errorDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:errorMapping method:RKRequestMethodAny pathPattern:nil keyPath:nil statusCodes:errorStatusCodes];
+    
+	NSIndexSet *statusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful); // Anything in 2xx
+	RKResponseDescriptor *articleDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:articleMapping method:RKRequestMethodAny pathPattern:nil keyPath:@"data" statusCodes:statusCodes];
+
+	[self.manager addResponseDescriptorsFromArray:@[articleDescriptor, errorDescriptor]];
+
+	__block NSArray *resultArray = [NSArray array];
 
     [[MIDatabaseManager sharedInstance] deleteOldEntries];
     
 	[manager getObjectsAtPath:[NSString stringWithFormat:@"self/feed?access_token=%@", [[MINetworkManager sharedInstance] token]]
 	               parameters:nil
 	                  success: ^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        for (id element in mappingResult.array) {
-            if ([element isKindOfClass:[NSDictionary class]]) {
-                nextPageURL = [NSURL URLWithString:element[@"next_url"]];
-            }
-            
-            if ([element isKindOfClass:[RKErrorMessage class]]) {
-                NSLog(@"error!: %@", [(RKErrorMessage *)element errorMessage]);
-            }
-            
-            if ([element isKindOfClass:[Post class]]) {
-                [resultArray addObject:element];
-            }
-        }
-                          
-	    block(YES, [resultArray copy]);
+	    resultArray = mappingResult.array;
+	    block(YES, resultArray);
 	}
                       failure: ^(RKObjectRequestOperation *operation, NSError *error) {
-	    block(NO, nil);
+	    block(NO, resultArray);
 	    NSLog(@"Failed to receive feed array");
 	}];
-}
 
-- (void)getNextPageAndExecute:(feedReturnBlockType)block {
-    if (nextPageURL) {
-        [self.manager getObjectsAtPath:nextPageURL.absoluteString
-                            parameters:nil
-                               success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-                                   // success
-                                   NSMutableArray *resultArray = [NSMutableArray array];
-                                   
-                                   for (id element in mappingResult.array) {
-                                       if ([element isKindOfClass:[NSDictionary class]]) {
-                                           nextPageURL = [NSURL URLWithString:element[@"next_url"]];
-                                       }
-                                       
-                                       if ([element isKindOfClass:[RKErrorMessage class]]) {
-                                           NSLog(@"error!: %@", [(RKErrorMessage *)element errorMessage]);
-                                       }
-                                       
-                                       if ([element isKindOfClass:[Post class]]) {
-                                           [resultArray addObject:element];
-                                       }
-                                   }
-                                   
-                                   block(YES, resultArray);
-                            }
-                               failure:^(RKObjectRequestOperation *operation, NSError *error) {
-                // failure
-                                   block(NO, nil);
-                                   NSLog(@"Failed to receive next page");
-        }];
-    } else {
-        NSLog(@"next page string is nil");
-    }
+	return resultArray;
 }
 
 + (BOOL)performInstagramAuthorization {
@@ -165,7 +103,7 @@
 	return NO;
 }
 
-#pragma mark - Token
+#pragma mark - User Defaults
 
 - (NSString *)token {
     if (!token) {

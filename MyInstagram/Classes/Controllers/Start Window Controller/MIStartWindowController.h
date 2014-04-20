@@ -7,11 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "MIScrollView.h"
 
 @class MICollectionView;
 
-@interface MIStartWindowController : NSWindowController <NSWindowDelegate, MIScrollViewDelegate>
+@interface MIStartWindowController : NSWindowController <NSWindowDelegate>
 
 @property (weak) IBOutlet NSProgressIndicator *progressBar;
 @property (weak) IBOutlet NSButton *reconnectButton;

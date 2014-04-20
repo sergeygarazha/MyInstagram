@@ -77,16 +77,20 @@
 }
 
 - (void)windowDidEndLiveResize:(NSNotification *)notification {
+//    CGPoint origin = self.window.frame.origin;
+//    CGSize size = self.image.frame.size;
+//    [self.window setFrame:CGRectMake(origin.x, origin.y, size.width, size.height) display:YES];
+    
+//    NSLog(@"%f, %f", self.window.frame.size.width, self.window.frame.size.height);
 }
 
-- (void)windowWillClose:(NSNotification *)notification {
-    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f,%f,%f,%f", self.window.frame.origin.x,self.window.frame.origin.y, self.window.frame.size.width, self.window.frame.size.height] forKey:@"detailsWindow"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
+//- (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize {
+//}
 
-- (void)updateWithPost:(Post *)post_ {
-    post = post_;
-    [self.image setImageFromURL:[NSURL URLWithString:post.standard] withThumbnail:[NSURL URLWithString:post.thumbnail]];
+- (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize {
+    NSLog(@"%f", frameSize.height);
+    
+    return frameSize;
 }
 
 @end

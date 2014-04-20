@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		47CB232EDB9F41D6A40A340A /* libPods-MyInstagram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBF243C994B40DAB6DE0012 /* libPods-MyInstagram.a */; };
-		CFF64A7D1903A65B0048AC93 /* Instagram1.png in Resources */ = {isa = PBXBuildFile; fileRef = CFF64A7B1903A65B0048AC93 /* Instagram1.png */; };
-		CFF64A7E1903A65B0048AC93 /* Instagram.png in Resources */ = {isa = PBXBuildFile; fileRef = CFF64A7C1903A65B0048AC93 /* Instagram.png */; };
 		D225738818E3029300D0C276 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D225738718E3029300D0C276 /* Cocoa.framework */; };
 		D225739218E3029300D0C276 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D225739018E3029300D0C276 /* InfoPlist.strings */; };
 		D225739418E3029300D0C276 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D225739318E3029300D0C276 /* main.m */; };
@@ -37,15 +35,6 @@
 		D22573F118E320AC00D0C276 /* MIStartWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D22573F018E320AC00D0C276 /* MIStartWindowController.m */; };
 		D22573F618E3FB8B00D0C276 /* MIDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D22573F518E3FB8B00D0C276 /* MIDatabaseManager.m */; };
 		D22573FB18E3FBDC00D0C276 /* MINetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D22573FA18E3FBDC00D0C276 /* MINetworkManager.m */; };
-		D256E7A3190123EC00305329 /* MIScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7A2190123EC00305329 /* MIScrollView.m */; };
-		D256E7AE1901319100305329 /* RFOverlayScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7AB1901319100305329 /* RFOverlayScroller.m */; };
-		D256E7AF1901319100305329 /* RFOverlayScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7AD1901319100305329 /* RFOverlayScrollView.m */; };
-		D256E7C719014CE500305329 /* INAppStoreWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7BE19014CE500305329 /* INAppStoreWindow.m */; };
-		D256E7C819014CE500305329 /* INAppStoreWindowSwizzling.c in Sources */ = {isa = PBXBuildFile; fileRef = D256E7BF19014CE500305329 /* INAppStoreWindowSwizzling.c */; };
-		D256E7C919014CE500305329 /* INTitlebarView+CoreUIRendering.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7C219014CE500305329 /* INTitlebarView+CoreUIRendering.m */; };
-		D256E7CA19014CE500305329 /* INWindowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7C419014CE500305329 /* INWindowButton.m */; };
-		D256E7CB19014CE500305329 /* NSDocument+INAppStoreWindowFixes.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7C619014CE500305329 /* NSDocument+INAppStoreWindowFixes.m */; };
-		D256E7CF190151E500305329 /* MICustomWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7CE190151E500305329 /* MICustomWindow.m */; };
 		D2A089CC18FE796800B298D3 /* MIStartWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2A089CB18FE796800B298D3 /* MIStartWindowController.xib */; };
 		D2A089D018FE9B0A00B298D3 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A089CF18FE9B0A00B298D3 /* Post.m */; };
 		D2A089D818FEBC4100B298D3 /* MICollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A089D718FEBC4100B298D3 /* MICollectionViewItem.m */; };
@@ -75,8 +64,6 @@
 /* Begin PBXFileReference section */
 		7FBF243C994B40DAB6DE0012 /* libPods-MyInstagram.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyInstagram.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CC38572A04645B88CCB5969 /* Pods-MyInstagram.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyInstagram.xcconfig"; path = "Pods/Pods-MyInstagram.xcconfig"; sourceTree = "<group>"; };
-		CFF64A7B1903A65B0048AC93 /* Instagram1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Instagram1.png; sourceTree = "<group>"; };
-		CFF64A7C1903A65B0048AC93 /* Instagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Instagram.png; sourceTree = "<group>"; };
 		D225738418E3029300D0C276 /* MyInstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyInstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D225738718E3029300D0C276 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D225738A18E3029300D0C276 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -122,24 +109,6 @@
 		D22573F918E3FBDC00D0C276 /* MINetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MINetworkManager.h; path = "Classes/Model/Network Manager/MINetworkManager.h"; sourceTree = "<group>"; };
 		D22573FA18E3FBDC00D0C276 /* MINetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MINetworkManager.m; path = "Classes/Model/Network Manager/MINetworkManager.m"; sourceTree = "<group>"; };
 		D256E79F18FFF6C300305329 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
-		D256E7A1190123EC00305329 /* MIScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIScrollView.h; path = "Classes/View/Scroll View/MIScrollView.h"; sourceTree = "<group>"; };
-		D256E7A2190123EC00305329 /* MIScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIScrollView.m; path = "Classes/View/Scroll View/MIScrollView.m"; sourceTree = "<group>"; };
-		D256E7AA1901319100305329 /* RFOverlayScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFOverlayScroller.h; sourceTree = "<group>"; };
-		D256E7AB1901319100305329 /* RFOverlayScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFOverlayScroller.m; sourceTree = "<group>"; };
-		D256E7AC1901319100305329 /* RFOverlayScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFOverlayScrollView.h; sourceTree = "<group>"; };
-		D256E7AD1901319100305329 /* RFOverlayScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFOverlayScrollView.m; sourceTree = "<group>"; };
-		D256E7BD19014CE500305329 /* INAppStoreWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAppStoreWindow.h; sourceTree = "<group>"; };
-		D256E7BE19014CE500305329 /* INAppStoreWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAppStoreWindow.m; sourceTree = "<group>"; };
-		D256E7BF19014CE500305329 /* INAppStoreWindowSwizzling.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = INAppStoreWindowSwizzling.c; sourceTree = "<group>"; };
-		D256E7C019014CE500305329 /* INAppStoreWindowSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAppStoreWindowSwizzling.h; sourceTree = "<group>"; };
-		D256E7C119014CE500305329 /* INTitlebarView+CoreUIRendering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "INTitlebarView+CoreUIRendering.h"; sourceTree = "<group>"; };
-		D256E7C219014CE500305329 /* INTitlebarView+CoreUIRendering.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "INTitlebarView+CoreUIRendering.m"; sourceTree = "<group>"; };
-		D256E7C319014CE500305329 /* INWindowButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INWindowButton.h; sourceTree = "<group>"; };
-		D256E7C419014CE500305329 /* INWindowButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INWindowButton.m; sourceTree = "<group>"; };
-		D256E7C519014CE500305329 /* NSDocument+INAppStoreWindowFixes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDocument+INAppStoreWindowFixes.h"; sourceTree = "<group>"; };
-		D256E7C619014CE500305329 /* NSDocument+INAppStoreWindowFixes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDocument+INAppStoreWindowFixes.m"; sourceTree = "<group>"; };
-		D256E7CD190151E500305329 /* MICustomWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MICustomWindow.h; path = "Classes/View/Custom Window/MICustomWindow.h"; sourceTree = "<group>"; };
-		D256E7CE190151E500305329 /* MICustomWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MICustomWindow.m; path = "Classes/View/Custom Window/MICustomWindow.m"; sourceTree = "<group>"; };
 		D2A089CB18FE796800B298D3 /* MIStartWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MIStartWindowController.xib; path = "Classes/Controllers/Start Window Controller/MIStartWindowController.xib"; sourceTree = "<group>"; };
 		D2A089CE18FE9B0A00B298D3 /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Post.h; path = Classes/Model/Entities/Post.h; sourceTree = "<group>"; };
 		D2A089CF18FE9B0A00B298D3 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Post.m; path = Classes/Model/Entities/Post.m; sourceTree = "<group>"; };
@@ -237,7 +206,6 @@
 		D225738D18E3029300D0C276 /* MyInstagram */ = {
 			isa = PBXGroup;
 			children = (
-				D256E7A81901318900305329 /* Ext */,
 				D225739918E3029300D0C276 /* MIAppDelegate.h */,
 				D225739A18E3029300D0C276 /* MIAppDelegate.m */,
 				D22573E018E31E1300D0C276 /* Classes */,
@@ -252,7 +220,6 @@
 		D225738E18E3029300D0C276 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D256E7D019015BD800305329 /* PNG */,
 				D225738F18E3029300D0C276 /* MyInstagram-Info.plist */,
 				D225739018E3029300D0C276 /* InfoPlist.strings */,
 				D225739318E3029300D0C276 /* main.m */,
@@ -382,72 +349,6 @@
 			name = "Network Manager";
 			sourceTree = "<group>";
 		};
-		D256E7A0190123BA00305329 /* MIScrollView */ = {
-			isa = PBXGroup;
-			children = (
-				D256E7A1190123EC00305329 /* MIScrollView.h */,
-				D256E7A2190123EC00305329 /* MIScrollView.m */,
-			);
-			name = MIScrollView;
-			sourceTree = "<group>";
-		};
-		D256E7A81901318900305329 /* Ext */ = {
-			isa = PBXGroup;
-			children = (
-				D256E7B01901391900305329 /* INAppStoreWindow */,
-				D256E7A91901319100305329 /* RFOverlayScrollView */,
-			);
-			name = Ext;
-			sourceTree = "<group>";
-		};
-		D256E7A91901319100305329 /* RFOverlayScrollView */ = {
-			isa = PBXGroup;
-			children = (
-				D256E7AA1901319100305329 /* RFOverlayScroller.h */,
-				D256E7AB1901319100305329 /* RFOverlayScroller.m */,
-				D256E7AC1901319100305329 /* RFOverlayScrollView.h */,
-				D256E7AD1901319100305329 /* RFOverlayScrollView.m */,
-			);
-			name = RFOverlayScrollView;
-			path = Ext/RFOverlayScrollView;
-			sourceTree = "<group>";
-		};
-		D256E7B01901391900305329 /* INAppStoreWindow */ = {
-			isa = PBXGroup;
-			children = (
-				D256E7BD19014CE500305329 /* INAppStoreWindow.h */,
-				D256E7BE19014CE500305329 /* INAppStoreWindow.m */,
-				D256E7BF19014CE500305329 /* INAppStoreWindowSwizzling.c */,
-				D256E7C019014CE500305329 /* INAppStoreWindowSwizzling.h */,
-				D256E7C119014CE500305329 /* INTitlebarView+CoreUIRendering.h */,
-				D256E7C219014CE500305329 /* INTitlebarView+CoreUIRendering.m */,
-				D256E7C319014CE500305329 /* INWindowButton.h */,
-				D256E7C419014CE500305329 /* INWindowButton.m */,
-				D256E7C519014CE500305329 /* NSDocument+INAppStoreWindowFixes.h */,
-				D256E7C619014CE500305329 /* NSDocument+INAppStoreWindowFixes.m */,
-			);
-			name = INAppStoreWindow;
-			path = Ext/INWindowTitle;
-			sourceTree = "<group>";
-		};
-		D256E7CC190151BA00305329 /* Start Window */ = {
-			isa = PBXGroup;
-			children = (
-				D256E7CD190151E500305329 /* MICustomWindow.h */,
-				D256E7CE190151E500305329 /* MICustomWindow.m */,
-			);
-			name = "Start Window";
-			sourceTree = "<group>";
-		};
-		D256E7D019015BD800305329 /* PNG */ = {
-			isa = PBXGroup;
-			children = (
-				CFF64A7B1903A65B0048AC93 /* Instagram1.png */,
-				CFF64A7C1903A65B0048AC93 /* Instagram.png */,
-			);
-			path = PNG;
-			sourceTree = SOURCE_ROOT;
-		};
 		D2A089CD18FE98F400B298D3 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
@@ -460,8 +361,6 @@
 		D2A089D118FEBBB000B298D3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D256E7CC190151BA00305329 /* Start Window */,
-				D256E7A0190123BA00305329 /* MIScrollView */,
 				D2A089DD18FEBF0B00B298D3 /* NSImageView+AFNetworking */,
 				D2A089D918FEBDC300B298D3 /* Collection View */,
 				D2A089D218FEBBB500B298D3 /* Collection View Cell */,
@@ -608,10 +507,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2A089CC18FE796800B298D3 /* MIStartWindowController.xib in Resources */,
-				CFF64A7E1903A65B0048AC93 /* Instagram.png in Resources */,
 				D225739218E3029300D0C276 /* InfoPlist.strings in Resources */,
 				D22573EA18E31F6D00D0C276 /* MIStartViewController.xib in Resources */,
-				CFF64A7D1903A65B0048AC93 /* Instagram1.png in Resources */,
 				D22573BD18E3029400D0C276 /* MyInstagramImporter.mdimporter in Resources */,
 				D22573A318E3029400D0C276 /* Images.xcassets in Resources */,
 				D225739818E3029300D0C276 /* Credits.rtf in Resources */,
@@ -676,27 +573,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D256E7C719014CE500305329 /* INAppStoreWindow.m in Sources */,
 				D22573FB18E3FBDC00D0C276 /* MINetworkManager.m in Sources */,
-				D256E7CA19014CE500305329 /* INWindowButton.m in Sources */,
 				D22573F618E3FB8B00D0C276 /* MIDatabaseManager.m in Sources */,
 				D22573E918E31F6D00D0C276 /* MIStartViewController.m in Sources */,
 				D2A089D818FEBC4100B298D3 /* MICollectionViewItem.m in Sources */,
-				D256E7AF1901319100305329 /* RFOverlayScrollView.m in Sources */,
 				D225739B18E3029300D0C276 /* MIAppDelegate.m in Sources */,
 				D2A089D018FE9B0A00B298D3 /* Post.m in Sources */,
 				D22573F118E320AC00D0C276 /* MIStartWindowController.m in Sources */,
-				D256E7AE1901319100305329 /* RFOverlayScroller.m in Sources */,
 				D2A089DC18FEBDEA00B298D3 /* MICollectionView.m in Sources */,
 				D2A089E518FFC8BC00B298D3 /* MIDetailsWindowController.m in Sources */,
-				D256E7C919014CE500305329 /* INTitlebarView+CoreUIRendering.m in Sources */,
-				D256E7CF190151E500305329 /* MICustomWindow.m in Sources */,
-				D256E7CB19014CE500305329 /* NSDocument+INAppStoreWindowFixes.m in Sources */,
-				D256E7A3190123EC00305329 /* MIScrollView.m in Sources */,
 				D22573A118E3029300D0C276 /* MyInstagram.xcdatamodeld in Sources */,
 				D22573ED18E31F8C00D0C276 /* MIMainViewController.m in Sources */,
 				D2A089E018FEBF4D00B298D3 /* NSImageView+AFNetworking.m in Sources */,
-				D256E7C819014CE500305329 /* INAppStoreWindowSwizzling.c in Sources */,
 				D225739418E3029300D0C276 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -889,7 +777,7 @@
 			baseConfigurationReference = 9CC38572A04645B88CCB5969 /* Pods-MyInstagram.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyInstagram/MyInstagram-Prefix.pch";
@@ -904,7 +792,7 @@
 			baseConfigurationReference = 9CC38572A04645B88CCB5969 /* Pods-MyInstagram.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyInstagram/MyInstagram-Prefix.pch";

@@ -41,13 +41,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MyInstagram/Ext/INWindowTitle/INAppStoreWindow.m"
-            timestampString = "419514759.099617"
+            filePath = "MyInstagram/Classes/Controllers/Start Window Controller/MIStartWindowController.m"
+            timestampString = "419435743.589944"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
-            landmarkName = "-drawWindowBackgroundGradient:showsBaselineSeparator:clippingPath:"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "-getFeed:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyInstagram/Classes/Controllers/Start Window Controller/MIStartWindowController.m"
+            timestampString = "419435743.589944"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "-getFeed:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,13 +73,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MyInstagram/Ext/INWindowTitle/INAppStoreWindow.m"
-            timestampString = "419518793.779701"
+            filePath = "MyInstagram/Classes/Controllers/Details Window Controller/MIDetailsWindowController.m"
+            timestampString = "419434431.279546"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "971"
-            endingLineNumber = "971"
-            landmarkName = "-_layoutTrafficLightsAndContent"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "-windowWillResize:toSize:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

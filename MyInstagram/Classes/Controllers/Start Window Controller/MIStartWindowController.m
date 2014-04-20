@@ -12,15 +12,12 @@
 #import "MIDatabaseManager.h"
 #import "MIDetailsWindowController.h"
 #import "Post.h"
-//#import "INTitlebarView+CoreUIRendering.h"
-#import "INAppStoreWindow.h"
 
 @interface MIStartWindowController () {
 	NSArray *feed;
 	NSArrayController *arrayController;
     MIDetailsWindowController *detailsWindowController;
     BOOL tapTrigger;
-    NSImageView *titleImage;
 }
 
 @end
@@ -37,10 +34,6 @@
         [arrayController setContent:[[MIDatabaseManager sharedInstance] extractFeedFromDatabase]];
         
         tapTrigger = NO;
-        
-        
-        titleImage = [[NSImageView alloc] initWithFrame:CGRectMake(400.0, 0.0, 50.0, 50.0)];
-        [titleImage setImage:[NSImage imageNamed:@"Instagram.png"]];
 	}
 	return self;
 }
@@ -70,9 +63,6 @@
     // reconneciton
 //	[self reconnect:self];
     
-    NSScrollView *scrollView = (NSScrollView *)self.collectionView.superview.superview;
-    scrollView.backgroundColor = [NSColor clearColor];
-    
     // selection handling
     [self.collectionView bind:NSContentBinding toObject:arrayController withKeyPath:@"arrangedObjects" options:nil];
 	[self.collectionView addObserver:self forKeyPath:@"selectionIndexes"
@@ -80,45 +70,10 @@
                              context:nil];
     
     self.window.delegate = self;
-    
-    [(MIScrollView *)self.collectionView.superview.superview setDelegate:self];
-    
-    INAppStoreWindow *window = (INAppStoreWindow *)self.window;
-    
-    window.titleBarHeight = 50.0f;
-    
-    window.inactiveTitleBarEndColor       = [NSColor colorWithCalibratedWhite: 0.95 alpha: 1.0];
-    window.inactiveTitleBarStartColor     = [NSColor colorWithCalibratedWhite: 0.8  alpha: 1.0];
-    window.inactiveBaselineSeparatorColor = [NSColor colorWithCalibratedWhite: 1.0  alpha: 1.0];
-    
-    [window setShowsBaselineSeparator:YES];
-    
-    window.titleBarDrawingBlock = ^(BOOL drawsAsMainWindow, CGRect drawingRect, CGPathRef clippingPath) {
-		CGContextRef ctx = [[NSGraphicsContext currentContext] graphicsPort];
-		CGContextAddPath(ctx, clippingPath);
-		CGContextClip(ctx);
-        
-		NSGradient *gradient = nil;
-		if (drawsAsMainWindow) {
-			gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedRed:36.0/256.0 green:98.0/256.0 blue:131.0/256.0 alpha:1.0]
-													 endingColor:[NSColor colorWithCalibratedRed:71.0/256.0 green:129.0/256.0 blue:162.0/256.0 alpha:1.0]];
-			[[NSColor darkGrayColor] setFill];
-		} else {
-			// set the default non-main window gradient colors
-			gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedWhite:0.851f alpha:1]
-													 endingColor:[NSColor colorWithCalibratedWhite:0.929f alpha:1]];
-			[[NSColor colorWithCalibratedWhite:0.6f alpha:1] setFill];
-		}
-		[gradient drawInRect:drawingRect angle:90];
-		NSRectFill(NSMakeRect(NSMinX(drawingRect), NSMinY(drawingRect), NSWidth(drawingRect), 1));
-	};
-    
-//    window.titleBarView = 
 }
 
 - (void)windowDidLoad {
 	[super windowDidLoad];
-    
 }
 
 - (void)showWindow:(id)sender {
@@ -139,15 +94,13 @@
 	if ([[self.collectionView selectionIndexes] count] > 0) {
         Post *selectedPost = arrayController.content[[[self.collectionView selectionIndexes] lastIndex]];
         
-        if ([detailsWindowController.window isVisible]) {
-            [detailsWindowController updateWithPost:selectedPost];
-        } else {
-            detailsWindowController = [[MIDetailsWindowController alloc] initWithPost:selectedPost];
-            NSString *str = [[NSUserDefaults standardUserDefaults] objectForKey:@"detailsWindow"];
-            if (str) {
-                [detailsWindowController.window setFrame:NSRectFromString(str) display:YES animate:NO];
-            }
-            [detailsWindowController showWindow:self];
+        CGRect rect = detailsWindowController.window.frame;
+        
+        detailsWindowController = [[MIDetailsWindowController alloc] initWithPost:selectedPost];
+        [detailsWindowController showWindow:self];
+        
+        if (rect.size.width != 0) {
+            [detailsWindowController.window setFrame:rect display:YES animate:NO];
         }
 	}
 	else {
@@ -184,44 +137,55 @@
     [self.progressBar setHidden:NO];
     [self.progressBar startAnimation:self];
 	[[MINetworkManager sharedInstance] getFeedAndExecute: ^(BOOL success, NSArray *resultArray) {
-        if (success) {
+	    if (success) {
             [arrayController setContent:resultArray];
             [self.progressBar stopAnimation:self];
             [self.progressBar setHidden:YES];
+		} else {
+            
         }
 	}];
 }
 
 - (IBAction)check:(id)sender {
-    [[MINetworkManager sharedInstance] getNextPageAndExecute:^(BOOL success, NSArray *resultArray) {
+    [[MINetworkManager sharedInstance] getFeedAndExecute:^(BOOL success, NSArray *resultArray) {
         if (success) {
-            NSMutableArray *ar = [NSMutableArray array];
-            [ar addObjectsFromArray:[arrayController content]];
-            [ar addObjectsFromArray:resultArray];
-            [arrayController setContent:ar];
+            [arrayController setContent:resultArray];
         }
     }];
 }
 
-- (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize {
+//- (void)windowDidEndLiveResize:(NSNotification *)notification {
 //    CGFloat spacing = self.window.frame.size.width-self.collectionView.frame.size.width;
-//
+//    NSSize size = self.window.frame.size;
 //    CGFloat itemWidth = self.collectionView.itemPrototype.view.frame.size.width;
-//    float x = (frameSize.width-spacing)/itemWidth;
-//
-//    CGSize size = CGSizeMake(itemWidth*floor(x)+spacing+15.0, frameSize.height);
-//
-//    float minWindowWidth = itemWidth+spacing;
+//    float x = (size.width-spacing)/itemWidth;
 //    
-//    if (size.width < minWindowWidth) {
-//        size.width = minWindowWidth;
-//    }
+//    CGRect rect = self.window.frame;
+//    rect.size.width = itemWidth*floor(x)+spacing;
+//    [self.window setFrame:rect display:YES animate:YES];
+//}
+
+- (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize {
+    CGFloat spacing = self.window.frame.size.width-self.collectionView.frame.size.width;
     
-    INAppStoreWindow *window = (INAppStoreWindow *)self.window;
-    [titleImage setFrame:CGRectMake(frameSize.width/2.0-25.0, 0.0, 80.0, 50.0)];
-    [window.titleBarView addSubview:titleImage];
+//    CGFloat scrollerWidth = self.window.scr
     
-    return frameSize;
+    CGFloat itemWidth = self.collectionView.itemPrototype.view.frame.size.width;
+    float x = (frameSize.width-spacing)/itemWidth;
+    
+    CGRect rect = CGRectMake(sender.frame.origin.x, sender.frame.origin.y, itemWidth*floor(x)+spacing, frameSize.height);
+    
+    float minWindowWidth = itemWidth+spacing;
+    
+    if (rect.size.width < minWindowWidth) {
+        rect.size.width = minWindowWidth;
+        NSLog(@"Yep");
+    }
+    
+    NSLog(@"%f", rect.size.width);
+    
+    return rect.size;
 }
 
 - (void)mouseDown:(NSEvent *)theEvent {
@@ -232,10 +196,6 @@
             NSPoint pt = NSMakePoint(0.0, 0.0);
             [[scrollView documentView] scrollPoint:pt];
     }
-}
-
-- (void)didScrollToEnd {
-    [self check:self];
 }
 
 @end

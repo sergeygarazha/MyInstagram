@@ -12,12 +12,6 @@
 
 typedef void (^feedReturnBlockType)(BOOL success, NSArray *resultArray);
 
-typedef enum {
-    MINetworkOperationReceivingToken,
-    MINetworkOperationReceivingInitialFeed,
-    MINetworkOperationReceivingNextFeedPage
-} MINetworkManagerOperationType;
-
 @interface MINetworkManager : NSObject
 
 @property (nonatomic, strong) NSString *token;
@@ -25,7 +19,6 @@ typedef enum {
 
 + (MINetworkManager *)sharedInstance;
 + (BOOL)performInstagramAuthorization;
-- (void)getFeedAndExecute:(feedReturnBlockType)block;
-- (void)getNextPageAndExecute:(feedReturnBlockType)block;
+- (NSArray *)getFeedAndExecute:(feedReturnBlockType)block;
 
 @end
