@@ -89,7 +89,7 @@
 	[manager getObjectsAtPath:[NSString stringWithFormat:@"self/feed?access_token=%@", [[MINetworkManager sharedInstance] token]]
 	               parameters:nil
 	                  success: ^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-                          @autoreleasepool {
+//                          @autoreleasepool {
                               for (id element in mappingResult.array) {
                                 if ([element isKindOfClass:[NSDictionary class]]) {
                                     nextPageURL = [NSURL URLWithString:element[@"next_url"]];
@@ -102,7 +102,7 @@
                                 if ([element isKindOfClass:[Post class]]) {
                                     [resultArray addObject:element];
                                 }
-                            }
+//                            }
                       }
      
 	    block(YES, [resultArray copy]);

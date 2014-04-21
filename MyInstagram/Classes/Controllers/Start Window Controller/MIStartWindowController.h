@@ -18,10 +18,10 @@
 @property (weak) IBOutlet NSButton *getFeedButton;
 @property (weak) IBOutlet MICollectionView *collectionView;
 @property (weak) IBOutlet NSView *tapView;
+@property (weak) IBOutlet NSButton *check;
 
 - (IBAction)reconnect:(id)sender;
 - (IBAction)getFeed:(id)sender;
-@property (weak) IBOutlet NSButton *check;
 - (IBAction)check:(id)sender;
 
 @end

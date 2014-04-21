@@ -12,15 +12,14 @@
 #import "MIDatabaseManager.h"
 #import "MIDetailsWindowController.h"
 #import "Post.h"
-//#import "INTitlebarView+CoreUIRendering.h"
 #import "INAppStoreWindow.h"
 
 @interface MIStartWindowController () {
 	NSArray *feed;
-	NSArrayController *arrayController;
     MIDetailsWindowController *detailsWindowController;
     BOOL tapTrigger;
     NSImageView *titleImage;
+    NSArrayController *arrayController;
 }
 
 @end
@@ -31,13 +30,9 @@
 	self = [super initWithWindowNibName:@"MIStartWindowController"];
 	if (self) {
 		feed = [NSArray array];
-        arrayController = [[NSArrayController alloc] init];
-        
-        // extracting cache from DB
-        [arrayController setContent:[[MIDatabaseManager sharedInstance] extractFeedFromDatabase]];
-        
         tapTrigger = NO;
         
+        arrayController = [[NSArrayController alloc] initWithContent:[NSArray array]];
         
         titleImage = [[NSImageView alloc] initWithFrame:CGRectMake(500.0, 0.0, 50.0, 70.0)];
         [titleImage setImage:[NSImage imageNamed:@"Instagram.png"]];
@@ -68,10 +63,13 @@
 - (void)loadWindow {
 	[super loadWindow];
     
+    // extracting cache from DB
+    [arrayController setContent:[[MIDatabaseManager sharedInstance] extractFeedFromDatabase]];
+    
     // reconneciton
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-//        [self getFeed:self];
-//    });
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [self getFeed:self];
+    });
     
     MIScrollView *scrollView = (MIScrollView *)self.collectionView.superview.superview;
     scrollView.backgroundColor = [NSColor clearColor];
@@ -86,12 +84,6 @@
     INAppStoreWindow *window = (INAppStoreWindow *)self.window;
     window.delegate = self;
     window.titleBarHeight = 50.0f;
-    
-//    window.inactiveTitleBarEndColor       = [NSColor colorWithCalibratedWhite: 0.95 alpha: 1.0];
-//    window.inactiveTitleBarStartColor     = [NSColor colorWithCalibratedWhite: 0.8  alpha: 1.0];
-//    window.inactiveBaselineSeparatorColor = [NSColor colorWithCalibratedWhite: 1.0  alpha: 1.0];
-//    
-//    [window setShowsBaselineSeparator:YES];
     
     window.titleBarDrawingBlock = ^(BOOL drawsAsMainWindow, CGRect drawingRect, CGPathRef clippingPath) {
 		CGContextRef ctx = [[NSGraphicsContext currentContext] graphicsPort];
@@ -213,6 +205,14 @@
     float width = 80.0;
     [titleImage setFrame:CGRectMake(frameSize.width/2.0-width/2.0, window.titleBarView.frame.size.height-height, width, height)];
     
+//    float collectionViewFrameWidth = self.collectionView.frame.size.width;
+//    float minItemWidth = 100.0;
+//    int count = (int)(collectionViewFrameWidth/minItemWidth);
+//    float difference = collectionViewFrameWidth - count*minItemWidth;
+//    float resultItemWidth = minItemWidth+difference/count;
+//    [self.collectionView setMinItemSize:CGSizeMake(resultItemWidth, resultItemWidth)];
+//    [self.collectionView setMaxItemSize:CGSizeMake(resultItemWidth, resultItemWidth)];
+    
     return frameSize;
 }
 
@@ -227,7 +227,7 @@
 }
 
 - (void)didScrollToEnd {
-    [self check:self];
+//    [self check:self];
 }
 
 @end

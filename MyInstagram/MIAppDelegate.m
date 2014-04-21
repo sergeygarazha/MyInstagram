@@ -22,6 +22,8 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
+    
+    // загружаем окно программно, потому что при загрузке из xib`а не вызывается -loadWindow
     self.startWC = [[MIStartWindowController alloc] init];
     self.window = startWC.window;
     [startWC showWindow:self];

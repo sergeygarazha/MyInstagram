@@ -50,7 +50,6 @@
 		D256E7CF190151E500305329 /* MICustomWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7CE190151E500305329 /* MICustomWindow.m */; };
 		D2A089CC18FE796800B298D3 /* MIStartWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2A089CB18FE796800B298D3 /* MIStartWindowController.xib */; };
 		D2A089D018FE9B0A00B298D3 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A089CF18FE9B0A00B298D3 /* Post.m */; };
-		D2A089D818FEBC4100B298D3 /* MICollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A089D718FEBC4100B298D3 /* MICollectionViewItem.m */; };
 		D2A089DC18FEBDEA00B298D3 /* MICollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A089DB18FEBDEA00B298D3 /* MICollectionView.m */; };
 		D2A089E018FEBF4D00B298D3 /* NSImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A089DF18FEBF4D00B298D3 /* NSImageView+AFNetworking.m */; };
 		D2A089E518FFC8BC00B298D3 /* MIDetailsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A089E318FFC8BC00B298D3 /* MIDetailsWindowController.m */; };
@@ -149,8 +148,6 @@
 		D2A089CB18FE796800B298D3 /* MIStartWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MIStartWindowController.xib; path = "Classes/Controllers/Start Window Controller/MIStartWindowController.xib"; sourceTree = "<group>"; };
 		D2A089CE18FE9B0A00B298D3 /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Post.h; path = Classes/Model/Entities/Post.h; sourceTree = "<group>"; };
 		D2A089CF18FE9B0A00B298D3 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Post.m; path = Classes/Model/Entities/Post.m; sourceTree = "<group>"; };
-		D2A089D618FEBC4100B298D3 /* MICollectionViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MICollectionViewItem.h; path = "Classes/View/Collection View Item /MICollectionViewItem.h"; sourceTree = "<group>"; };
-		D2A089D718FEBC4100B298D3 /* MICollectionViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MICollectionViewItem.m; path = "Classes/View/Collection View Item /MICollectionViewItem.m"; sourceTree = "<group>"; };
 		D2A089DA18FEBDEA00B298D3 /* MICollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MICollectionView.h; path = "Classes/View/Colleciton View/MICollectionView.h"; sourceTree = "<group>"; };
 		D2A089DB18FEBDEA00B298D3 /* MICollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MICollectionView.m; path = "Classes/View/Colleciton View/MICollectionView.m"; sourceTree = "<group>"; };
 		D2A089DE18FEBF4D00B298D3 /* NSImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSImageView+AFNetworking.h"; path = "Classes/View/NSImageView+AFNetworking/NSImageView+AFNetworking.h"; sourceTree = "<group>"; };
@@ -482,18 +479,8 @@
 				D256E7A0190123BA00305329 /* MIScrollView */,
 				D2A089DD18FEBF0B00B298D3 /* NSImageView+AFNetworking */,
 				D2A089D918FEBDC300B298D3 /* Collection View */,
-				D2A089D218FEBBB500B298D3 /* Collection View Cell */,
 			);
 			name = View;
-			sourceTree = "<group>";
-		};
-		D2A089D218FEBBB500B298D3 /* Collection View Cell */ = {
-			isa = PBXGroup;
-			children = (
-				D2A089D618FEBC4100B298D3 /* MICollectionViewItem.h */,
-				D2A089D718FEBC4100B298D3 /* MICollectionViewItem.m */,
-			);
-			name = "Collection View Cell";
 			sourceTree = "<group>";
 		};
 		D2A089D918FEBDC300B298D3 /* Collection View */ = {
@@ -699,7 +686,6 @@
 				D256E7CA19014CE500305329 /* INWindowButton.m in Sources */,
 				D22573F618E3FB8B00D0C276 /* MIDatabaseManager.m in Sources */,
 				D22573E918E31F6D00D0C276 /* MIStartViewController.m in Sources */,
-				D2A089D818FEBC4100B298D3 /* MICollectionViewItem.m in Sources */,
 				D256E7AF1901319100305329 /* RFOverlayScrollView.m in Sources */,
 				CF6690501904128E00324BC7 /* MIImageView.m in Sources */,
 				D225739B18E3029300D0C276 /* MIAppDelegate.m in Sources */,
@@ -822,6 +808,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
+					"CA_DEBUG_TRANSACTIONS=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
