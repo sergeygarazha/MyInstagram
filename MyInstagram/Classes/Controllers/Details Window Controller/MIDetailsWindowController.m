@@ -65,7 +65,7 @@
     [super loadWindow];
     
     [self.window setAspectRatio: self.image.frame.size];
-    [self.image setImageFromURL:[NSURL URLWithString:post.standard] withThumbnail:[NSURL URLWithString:post.thumbnail]];
+    [self.image setImageFromURL:[NSURL URLWithString:post.standard] withThumbnailURL:[NSURL URLWithString:post.thumbnail]];
     
     self.window.delegate = self;
 }
@@ -86,7 +86,8 @@
 
 - (void)updateWithPost:(Post *)post_ {
     post = post_;
-    [self.image setImageFromURL:[NSURL URLWithString:post.standard] withThumbnail:[NSURL URLWithString:post.thumbnail]];
+    
+    [self.image setImageFromURL:[NSURL URLWithString:post.standard] withThumbnailURL:[NSURL URLWithString:post.thumbnail]];
 }
 
 @end

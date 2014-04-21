@@ -39,8 +39,9 @@
         tapTrigger = NO;
         
         
-        titleImage = [[NSImageView alloc] initWithFrame:CGRectMake(400.0, 0.0, 50.0, 50.0)];
+        titleImage = [[NSImageView alloc] initWithFrame:CGRectMake(500.0, 0.0, 50.0, 70.0)];
         [titleImage setImage:[NSImage imageNamed:@"Instagram.png"]];
+        [[(INAppStoreWindow *)self.window titleBarView] addSubview:titleImage];
 	}
 	return self;
 }
@@ -68,10 +69,13 @@
 	[super loadWindow];
     
     // reconneciton
-//	[self reconnect:self];
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+//        [self getFeed:self];
+//    });
     
-    NSScrollView *scrollView = (NSScrollView *)self.collectionView.superview.superview;
+    MIScrollView *scrollView = (MIScrollView *)self.collectionView.superview.superview;
     scrollView.backgroundColor = [NSColor clearColor];
+    [scrollView setDelegate:self];
     
     // selection handling
     [self.collectionView bind:NSContentBinding toObject:arrayController withKeyPath:@"arrangedObjects" options:nil];
@@ -79,19 +83,15 @@
                              options:NSKeyValueObservingOptionNew
                              context:nil];
     
-    self.window.delegate = self;
-    
-    [(MIScrollView *)self.collectionView.superview.superview setDelegate:self];
-    
     INAppStoreWindow *window = (INAppStoreWindow *)self.window;
-    
+    window.delegate = self;
     window.titleBarHeight = 50.0f;
     
-    window.inactiveTitleBarEndColor       = [NSColor colorWithCalibratedWhite: 0.95 alpha: 1.0];
-    window.inactiveTitleBarStartColor     = [NSColor colorWithCalibratedWhite: 0.8  alpha: 1.0];
-    window.inactiveBaselineSeparatorColor = [NSColor colorWithCalibratedWhite: 1.0  alpha: 1.0];
-    
-    [window setShowsBaselineSeparator:YES];
+//    window.inactiveTitleBarEndColor       = [NSColor colorWithCalibratedWhite: 0.95 alpha: 1.0];
+//    window.inactiveTitleBarStartColor     = [NSColor colorWithCalibratedWhite: 0.8  alpha: 1.0];
+//    window.inactiveBaselineSeparatorColor = [NSColor colorWithCalibratedWhite: 1.0  alpha: 1.0];
+//    
+//    [window setShowsBaselineSeparator:YES];
     
     window.titleBarDrawingBlock = ^(BOOL drawsAsMainWindow, CGRect drawingRect, CGPathRef clippingPath) {
 		CGContextRef ctx = [[NSGraphicsContext currentContext] graphicsPort];
@@ -113,7 +113,8 @@
 		NSRectFill(NSMakeRect(NSMinX(drawingRect), NSMinY(drawingRect), NSWidth(drawingRect), 1));
 	};
     
-//    window.titleBarView = 
+    [self.collectionView setMinItemSize:CGSizeMake(100.0, 100.0)];
+    [self.collectionView setMaxItemSize:CGSizeMake(200.0, 200.0)];
 }
 
 - (void)windowDidLoad {
@@ -203,23 +204,14 @@
     }];
 }
 
+#define MIN_ITEM_WIDTH  100
+
 - (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize {
-//    CGFloat spacing = self.window.frame.size.width-self.collectionView.frame.size.width;
-//
-//    CGFloat itemWidth = self.collectionView.itemPrototype.view.frame.size.width;
-//    float x = (frameSize.width-spacing)/itemWidth;
-//
-//    CGSize size = CGSizeMake(itemWidth*floor(x)+spacing+15.0, frameSize.height);
-//
-//    float minWindowWidth = itemWidth+spacing;
-//    
-//    if (size.width < minWindowWidth) {
-//        size.width = minWindowWidth;
-//    }
-    
+    // положение изображения заголовка
     INAppStoreWindow *window = (INAppStoreWindow *)self.window;
-    [titleImage setFrame:CGRectMake(frameSize.width/2.0-25.0, 0.0, 80.0, 50.0)];
-    [window.titleBarView addSubview:titleImage];
+    float height = 55.0;
+    float width = 80.0;
+    [titleImage setFrame:CGRectMake(frameSize.width/2.0-width/2.0, window.titleBarView.frame.size.height-height, width, height)];
     
     return frameSize;
 }

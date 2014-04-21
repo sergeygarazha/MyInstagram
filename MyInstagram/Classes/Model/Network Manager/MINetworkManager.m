@@ -84,25 +84,27 @@
 - (void)getFeedAndExecute:(feedReturnBlockType)block {
     __block NSMutableArray *resultArray = [NSMutableArray array];
 
-    [[MIDatabaseManager sharedInstance] deleteOldEntries];
+//    [[MIDatabaseManager sharedInstance] deleteOldEntries];
     
 	[manager getObjectsAtPath:[NSString stringWithFormat:@"self/feed?access_token=%@", [[MINetworkManager sharedInstance] token]]
 	               parameters:nil
 	                  success: ^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        for (id element in mappingResult.array) {
-            if ([element isKindOfClass:[NSDictionary class]]) {
-                nextPageURL = [NSURL URLWithString:element[@"next_url"]];
-            }
-            
-            if ([element isKindOfClass:[RKErrorMessage class]]) {
-                NSLog(@"error!: %@", [(RKErrorMessage *)element errorMessage]);
-            }
-            
-            if ([element isKindOfClass:[Post class]]) {
-                [resultArray addObject:element];
-            }
-        }
-                          
+                          @autoreleasepool {
+                              for (id element in mappingResult.array) {
+                                if ([element isKindOfClass:[NSDictionary class]]) {
+                                    nextPageURL = [NSURL URLWithString:element[@"next_url"]];
+                                }
+                                
+                                if ([element isKindOfClass:[RKErrorMessage class]]) {
+                                    NSLog(@"error!: %@", [(RKErrorMessage *)element errorMessage]);
+                                }
+                                
+                                if ([element isKindOfClass:[Post class]]) {
+                                    [resultArray addObject:element];
+                                }
+                            }
+                      }
+     
 	    block(YES, [resultArray copy]);
 	}
                       failure: ^(RKObjectRequestOperation *operation, NSError *error) {
@@ -119,20 +121,21 @@
                                    // success
                                    NSMutableArray *resultArray = [NSMutableArray array];
                                    
-                                   for (id element in mappingResult.array) {
-                                       if ([element isKindOfClass:[NSDictionary class]]) {
-                                           nextPageURL = [NSURL URLWithString:element[@"next_url"]];
-                                       }
-                                       
-                                       if ([element isKindOfClass:[RKErrorMessage class]]) {
-                                           NSLog(@"error!: %@", [(RKErrorMessage *)element errorMessage]);
-                                       }
-                                       
-                                       if ([element isKindOfClass:[Post class]]) {
-                                           [resultArray addObject:element];
+                                   @autoreleasepool {
+                                       for (id element in mappingResult.array) {
+                                           if ([element isKindOfClass:[NSDictionary class]]) {
+                                               nextPageURL = [NSURL URLWithString:element[@"next_url"]];
+                                           }
+                                           
+                                           if ([element isKindOfClass:[RKErrorMessage class]]) {
+                                               NSLog(@"error!: %@", [(RKErrorMessage *)element errorMessage]);
+                                           }
+                                           
+                                           if ([element isKindOfClass:[Post class]]) {
+                                               [resultArray addObject:element];
+                                           }
                                        }
                                    }
-                                   
                                    block(YES, resultArray);
                             }
                                failure:^(RKObjectRequestOperation *operation, NSError *error) {

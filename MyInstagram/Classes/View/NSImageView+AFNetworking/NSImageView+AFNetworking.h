@@ -11,6 +11,7 @@
 @interface NSImageView (AFNetworking)
 
 - (void)setImageFromURL:(NSURL *)url;
-- (void)setImageFromURL:(NSURL *)url withThumbnail:(NSURL *)thumbnail;
+- (void)setImageFromURL:(NSURL *)url withThumbnailURL:(NSURL *)thumbnail;
+- (void)setImageFromURL:(NSURL *)url withThumbnail:(NSImage *)thumbnail;
 
 @end

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		47CB232EDB9F41D6A40A340A /* libPods-MyInstagram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBF243C994B40DAB6DE0012 /* libPods-MyInstagram.a */; };
+		CF6690501904128E00324BC7 /* MIImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF66904F1904128E00324BC7 /* MIImageView.m */; };
+		CF66905319041AE400324BC7 /* MIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = CF66905219041AE400324BC7 /* MIImage.m */; };
 		CFF64A7D1903A65B0048AC93 /* Instagram1.png in Resources */ = {isa = PBXBuildFile; fileRef = CFF64A7B1903A65B0048AC93 /* Instagram1.png */; };
 		CFF64A7E1903A65B0048AC93 /* Instagram.png in Resources */ = {isa = PBXBuildFile; fileRef = CFF64A7C1903A65B0048AC93 /* Instagram.png */; };
 		D225738818E3029300D0C276 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D225738718E3029300D0C276 /* Cocoa.framework */; };
@@ -75,6 +77,10 @@
 /* Begin PBXFileReference section */
 		7FBF243C994B40DAB6DE0012 /* libPods-MyInstagram.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyInstagram.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CC38572A04645B88CCB5969 /* Pods-MyInstagram.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyInstagram.xcconfig"; path = "Pods/Pods-MyInstagram.xcconfig"; sourceTree = "<group>"; };
+		CF66904E1904128E00324BC7 /* MIImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIImageView.h; path = "Classes/View/Custom Image View/MIImageView.h"; sourceTree = "<group>"; };
+		CF66904F1904128E00324BC7 /* MIImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIImageView.m; path = "Classes/View/Custom Image View/MIImageView.m"; sourceTree = "<group>"; };
+		CF66905119041AE400324BC7 /* MIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIImage.h; path = "Classes/View/Custom Image View/MIImage.h"; sourceTree = "<group>"; };
+		CF66905219041AE400324BC7 /* MIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIImage.m; path = "Classes/View/Custom Image View/MIImage.m"; sourceTree = "<group>"; };
 		CFF64A7B1903A65B0048AC93 /* Instagram1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Instagram1.png; sourceTree = "<group>"; };
 		CFF64A7C1903A65B0048AC93 /* Instagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Instagram.png; sourceTree = "<group>"; };
 		D225738418E3029300D0C276 /* MyInstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyInstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,6 +193,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF66904A190410DC00324BC7 /* Image View */ = {
+			isa = PBXGroup;
+			children = (
+				CF66904E1904128E00324BC7 /* MIImageView.h */,
+				CF66904F1904128E00324BC7 /* MIImageView.m */,
+				CF66905119041AE400324BC7 /* MIImage.h */,
+				CF66905219041AE400324BC7 /* MIImage.m */,
+			);
+			name = "Image View";
+			sourceTree = "<group>";
+		};
 		D225737B18E3029300D0C276 = {
 			isa = PBXGroup;
 			children = (
@@ -460,6 +477,7 @@
 		D2A089D118FEBBB000B298D3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CF66904A190410DC00324BC7 /* Image View */,
 				D256E7CC190151BA00305329 /* Start Window */,
 				D256E7A0190123BA00305329 /* MIScrollView */,
 				D2A089DD18FEBF0B00B298D3 /* NSImageView+AFNetworking */,
@@ -683,11 +701,13 @@
 				D22573E918E31F6D00D0C276 /* MIStartViewController.m in Sources */,
 				D2A089D818FEBC4100B298D3 /* MICollectionViewItem.m in Sources */,
 				D256E7AF1901319100305329 /* RFOverlayScrollView.m in Sources */,
+				CF6690501904128E00324BC7 /* MIImageView.m in Sources */,
 				D225739B18E3029300D0C276 /* MIAppDelegate.m in Sources */,
 				D2A089D018FE9B0A00B298D3 /* Post.m in Sources */,
 				D22573F118E320AC00D0C276 /* MIStartWindowController.m in Sources */,
 				D256E7AE1901319100305329 /* RFOverlayScroller.m in Sources */,
 				D2A089DC18FEBDEA00B298D3 /* MICollectionView.m in Sources */,
+				CF66905319041AE400324BC7 /* MIImage.m in Sources */,
 				D2A089E518FFC8BC00B298D3 /* MIDetailsWindowController.m in Sources */,
 				D256E7C919014CE500305329 /* INTitlebarView+CoreUIRendering.m in Sources */,
 				D256E7CF190151E500305329 /* MICustomWindow.m in Sources */,
