@@ -37,6 +37,25 @@
                                 <view translatesAutoresizingMaskIntoConstraints="NO" id="Nwq-dJ-OdK">
                                     <rect key="frame" x="0.0" y="0.0" width="507" height="491"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hN6-vW-Agy" userLabel="Connecting Button">
+                                            <rect key="frame" x="276" y="19" width="85" height="19"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="85" id="BhL-lb-uMK"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="roundRect" title="Size" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ltn-fc-P25">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="cellTitle"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="reconnect:" target="-2" id="ZqQ-94-rKI"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="hN6-vW-Agy" secondAttribute="bottom" constant="20" id="p4X-XP-jb5"/>
+                                    </constraints>
                                 </view>
                             </subviews>
                             <constraints>
@@ -62,17 +81,6 @@
                             <constraint firstAttribute="width" constant="96" id="wB4-bp-k4Q"/>
                         </constraints>
                     </progressIndicator>
-                    <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hN6-vW-Agy" userLabel="Connecting Button">
-                        <rect key="frame" x="20" y="19" width="81" height="19"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="roundRect" title="Connecting" bezelStyle="roundedRect" alignment="center" enabled="NO" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ltn-fc-P25">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="cellTitle"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="reconnect:" target="-2" id="ZqQ-94-rKI"/>
-                        </connections>
-                    </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UfQ-oy-uPS" userLabel="Check">
                         <rect key="frame" x="366" y="12" width="129" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -134,19 +142,19 @@
                     <constraint firstItem="gFO-AE-SHX" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="CWa-hg-w91"/>
                     <constraint firstItem="UfQ-oy-uPS" firstAttribute="top" secondItem="Nwq-dJ-OdK" secondAttribute="bottom" constant="-39" id="Hvx-ds-D5z"/>
                     <constraint firstItem="gFO-AE-SHX" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="Ku0-FE-ody"/>
-                    <constraint firstItem="hN6-vW-Agy" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="OEv-AJ-XkH"/>
-                    <constraint firstItem="wpF-gb-T2x" firstAttribute="leading" secondItem="hN6-vW-Agy" secondAttribute="trailing" constant="8" id="OoI-BW-5jq"/>
                     <constraint firstItem="b3l-ZL-L0k" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="Qsv-Jc-ACg"/>
                     <constraint firstAttribute="trailing" secondItem="gFO-AE-SHX" secondAttribute="trailing" id="Qx2-DM-p8J"/>
                     <constraint firstItem="To6-dd-1lA" firstAttribute="top" secondItem="mtz-4r-gpY" secondAttribute="bottom" constant="8" id="ZYI-VZ-pYe"/>
+                    <constraint firstItem="wpF-gb-T2x" firstAttribute="leading" secondItem="To6-dd-1lA" secondAttribute="trailing" constant="26" id="c8e-U2-YQV"/>
+                    <constraint firstAttribute="trailing" secondItem="UfQ-oy-uPS" secondAttribute="trailing" constant="20" id="dBQ-4c-pby"/>
                     <constraint firstAttribute="trailing" secondItem="b3l-ZL-L0k" secondAttribute="trailing" id="dyW-O7-vtu"/>
+                    <constraint firstItem="UfQ-oy-uPS" firstAttribute="leading" secondItem="hN6-vW-Agy" secondAttribute="trailing" constant="10" id="eSu-ex-V1H"/>
                     <constraint firstAttribute="bottom" secondItem="b3l-ZL-L0k" secondAttribute="bottom" id="kN9-Tg-Nib"/>
                     <constraint firstItem="b3l-ZL-L0k" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="kon-2H-Tsb"/>
                     <constraint firstAttribute="bottom" secondItem="To6-dd-1lA" secondAttribute="bottom" constant="20" id="m78-UW-dbA"/>
                     <constraint firstItem="To6-dd-1lA" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="ngC-WQ-feQ"/>
                     <constraint firstItem="mtz-4r-gpY" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="10" id="qMe-cg-WtM"/>
                     <constraint firstAttribute="trailing" secondItem="mtz-4r-gpY" secondAttribute="trailing" constant="20" id="tPf-0C-l2C"/>
-                    <constraint firstAttribute="bottom" secondItem="hN6-vW-Agy" secondAttribute="bottom" constant="20" id="uhD-xz-TVP"/>
                     <constraint firstItem="UfQ-oy-uPS" firstAttribute="leading" secondItem="Nwq-dJ-OdK" secondAttribute="trailing" constant="-136" id="w7i-lB-kJb"/>
                     <constraint firstItem="mtz-4r-gpY" firstAttribute="top" secondItem="gFO-AE-SHX" secondAttribute="bottom" constant="8" id="zLA-2N-qrL"/>
                 </constraints>
@@ -158,7 +166,7 @@
                 <outlet property="view" destination="nvG-nF-b1i" id="OAd-Kb-gSE"/>
             </connections>
         </collectionViewItem>
-        <view autoresizesSubviews="NO" canDrawConcurrently="YES" id="nvG-nF-b1i">
+        <view autoresizesSubviews="NO" canDrawConcurrently="YES" id="nvG-nF-b1i" customClass="MICVItemView">
             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>

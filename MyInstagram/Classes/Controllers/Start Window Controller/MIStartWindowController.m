@@ -13,6 +13,8 @@
 #import "MIDetailsWindowController.h"
 #import "Post.h"
 #import "INAppStoreWindow.h"
+#import "NSImageView+AFNetworking.h"
+#import "RKObjectManager.h"
 
 @interface MIStartWindowController () {
 	NSArray *feed;
@@ -20,6 +22,9 @@
     BOOL tapTrigger;
     NSImageView *titleImage;
     NSArrayController *arrayController;
+    BOOL loadingInProgress;
+    NSTimer *timer;
+    BOOL alignment;
 }
 
 @end
@@ -31,6 +36,7 @@
 	if (self) {
 		feed = [NSArray array];
         tapTrigger = NO;
+        loadingInProgress = NO;
         
         arrayController = [[NSArrayController alloc] initWithContent:[NSArray array]];
         
@@ -52,6 +58,7 @@
 - (void)dealloc {
 	[arrayController removeObserver:self
 	                     forKeyPath:@"selectedObjects"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Window controller lifecycle
@@ -63,17 +70,23 @@
 - (void)loadWindow {
 	[super loadWindow];
     
+    [self.check setHidden:YES];
+    
     // extracting cache from DB
-    [arrayController setContent:[[MIDatabaseManager sharedInstance] extractFeedFromDatabase]];
+//    [arrayController setContent:[[MIDatabaseManager sharedInstance] extractFeedFromDatabase]];
     
     // reconneciton
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [self getFeed:self];
-    });
+    [self getFeed:self];
     
-    MIScrollView *scrollView = (MIScrollView *)self.collectionView.superview.superview;
+    NSScrollView *scrollView = (NSScrollView *)self.collectionView.superview.superview;
     scrollView.backgroundColor = [NSColor clearColor];
-    [scrollView setDelegate:self];
+    [(MIScrollView *)scrollView setDelegate:self];
+    
+    // scrolling notification turning ON
+//    [[self.collectionView superview] setPostsBoundsChangedNotifications:YES];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(check:)
+//                                                 name:NSViewBoundsDidChangeNotification object:[self.collectionView superview]];
     
     // selection handling
     [self.collectionView bind:NSContentBinding toObject:arrayController withKeyPath:@"arrangedObjects" options:nil];
@@ -81,6 +94,7 @@
                              options:NSKeyValueObservingOptionNew
                              context:nil];
     
+    // window apperience configuration
     INAppStoreWindow *window = (INAppStoreWindow *)self.window;
     window.delegate = self;
     window.titleBarHeight = 50.0f;
@@ -105,8 +119,8 @@
 		NSRectFill(NSMakeRect(NSMinX(drawingRect), NSMinY(drawingRect), NSWidth(drawingRect), 1));
 	};
     
-    [self.collectionView setMinItemSize:CGSizeMake(100.0, 100.0)];
-    [self.collectionView setMaxItemSize:CGSizeMake(200.0, 200.0)];
+//    [self.collectionView setMinItemSize:CGSizeMake(100.0, 100.0)];
+//    [self.collectionView setMaxItemSize:CGSizeMake(200.0, 200.0)];
 }
 
 - (void)windowDidLoad {
@@ -128,9 +142,27 @@
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context {
-	// do whatever necessary here
+    
 	if ([[self.collectionView selectionIndexes] count] > 0) {
-        Post *selectedPost = arrayController.content[[[self.collectionView selectionIndexes] lastIndex]];
+        NSUInteger index = [[self.collectionView selectionIndexes] lastIndex];
+        NSCollectionViewItem *item = [self.collectionView itemAtIndex:index];
+        Post *selectedPost = arrayController.content[index];
+        
+        //!!: обнуляем индексы
+        [self.collectionView setSelectionIndexes:[NSIndexSet indexSet]];
+        
+        // проверяем, нету ли уже готового окна с таким постом
+        if (detailsWindowController && detailsWindowController.post == selectedPost) {
+            if (![detailsWindowController.window isVisible]) {
+                [detailsWindowController showWindow:self];
+                [detailsWindowController.window becomeKeyWindow];
+            }
+            return;
+        }
+        
+        if (!item.imageView.image) {
+            [item.imageView setImageFromURL:[NSURL URLWithString:selectedPost.thumbnail]];
+        }
         
         if ([detailsWindowController.window isVisible]) {
             [detailsWindowController updateWithPost:selectedPost];
@@ -142,61 +174,138 @@
             }
             [detailsWindowController showWindow:self];
         }
+//        [detailsWindowController.window makeMainWindow];
+        [detailsWindowController.window makeKeyAndOrderFront:self];
+        [detailsWindowController.window setOrderedIndex:0];
 	}
 	else {
-		NSLog(@"Observer called but no objects where selected.");
+        // ничего не выбрано
+//		NSLog(@"Observer called but no objects where selected.");
 	}
 }
 
 #pragma mark - Methods
 
 - (IBAction)reconnect:(id)sender {
-	NSLog(@"Token request started");
-	[self.progressBar startAnimation:self];
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-	    BOOL result = [MINetworkManager performInstagramAuthorization];
-	    dispatch_async(dispatch_get_main_queue(), ^{
-	        if (result) {   //success
-	            NSLog(@"Token received");
-	            [self.progressBar setHidden:YES];
-	            [self.reconnectButton setHidden:YES];
-	            [self.getFeedButton setHidden:NO];
-			}
-	        else {          // failure
-	            NSLog(@"Failed to receive token");
-	            [self.reconnectButton setEnabled:YES];
-	            [self.reconnectButton setTitle:@"Retry to connect"];
-	            [self.reconnectButton sizeToFit];
-			}
-	        [self.progressBar stopAnimation:self];
-		});
-	});
+//	NSLog(@"Token request started");
+//	[self.progressBar startAnimation:self];
+//	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+//	    BOOL result = [[MINetworkManager sharedInstance] performInstagramAuthorization];
+//	    dispatch_async(dispatch_get_main_queue(), ^{
+//	        if (result) {   //success
+//	            NSLog(@"Token received");
+//	            [self.progressBar setHidden:YES];
+//	            [self.reconnectButton setHidden:YES];
+//	            [self.getFeedButton setHidden:NO];
+//			}
+//	        else {          // failure
+//	            NSLog(@"Failed to receive token");
+//	            [self.reconnectButton setEnabled:YES];
+//	            [self.reconnectButton setTitle:@"Retry to connect"];
+//	            [self.reconnectButton sizeToFit];
+//			}
+//	        [self.progressBar stopAnimation:self];
+//		});
+//	});
+    
+    alignment = !alignment;
+    if (alignment) {
+        [self.collectionView setMinItemSize:CGSizeMake(100.0, 100.0)];
+        [self.collectionView setMaxItemSize:CGSizeMake(200.0, 200.0)];
+    } else {
+        [self.collectionView setMinItemSize:CGSizeMake(100.0, 100.0)];
+        [self.collectionView setMaxItemSize:CGSizeMake(100.0, 100.0)];
+    }
 }
 
 - (IBAction)getFeed:(id)sender {
-    [self.progressBar setHidden:NO];
-    [self.progressBar startAnimation:self];
-	[[MINetworkManager sharedInstance] getFeedAndExecute: ^(BOOL success, NSArray *resultArray) {
-        if (success) {
-            [arrayController setContent:resultArray];
-            [self.progressBar stopAnimation:self];
-            [self.progressBar setHidden:YES];
-        }
-	}];
+    if (!loadingInProgress) {
+        [self.progressBar setHidden:NO];
+        [self.progressBar startAnimation:self];
+        [self.getFeedButton setEnabled:NO];
+        loadingInProgress = YES;
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            [[MINetworkManager sharedInstance] getFeedAndExecute: ^(BOOL success, NSArray *resultArray) {
+                if (success) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [arrayController setContent:resultArray];
+                        [self.progressBar setHidden:YES];
+                        [self.check setHidden:NO];
+                    });
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    loadingInProgress = NO;
+                    [self.progressBar stopAnimation:self];
+                    [self.getFeedButton setEnabled:YES];
+                });
+            }];
+        });
+    }
 }
 
+#pragma mark - Next Page Receiving
+
+// load next page
 - (IBAction)check:(id)sender {
-    [[MINetworkManager sharedInstance] getNextPageAndExecute:^(BOOL success, NSArray *resultArray) {
-        if (success) {
-            NSMutableArray *ar = [NSMutableArray array];
-            [ar addObjectsFromArray:[arrayController content]];
-            [ar addObjectsFromArray:resultArray];
-            [arrayController setContent:ar];
-        }
-    }];
+    if (!loadingInProgress) {
+        loadingInProgress = YES;
+        NSProgressIndicator *indicator = [[NSProgressIndicator alloc] initWithFrame:CGRectZero];
+        [indicator setStyle:NSProgressIndicatorSpinningStyle];
+        NSMutableArray *ar = [NSMutableArray arrayWithArray:arrayController.content];
+        [ar addObject:indicator];
+        [arrayController setContent:[ar copy]];
+        [self.check setEnabled:NO];
+        [self.check setTitle:@"Cancel"];
+        timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(showCancelLable) userInfo:nil repeats:NO];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            [[MINetworkManager sharedInstance] getNextPageAndExecute:^(BOOL success, NSArray *resultArray) {
+                if (success) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (resultArray.count) {
+                            NSMutableArray *ar = [NSMutableArray array];
+                            [ar addObjectsFromArray:[arrayController content]];
+                            [ar removeLastObject];
+                            [ar addObjectsFromArray:resultArray];
+                            [arrayController setContent:[ar copy]];
+                            loadingInProgress = NO;
+                            [self.check setEnabled:YES];
+                            [self.check setTitle:@"Get next page"];
+                            [timer invalidate];
+                        }
+                    });
+                } else {
+                    [self cancelNextPageReceiving];
+                    if (resultArray) {
+                        [self.check setEnabled:NO];
+                    }
+                }
+                
+            }];
+        });
+    }
 }
 
-#define MIN_ITEM_WIDTH  100
+- (void)showCancelLable {
+    [self.check setEnabled:YES];
+    [self.check setTitle:@"Cancel"];
+    [self.check setAction:@selector(cancelNextPageReceiving)];
+    timer = [NSTimer scheduledTimerWithTimeInterval:20.0 target:self selector:@selector(cancelNextPageReceiving) userInfo:nil repeats:NO];
+}
+
+- (void)cancelNextPageReceiving {
+    [timer invalidate];
+    [self.check setEnabled:YES];
+    [self.check setTitle:@"Get next page"];
+    [self.check setAction:@selector(check:)];
+    loadingInProgress = NO;
+    NSMutableArray *ar = [NSMutableArray arrayWithArray:arrayController.content];
+    [ar removeLastObject];
+    [arrayController setContent:[ar copy]];
+    [[RKObjectManager sharedManager] cancelAllObjectRequestOperationsWithMethod:RKRequestMethodAny matchingPathPattern:@""];
+}
+
+#pragma mark - Window resizong
 
 - (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize {
     // положение изображения заголовка
@@ -204,17 +313,11 @@
     float height = 55.0;
     float width = 80.0;
     [titleImage setFrame:CGRectMake(frameSize.width/2.0-width/2.0, window.titleBarView.frame.size.height-height, width, height)];
-    
-//    float collectionViewFrameWidth = self.collectionView.frame.size.width;
-//    float minItemWidth = 100.0;
-//    int count = (int)(collectionViewFrameWidth/minItemWidth);
-//    float difference = collectionViewFrameWidth - count*minItemWidth;
-//    float resultItemWidth = minItemWidth+difference/count;
-//    [self.collectionView setMinItemSize:CGSizeMake(resultItemWidth, resultItemWidth)];
-//    [self.collectionView setMaxItemSize:CGSizeMake(resultItemWidth, resultItemWidth)];
-    
+
     return frameSize;
 }
+
+#pragma mark - Mouse handling
 
 - (void)mouseDown:(NSEvent *)theEvent {
     NSPoint locationInView = [self.tapView convertPoint:[theEvent locationInWindow]
@@ -227,7 +330,7 @@
 }
 
 - (void)didScrollToEnd {
-//    [self check:self];
+    [self check:self];
 }
 
 @end

@@ -13,6 +13,7 @@
 @interface MIDetailsWindowController : NSWindowController <NSWindowDelegate>
 
 @property (weak) IBOutlet NSImageView *image;
+@property (strong) Post *post;
 
 - (instancetype)initWithPost:(Post *)post_;
 - (void)updateWithPost:(Post *)post;

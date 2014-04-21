@@ -26,7 +26,7 @@ AFImageRequestOperation *currentOperation = nil;
     
     currentOperation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:^(NSImage *image) {
         self.image = image;
-        [self.image setSize:self.frame.size];
+        [self.image setSize:CGSizeMake(200.0, 200.0)];
     }];
     [currentOperation start];
 }

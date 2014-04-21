@@ -13,6 +13,7 @@
 typedef void (^feedReturnBlockType)(BOOL success, NSArray *resultArray);
 
 typedef enum {
+    MINetworkOperationWaiting,
     MINetworkOperationReceivingToken,
     MINetworkOperationReceivingInitialFeed,
     MINetworkOperationReceivingNextFeedPage
@@ -24,7 +25,7 @@ typedef enum {
 @property (nonatomic, strong) RKObjectManager *manager;
 
 + (MINetworkManager *)sharedInstance;
-+ (BOOL)performInstagramAuthorization;
+- (BOOL)performInstagramAuthorization;
 - (void)getFeedAndExecute:(feedReturnBlockType)block;
 - (void)getNextPageAndExecute:(feedReturnBlockType)block;
 

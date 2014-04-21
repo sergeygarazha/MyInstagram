@@ -15,6 +15,7 @@
 
 @interface MINetworkManager () {
     NSURL *nextPageURL;
+    MINetworkManagerOperationType currentOperation;
 }
 
 @end
@@ -118,22 +119,21 @@
         [self.manager getObjectsAtPath:nextPageURL.absoluteString
                             parameters:nil
                                success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-                                   // success
+                // success
+                                    // если страница последняя, next_url будет пустой
+                                   nextPageURL = nil;
                                    NSMutableArray *resultArray = [NSMutableArray array];
-                                   
-                                   @autoreleasepool {
-                                       for (id element in mappingResult.array) {
-                                           if ([element isKindOfClass:[NSDictionary class]]) {
-                                               nextPageURL = [NSURL URLWithString:element[@"next_url"]];
-                                           }
-                                           
-                                           if ([element isKindOfClass:[RKErrorMessage class]]) {
-                                               NSLog(@"error!: %@", [(RKErrorMessage *)element errorMessage]);
-                                           }
-                                           
-                                           if ([element isKindOfClass:[Post class]]) {
-                                               [resultArray addObject:element];
-                                           }
+                                   for (id element in mappingResult.array) {
+                                       if ([element isKindOfClass:[NSDictionary class]]) {
+                                           nextPageURL = [NSURL URLWithString:element[@"next_url"]];
+                                       }
+                                       
+                                       if ([element isKindOfClass:[RKErrorMessage class]]) {
+                                           NSLog(@"error!: %@", [(RKErrorMessage *)element errorMessage]);
+                                       }
+                                       
+                                       if ([element isKindOfClass:[Post class]]) {
+                                           [resultArray addObject:element];
                                        }
                                    }
                                    block(YES, resultArray);
@@ -145,11 +145,12 @@
         }];
     } else {
         NSLog(@"next page string is nil");
+        block(NO, [NSArray array]);
     }
 }
 
-+ (BOOL)performInstagramAuthorization {
-	NSURL *url = [NSURL URLWithString:@"https://instagram.com/oauth/authorize/?client_id=59643e138238464f81021b607ad0b820&redirect_uri=http://ya.ru/&response_type=token"];
+- (BOOL)performInstagramAuthorization {
+    NSURL *url = [NSURL URLWithString:@"https://instagram.com/oauth/authorize/?client_id=59643e138238464f81021b607ad0b820&redirect_uri=http://ya.ru/&response_type=token"];
 	NSError *error = nil;
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	NSURLResponse *response = nil;
@@ -161,6 +162,7 @@
 		NSString *str = url.absoluteString;
 		NSRange start = [str rangeOfString:@"_token="];
 		[[MINetworkManager sharedInstance] setToken:[str substringFromIndex:start.location + 7]];
+        
 		return YES;
 	}
 
@@ -177,7 +179,7 @@
     
     if (!token) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            [MINetworkManager performInstagramAuthorization];
+            [[MINetworkManager sharedInstance] performInstagramAuthorization];
         });
     }
     

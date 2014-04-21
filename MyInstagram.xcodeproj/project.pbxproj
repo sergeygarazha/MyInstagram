@@ -54,6 +54,7 @@
 		D2A089E018FEBF4D00B298D3 /* NSImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A089DF18FEBF4D00B298D3 /* NSImageView+AFNetworking.m */; };
 		D2A089E518FFC8BC00B298D3 /* MIDetailsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A089E318FFC8BC00B298D3 /* MIDetailsWindowController.m */; };
 		D2A089E618FFC8BC00B298D3 /* MIDetailsWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2A089E418FFC8BC00B298D3 /* MIDetailsWindowController.xib */; };
+		D2EAC60A1905220A0067AED3 /* MICVItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EAC6091905220A0067AED3 /* MICVItemView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,6 +156,8 @@
 		D2A089E218FFC8BC00B298D3 /* MIDetailsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIDetailsWindowController.h; path = "Classes/Controllers/Details Window Controller/MIDetailsWindowController.h"; sourceTree = "<group>"; };
 		D2A089E318FFC8BC00B298D3 /* MIDetailsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIDetailsWindowController.m; path = "Classes/Controllers/Details Window Controller/MIDetailsWindowController.m"; sourceTree = "<group>"; };
 		D2A089E418FFC8BC00B298D3 /* MIDetailsWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MIDetailsWindowController.xib; path = "Classes/Controllers/Details Window Controller/MIDetailsWindowController.xib"; sourceTree = "<group>"; };
+		D2EAC6081905220A0067AED3 /* MICVItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MICVItemView.h; path = "Classes/View/Colleciton View/MICVItemView.h"; sourceTree = "<group>"; };
+		D2EAC6091905220A0067AED3 /* MICVItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MICVItemView.m; path = "Classes/View/Colleciton View/MICVItemView.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -488,6 +491,8 @@
 			children = (
 				D2A089DA18FEBDEA00B298D3 /* MICollectionView.h */,
 				D2A089DB18FEBDEA00B298D3 /* MICollectionView.m */,
+				D2EAC6081905220A0067AED3 /* MICVItemView.h */,
+				D2EAC6091905220A0067AED3 /* MICVItemView.m */,
 			);
 			name = "Collection View";
 			sourceTree = "<group>";
@@ -691,6 +696,7 @@
 				D225739B18E3029300D0C276 /* MIAppDelegate.m in Sources */,
 				D2A089D018FE9B0A00B298D3 /* Post.m in Sources */,
 				D22573F118E320AC00D0C276 /* MIStartWindowController.m in Sources */,
+				D2EAC60A1905220A0067AED3 /* MICVItemView.m in Sources */,
 				D256E7AE1901319100305329 /* RFOverlayScroller.m in Sources */,
 				D2A089DC18FEBDEA00B298D3 /* MICollectionView.m in Sources */,
 				CF66905319041AE400324BC7 /* MIImage.m in Sources */,

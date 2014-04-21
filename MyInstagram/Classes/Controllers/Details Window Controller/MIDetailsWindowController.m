@@ -11,7 +11,6 @@
 #import "NSImageView+AFNetworking.h"
 
 @interface MIDetailsWindowController () {
-    Post *post;
     BOOL trigger;
     CGPoint mouseLocationChanged;
 }
@@ -20,10 +19,12 @@
 
 @implementation MIDetailsWindowController
 
+@synthesize post;
+
 - (instancetype)initWithPost:(Post *)post_ {
 	self = [super initWithWindowNibName:@"MIDetailsWindowController"];
 	if (self) {
-        post = post_;
+        self.post = post_;
         trigger = NO;
 	}
 	return self;
@@ -85,7 +86,7 @@
 }
 
 - (void)updateWithPost:(Post *)post_ {
-    post = post_;
+    self.post = post_;
     
     [self.image setImageFromURL:[NSURL URLWithString:post.standard] withThumbnailURL:[NSURL URLWithString:post.thumbnail]];
 }
