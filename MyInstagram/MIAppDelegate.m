@@ -29,6 +29,15 @@
     [startWC showWindow:self];
 }
 
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag {
+    if (flag) {
+        return NO;
+    }
+    
+    [self.startWC showWindow:self];
+    return YES;
+}
+
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "self.MyInstagram" in the user's Application Support directory.
 - (NSURL *)applicationFilesDirectory
 {

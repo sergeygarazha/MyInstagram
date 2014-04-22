@@ -31,4 +31,8 @@
     return item;
 }
 
+- (NSRect)frameForItemAtIndex:(NSUInteger)index {
+    return [super frameForItemAtIndex:index];
+}
+
 @end

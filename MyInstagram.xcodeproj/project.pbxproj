@@ -12,6 +12,8 @@
 		CF66905319041AE400324BC7 /* MIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = CF66905219041AE400324BC7 /* MIImage.m */; };
 		CFF64A7D1903A65B0048AC93 /* Instagram1.png in Resources */ = {isa = PBXBuildFile; fileRef = CFF64A7B1903A65B0048AC93 /* Instagram1.png */; };
 		CFF64A7E1903A65B0048AC93 /* Instagram.png in Resources */ = {isa = PBXBuildFile; fileRef = CFF64A7C1903A65B0048AC93 /* Instagram.png */; };
+		D208E79E190688A800825934 /* ITProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = D208E79B190688A800825934 /* ITProgressIndicator.m */; };
+		D208E79F190688A800825934 /* NSBezierPath+Geometry.m in Sources */ = {isa = PBXBuildFile; fileRef = D208E79D190688A800825934 /* NSBezierPath+Geometry.m */; };
 		D225738818E3029300D0C276 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D225738718E3029300D0C276 /* Cocoa.framework */; };
 		D225739218E3029300D0C276 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D225739018E3029300D0C276 /* InfoPlist.strings */; };
 		D225739418E3029300D0C276 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D225739318E3029300D0C276 /* main.m */; };
@@ -55,6 +57,7 @@
 		D2A089E518FFC8BC00B298D3 /* MIDetailsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A089E318FFC8BC00B298D3 /* MIDetailsWindowController.m */; };
 		D2A089E618FFC8BC00B298D3 /* MIDetailsWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2A089E418FFC8BC00B298D3 /* MIDetailsWindowController.xib */; };
 		D2EAC60A1905220A0067AED3 /* MICVItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EAC6091905220A0067AED3 /* MICVItemView.m */; };
+		D2EAC60C19066DFA0067AED3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EAC60B19066DFA0067AED3 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +86,10 @@
 		CF66905219041AE400324BC7 /* MIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIImage.m; path = "Classes/View/Custom Image View/MIImage.m"; sourceTree = "<group>"; };
 		CFF64A7B1903A65B0048AC93 /* Instagram1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Instagram1.png; sourceTree = "<group>"; };
 		CFF64A7C1903A65B0048AC93 /* Instagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Instagram.png; sourceTree = "<group>"; };
+		D208E79A190688A800825934 /* ITProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITProgressIndicator.h; sourceTree = "<group>"; };
+		D208E79B190688A800825934 /* ITProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITProgressIndicator.m; sourceTree = "<group>"; };
+		D208E79C190688A800825934 /* NSBezierPath+Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBezierPath+Geometry.h"; sourceTree = "<group>"; };
+		D208E79D190688A800825934 /* NSBezierPath+Geometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBezierPath+Geometry.m"; sourceTree = "<group>"; };
 		D225738418E3029300D0C276 /* MyInstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyInstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D225738718E3029300D0C276 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D225738A18E3029300D0C276 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -158,6 +165,7 @@
 		D2A089E418FFC8BC00B298D3 /* MIDetailsWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MIDetailsWindowController.xib; path = "Classes/Controllers/Details Window Controller/MIDetailsWindowController.xib"; sourceTree = "<group>"; };
 		D2EAC6081905220A0067AED3 /* MICVItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MICVItemView.h; path = "Classes/View/Colleciton View/MICVItemView.h"; sourceTree = "<group>"; };
 		D2EAC6091905220A0067AED3 /* MICVItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MICVItemView.m; path = "Classes/View/Colleciton View/MICVItemView.m"; sourceTree = "<group>"; };
+		D2EAC60B19066DFA0067AED3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2EAC60C19066DFA0067AED3 /* QuartzCore.framework in Frameworks */,
 				D225738818E3029300D0C276 /* Cocoa.framework in Frameworks */,
 				47CB232EDB9F41D6A40A340A /* libPods-MyInstagram.a in Frameworks */,
 			);
@@ -229,6 +238,7 @@
 		D225738618E3029300D0C276 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D2EAC60B19066DFA0067AED3 /* QuartzCore.framework */,
 				D225738718E3029300D0C276 /* Cocoa.framework */,
 				D22573A918E3029400D0C276 /* XCTest.framework */,
 				D22573BE18E3029400D0C276 /* CoreServices.framework */,
@@ -411,6 +421,7 @@
 		D256E7A81901318900305329 /* Ext */ = {
 			isa = PBXGroup;
 			children = (
+				D2EAC615190674820067AED3 /* ITProgressIndicator */,
 				D256E7B01901391900305329 /* INAppStoreWindow */,
 				D256E7A91901319100305329 /* RFOverlayScrollView */,
 			);
@@ -514,6 +525,18 @@
 				D2A089E418FFC8BC00B298D3 /* MIDetailsWindowController.xib */,
 			);
 			name = "Details Window Controller";
+			sourceTree = "<group>";
+		};
+		D2EAC615190674820067AED3 /* ITProgressIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				D208E79A190688A800825934 /* ITProgressIndicator.h */,
+				D208E79B190688A800825934 /* ITProgressIndicator.m */,
+				D208E79C190688A800825934 /* NSBezierPath+Geometry.h */,
+				D208E79D190688A800825934 /* NSBezierPath+Geometry.m */,
+			);
+			name = ITProgressIndicator;
+			path = Ext/ITProgressIndicator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -687,6 +710,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D256E7C719014CE500305329 /* INAppStoreWindow.m in Sources */,
+				D208E79E190688A800825934 /* ITProgressIndicator.m in Sources */,
 				D22573FB18E3FBDC00D0C276 /* MINetworkManager.m in Sources */,
 				D256E7CA19014CE500305329 /* INWindowButton.m in Sources */,
 				D22573F618E3FB8B00D0C276 /* MIDatabaseManager.m in Sources */,
@@ -695,6 +719,7 @@
 				CF6690501904128E00324BC7 /* MIImageView.m in Sources */,
 				D225739B18E3029300D0C276 /* MIAppDelegate.m in Sources */,
 				D2A089D018FE9B0A00B298D3 /* Post.m in Sources */,
+				D208E79F190688A800825934 /* NSBezierPath+Geometry.m in Sources */,
 				D22573F118E320AC00D0C276 /* MIStartWindowController.m in Sources */,
 				D2EAC60A1905220A0067AED3 /* MICVItemView.m in Sources */,
 				D256E7AE1901319100305329 /* RFOverlayScroller.m in Sources */,

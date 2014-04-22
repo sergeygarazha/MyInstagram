@@ -19,7 +19,7 @@
 @interface MIStartWindowController () {
 	NSArray *feed;
     MIDetailsWindowController *detailsWindowController;
-    BOOL tapTrigger;
+    CGPoint windowOrigin;
     NSImageView *titleImage;
     NSArrayController *arrayController;
     BOOL loadingInProgress;
@@ -35,22 +35,14 @@
 	self = [super initWithWindowNibName:@"MIStartWindowController"];
 	if (self) {
 		feed = [NSArray array];
-        tapTrigger = NO;
         loadingInProgress = NO;
+        windowOrigin = CGPointMake(100000.0, 100000.0);
         
         arrayController = [[NSArrayController alloc] initWithContent:[NSArray array]];
         
         titleImage = [[NSImageView alloc] initWithFrame:CGRectMake(500.0, 0.0, 50.0, 70.0)];
         [titleImage setImage:[NSImage imageNamed:@"Instagram.png"]];
         [[(INAppStoreWindow *)self.window titleBarView] addSubview:titleImage];
-	}
-	return self;
-}
-
-- (id)initWithWindow:(NSWindow *)window {
-	self = [super initWithWindow:window];
-	if (self) {
-		// Initialization code here.
 	}
 	return self;
 }
@@ -73,10 +65,10 @@
     [self.check setHidden:YES];
     
     // extracting cache from DB
-//    [arrayController setContent:[[MIDatabaseManager sharedInstance] extractFeedFromDatabase]];
+    [arrayController setContent:[[MIDatabaseManager sharedInstance] extractFeedFromDatabase]];
     
     // reconneciton
-    [self getFeed:self];
+//    [self getFeed:self];
     
     NSScrollView *scrollView = (NSScrollView *)self.collectionView.superview.superview;
     scrollView.backgroundColor = [NSColor clearColor];
@@ -119,21 +111,15 @@
 		NSRectFill(NSMakeRect(NSMinX(drawingRect), NSMinY(drawingRect), NSWidth(drawingRect), 1));
 	};
     
-//    [self.collectionView setMinItemSize:CGSizeMake(100.0, 100.0)];
-//    [self.collectionView setMaxItemSize:CGSizeMake(200.0, 200.0)];
+    // title bar image positioning
+    [self windowWillResize:self.window toSize:self.window.frame.size];
+    // collection view items sizing
+    [self windowDidEndLiveResize:nil];
+    [self.collectionView setNeedsDisplay:YES];
 }
 
-- (void)windowDidLoad {
-	[super windowDidLoad];
-    
-}
-
-- (void)showWindow:(id)sender {
-	[super showWindow:sender];
-}
-
-- (NSWindow *)window {
-	return [super window];
+- (void)close:(id)sender {
+    [detailsWindowController.window close];
 }
 
 #pragma mark - Observing
@@ -174,7 +160,6 @@
             }
             [detailsWindowController showWindow:self];
         }
-//        [detailsWindowController.window makeMainWindow];
         [detailsWindowController.window makeKeyAndOrderFront:self];
         [detailsWindowController.window setOrderedIndex:0];
 	}
@@ -213,17 +198,22 @@
         [self.collectionView setMinItemSize:CGSizeMake(100.0, 100.0)];
         [self.collectionView setMaxItemSize:CGSizeMake(200.0, 200.0)];
     } else {
-        [self.collectionView setMinItemSize:CGSizeMake(100.0, 100.0)];
-        [self.collectionView setMaxItemSize:CGSizeMake(100.0, 100.0)];
+        [self windowDidEndLiveResize:nil];
     }
 }
 
+#pragma mark - Initial feed receiving
+
 - (IBAction)getFeed:(id)sender {
+    [[MIDatabaseManager sharedInstance] deleteOldEntries];
+    
     if (!loadingInProgress) {
         [self.progressBar setHidden:NO];
         [self.progressBar startAnimation:self];
         [self.getFeedButton setEnabled:NO];
         loadingInProgress = YES;
+        
+        timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(showCancelForGetFeed) userInfo:nil repeats:NO];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             [[MINetworkManager sharedInstance] getFeedAndExecute: ^(BOOL success, NSArray *resultArray) {
                 if (success) {
@@ -231,6 +221,7 @@
                         [arrayController setContent:resultArray];
                         [self.progressBar setHidden:YES];
                         [self.check setHidden:NO];
+                        [timer invalidate];
                     });
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -241,6 +232,23 @@
             }];
         });
     }
+}
+
+- (void)showCancelForGetFeed {
+    [self.getFeedButton setEnabled:YES];
+    [self.getFeedButton setTitle:@"Cancel"];
+    [self.getFeedButton setAction:@selector(cancelGetFeedOperation)];
+    timer = [NSTimer scheduledTimerWithTimeInterval:20.0 target:self selector:@selector(cancelGetFeedOperation) userInfo:nil repeats:NO];
+}
+
+- (void)cancelGetFeedOperation {
+    [timer invalidate];
+    [self.progressBar stopAnimation:self];
+    [self.getFeedButton setEnabled:YES];
+    [self.getFeedButton setTitle:@"Get feed"];
+    [self.getFeedButton setAction:@selector(getFeed:)];
+    loadingInProgress = NO;
+    [[RKObjectManager sharedManager] cancelAllObjectRequestOperationsWithMethod:RKRequestMethodAny matchingPathPattern:@""];
 }
 
 #pragma mark - Next Page Receiving
@@ -305,7 +313,7 @@
     [[RKObjectManager sharedManager] cancelAllObjectRequestOperationsWithMethod:RKRequestMethodAny matchingPathPattern:@""];
 }
 
-#pragma mark - Window resizong
+#pragma mark - Window resizing
 
 - (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize {
     // положение изображения заголовка
@@ -317,16 +325,40 @@
     return frameSize;
 }
 
+- (void)windowDidEndLiveResize:(NSNotification *)notification {
+    if (!alignment) {
+        float collectionViewWidth = self.collectionView.superview.frame.size.width;
+        
+        int count = (int)(collectionViewWidth/100.0);
+        float dif = collectionViewWidth - count*100.0;
+        float width = 100.0 + dif/count - 1;
+        
+        [self.collectionView setMinItemSize:CGSizeMake(width, width)];
+        [self.collectionView setMaxItemSize:CGSizeMake(width, width)];
+    }
+}
+
 #pragma mark - Mouse handling
 
 - (void)mouseDown:(NSEvent *)theEvent {
     NSPoint locationInView = [self.tapView convertPoint:[theEvent locationInWindow]
                                          fromView:[[self.tapView window] contentView]];
     if (locationInView.y > 0) {
-            NSScrollView *scrollView = (NSScrollView *)self.collectionView.superview.superview;
-            NSPoint pt = NSMakePoint(0.0, 0.0);
-            [[scrollView documentView] scrollPoint:pt];
+//        windowOrigin = self.window.frame.origin;
+        NSScrollView *scrollView = (NSScrollView *)self.collectionView.superview.superview;
+        NSPoint pt = NSMakePoint(0.0, 0.0);
+        [[scrollView documentView] scrollPoint:pt];
     }
+}
+
+- (void)mouseUp:(NSEvent *)theEvent {
+//    if (windowOrigin.x != self.window.frame.origin.x || windowOrigin.y != self.window.frame.origin.y) {
+//        NSScrollView *scrollView = (NSScrollView *)self.collectionView.superview.superview;
+//        NSPoint pt = NSMakePoint(0.0, 0.0);
+//        [[scrollView documentView] scrollPoint:pt];
+//    } else {
+//        windowOrigin = CGPointMake(100000.0, 100000.0);
+//    }
 }
 
 - (void)didScrollToEnd {

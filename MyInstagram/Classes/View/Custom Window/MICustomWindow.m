@@ -19,5 +19,10 @@
     return self;
 }
 
+- (void)close {
+    [self.windowController close:self];
+    
+    [super close];
+}
 
 @end

@@ -27,7 +27,8 @@
     NSCollectionView *cv = (NSCollectionView *)self.documentView;
     CGRect ds = cv.frame;
     
-    if (ds.size.height == rect.origin.y+rect.size.height) {
+    float dif = fabsf(ds.size.height - (rect.origin.y+rect.size.height));
+    if (dif < 10.0) {
         if ([self.delegate respondsToSelector:@selector(didScrollToEnd)]) {
             [self.delegate didScrollToEnd];
         }
