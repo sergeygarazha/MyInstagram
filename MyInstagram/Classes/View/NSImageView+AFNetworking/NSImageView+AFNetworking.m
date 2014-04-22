@@ -14,8 +14,13 @@
 
 @implementation NSImageView (AFNetworking)
 
+#pragma mark - Ivars
 AFImageRequestOperation *currentOperation = nil;
 ITProgressIndicator *progressIndicator;
+BOOL showIndicator;
+NSTimer *timer;
+
+#pragma mark - Publick methods
 
 - (void)setImageFromURL:(NSURL *)url {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -30,12 +35,13 @@ ITProgressIndicator *progressIndicator;
         [self.image setSize:CGSizeMake(200.0, 200.0)];
         [progressIndicator removeFromSuperview];
         progressIndicator = nil;
+        [timer invalidate];
     }];
     [currentOperation start];
 }
 
 - (void)setImageFromURL:(NSURL *)url withThumbnailURL:(NSURL *)thumbnail {
-    [self showProgressIndicator];
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(showProgressIndicator) userInfo:nil repeats:NO];
     NSURLRequest *request = [NSURLRequest requestWithURL:thumbnail];
     AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request
                                                       success:^(NSImage *image) {
@@ -49,12 +55,15 @@ ITProgressIndicator *progressIndicator;
     [self setImageFromURL:url];
 }
 
+#pragma mark - Progress Indicator handling
+
 - (void)showProgressIndicator {
     [progressIndicator removeFromSuperview];
     progressIndicator = nil;
     progressIndicator = [[ITProgressIndicator alloc] initWithFrame:self.frame];
-    progressIndicator.color = [NSColor colorWithCalibratedRed:36.0/256.0 green:98.0/256.0 blue:131.0/256.0 alpha:0.1];
-    progressIndicator.widthOfLine = 5.0;
+    progressIndicator.color = [NSColor colorWithCalibratedRed:36.0/256.0 green:98.0/256.0 blue:131.0/256.0 alpha:1.0];
+    [progressIndicator setAlphaValue:0.5];
+    progressIndicator.widthOfLine = 20.0;
     progressIndicator.innerMargin = 30.0;
     progressIndicator.animationDuration = 1.0;
     progressIndicator.numberOfLines = 8;
@@ -71,6 +80,10 @@ ITProgressIndicator *progressIndicator;
     if (progressIndicator) {
         [self showProgressIndicator];
     }
+}
+
+- (void)dealloc {
+    [timer invalidate];
 }
 
 @end
