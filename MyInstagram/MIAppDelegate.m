@@ -11,6 +11,8 @@
 #import "MIStartWindowController.h"
 #import <RKLog.h>
 #import "MIAuthWindowController.h"
+#import "MINetworkManager.h"
+#import <AFNetworking/AFHTTPRequestOperation.h>
 
 @implementation MIAppDelegate
 
@@ -22,11 +24,13 @@
 {
     RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
     
-    // showing auth window
-    [self logout:self];
-    
-    // showing main window
-//    [self showMainWindow];
+    if ([[MINetworkManager sharedInstance] token]) {
+        // showing main window
+        [self showMainWindow];
+    } else {
+        // showing auth window
+        [self showAuthentificationWindow];
+    }
 }
 
 - (void)showMainWindow {
@@ -38,8 +42,24 @@
     [self.currentWindowController showWindow:self];
 }
 
+AFHTTPRequestOperation *operation;
+
 - (IBAction)logout:(id)sender {
+    NSURL *url = [NSURL URLWithString:@"https://instagram.com/accounts/logout/"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlock:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self showAuthentificationWindow];
+        });
+    }];
+    [operation start];
+}
+
+- (void)showAuthentificationWindow {
     if (![self.currentWindowController isKindOfClass:[MIAuthWindowController class]]) {
+        [[MINetworkManager sharedInstance] clearToken];
+        
         [self.currentWindowController close];
         
         // показываем окно авторизации

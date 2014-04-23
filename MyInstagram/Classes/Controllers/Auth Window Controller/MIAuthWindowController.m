@@ -30,21 +30,33 @@
 - (void)loadWindow {
     [super loadWindow];
     
-    [self.progressIndicator startAnimation:self];
+    [[self progressIndicator] startAnimation:self];
     [self reload:self];
+}
+
+- (void)dealloc {
+    [self.webView setFrameLoadDelegate:nil];
+    [self.webView setResourceLoadDelegate:nil];
 }
 
 #pragma mark - Mathods
 
 - (IBAction)reload:(id)sender {
-    [self.progressIndicator setHidden:NO];
-    
     // заствляем показать окно авторизации
-    WebPreferences *prefs = [self.webView preferences];
-    [prefs setPrivateBrowsingEnabled:YES];
+//    WebPreferences *prefs = [self.webView preferences];
+//    [prefs setPrivateBrowsingEnabled:YES];
+    
+//    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+//    for (NSHTTPCookie *each in [cookieStorage cookies]) {
+//    	[cookieStorage deleteCookie:each];
+//    }
+    
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     
     NSString *authPath = [NSString stringWithFormat:@"https://api.instagram.com/oauth/authorize/?client_id=%@&redirect_uri=%@&response_type=token", CLIENT_ID, REDIRECT_URI];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:authPath]];
+//    request.cachePolicy = NSURLRequestReloadIgnoringLocalAndRemoteCacheData;
     
     self.webView.frameLoadDelegate = self;
     self.webView.resourceLoadDelegate = self;
@@ -53,6 +65,10 @@
 }
 
 #pragma mark - Web view delegeta methods
+
+- (void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame {
+    [[self progressIndicator] setHidden:NO];
+}
 
 - (void)webView:(WebView *)sender resource:(id)identifier didReceiveResponse:(NSURLResponse *)response fromDataSource:(WebDataSource *)dataSource {
     
@@ -75,7 +91,7 @@
 }
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {
-    [self.progressIndicator setHidden:YES];
+    [[self progressIndicator] setHidden:YES];
 }
 
 @end

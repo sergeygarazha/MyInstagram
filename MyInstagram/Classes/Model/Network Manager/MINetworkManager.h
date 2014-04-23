@@ -29,5 +29,6 @@ typedef enum {
 - (BOOL)performInstagramAuthorization;
 - (void)getFeedAndExecute:(feedReturnBlockType)block;
 - (void)getNextPageAndExecute:(feedReturnBlockType)block;
+- (void)clearToken;
 
 @end

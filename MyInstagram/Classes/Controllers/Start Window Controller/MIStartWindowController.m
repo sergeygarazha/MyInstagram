@@ -48,8 +48,8 @@
 }
 
 - (void)dealloc {
-	[arrayController removeObserver:self
-	                     forKeyPath:@"selectedObjects"];
+	[self.collectionView removeObserver:self
+	                     forKeyPath:@"selectionIndexes"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -65,10 +65,10 @@
     [self.check setHidden:YES];
     
     // extracting cache from DB
-    [arrayController setContent:[[MIDatabaseManager sharedInstance] extractFeedFromDatabase]];
+//    [arrayController setContent:[[MIDatabaseManager sharedInstance] extractFeedFromDatabase]];
     
     // reconneciton
-//    [self getFeed:self];
+    [self getFeed:self];
     
     NSScrollView *scrollView = (NSScrollView *)self.collectionView.superview.superview;
     scrollView.backgroundColor = [NSColor clearColor];

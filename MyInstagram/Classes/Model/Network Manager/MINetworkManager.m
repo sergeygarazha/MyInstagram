@@ -173,15 +173,17 @@
 #pragma mark - Token
 
 - (NSString *)token {
-    if (!token) {
-        token = [[NSUserDefaults standardUserDefaults] stringForKey:TOKEN];
+    if (token) {
+        return token;
     }
     
-    if (!token) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            [[MINetworkManager sharedInstance] performInstagramAuthorization];
-        });
-    }
+    token = [[NSUserDefaults standardUserDefaults] stringForKey:TOKEN];
+    
+//    if (!token) {
+////        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+//            [[MINetworkManager sharedInstance] performInstagramAuthorization];
+////        });
+//    }
     
     return token;
 }
@@ -189,6 +191,11 @@
 - (void)setToken:(NSString *)token_ {
     token = token_;
     [[NSUserDefaults standardUserDefaults] setObject:token forKey:TOKEN];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)clearToken {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:TOKEN];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

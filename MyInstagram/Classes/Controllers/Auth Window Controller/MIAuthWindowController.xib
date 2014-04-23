@@ -16,8 +16,8 @@
         <customObject id="-3" userLabel="Application"/>
         <window title="Authorization" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="400" height="330"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" topStrut="YES"/>
+            <rect key="contentRect" x="222" y="614" width="400" height="330"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <value key="minSize" type="size" width="400" height="330"/>
             <value key="maxSize" type="size" width="400" height="330"/>
@@ -28,7 +28,9 @@
                     <webView translatesAutoresizingMaskIntoConstraints="NO" id="2dl-Oe-Qi6">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="330"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12"/>
+                        <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
+                            <nil key="identifier"/>
+                        </webPreferences>
                     </webView>
                     <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XPC-mq-rFd">
                         <rect key="frame" x="14" y="11" width="39" height="38"/>
