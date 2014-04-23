@@ -7,6 +7,10 @@
 //
 
 #import "MIAppDelegate.h"
+#import "MIStartViewController.h"
+#import "MIStartWindowController.h"
+#import <RKLog.h>
+#import "MIAuthWindowController.h"
 
 @implementation MIAppDelegate
 
@@ -16,7 +20,42 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+    RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
+    
+    // showing auth window
+    [self logout:self];
+    
+    // showing main window
+//    [self showMainWindow];
+}
+
+- (void)showMainWindow {
+    [self.currentWindowController close];
+    
+    // загружаем окно программно, потому что при загрузке из xib`а не вызывается -loadWindow
+    self.currentWindowController = [[MIStartWindowController alloc] init];
+    self.window = self.currentWindowController.window;
+    [self.currentWindowController showWindow:self];
+}
+
+- (IBAction)logout:(id)sender {
+    if (![self.currentWindowController isKindOfClass:[MIAuthWindowController class]]) {
+        [self.currentWindowController close];
+        
+        // показываем окно авторизации
+        self.currentWindowController = [[MIAuthWindowController alloc] init];
+        self.window = self.currentWindowController.window;
+        [self.currentWindowController showWindow:self];
+    }
+}
+
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag {
+//    if (flag) {
+//        return NO;
+//    }
+    
+    [self.currentWindowController showWindow:self];
+    return YES;
 }
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "self.MyInstagram" in the user's Application Support directory.

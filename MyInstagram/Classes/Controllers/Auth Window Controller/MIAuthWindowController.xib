@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="5053"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="MIAuthWindowController">
+            <connections>
+                <outlet property="progressIndicator" destination="gta-d1-0C0" id="64G-2B-voS"/>
+                <outlet property="webView" destination="2dl-Oe-Qi6" id="h2k-0G-CWo"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application"/>
+        <window title="Authorization" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="400" height="330"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <value key="minSize" type="size" width="400" height="330"/>
+            <value key="maxSize" type="size" width="400" height="330"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="400" height="330"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <webView translatesAutoresizingMaskIntoConstraints="NO" id="2dl-Oe-Qi6">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="330"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12"/>
+                    </webView>
+                    <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XPC-mq-rFd">
+                        <rect key="frame" x="14" y="11" width="39" height="38"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="round" bezelStyle="circular" image="Reload" imagePosition="left" alignment="left" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="EV8-Ni-qN0">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="reload:" target="-2" id="FFt-Rk-bn1"/>
+                        </connections>
+                    </button>
+                    <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="gta-d1-0C0">
+                        <rect key="frame" x="20" y="294" width="16" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    </progressIndicator>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="2dl-Oe-Qi6" firstAttribute="top" secondItem="gta-d1-0C0" secondAttribute="bottom" constant="-36" id="4OP-5a-A0C"/>
+                    <constraint firstItem="2dl-Oe-Qi6" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="AZu-Xo-i6h"/>
+                    <constraint firstItem="2dl-Oe-Qi6" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="Ocs-KF-Sm8"/>
+                    <constraint firstItem="2dl-Oe-Qi6" firstAttribute="leading" secondItem="gta-d1-0C0" secondAttribute="trailing" constant="-36" id="WDd-r8-JGO"/>
+                    <constraint firstAttribute="bottom" secondItem="2dl-Oe-Qi6" secondAttribute="bottom" id="bGE-vR-EbD"/>
+                    <constraint firstItem="2dl-Oe-Qi6" firstAttribute="leading" secondItem="XPC-mq-rFd" secondAttribute="trailing" constant="-46" id="ezX-M4-chr"/>
+                    <constraint firstItem="XPC-mq-rFd" firstAttribute="top" secondItem="2dl-Oe-Qi6" secondAttribute="bottom" constant="-46" id="jhg-tn-24o"/>
+                    <constraint firstAttribute="trailing" secondItem="2dl-Oe-Qi6" secondAttribute="trailing" id="vm7-UN-Slf"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+        </window>
+    </objects>
+    <resources>
+        <image name="Reload" width="128" height="128"/>
+    </resources>
+</document>

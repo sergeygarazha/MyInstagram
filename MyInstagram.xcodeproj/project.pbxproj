@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47CB232EDB9F41D6A40A340A /* libPods-MyInstagram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBF243C994B40DAB6DE0012 /* libPods-MyInstagram.a */; };
+		CF6690501904128E00324BC7 /* MIImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF66904F1904128E00324BC7 /* MIImageView.m */; };
+		CF66905319041AE400324BC7 /* MIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = CF66905219041AE400324BC7 /* MIImage.m */; };
+		CFF64A7D1903A65B0048AC93 /* Instagram1.png in Resources */ = {isa = PBXBuildFile; fileRef = CFF64A7B1903A65B0048AC93 /* Instagram1.png */; };
+		D208E79E190688A800825934 /* ITProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = D208E79B190688A800825934 /* ITProgressIndicator.m */; };
+		D208E79F190688A800825934 /* NSBezierPath+Geometry.m in Sources */ = {isa = PBXBuildFile; fileRef = D208E79D190688A800825934 /* NSBezierPath+Geometry.m */; };
+		D208E7A4190789F700825934 /* MIAuthWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D208E7A2190789F700825934 /* MIAuthWindowController.m */; };
+		D208E7A5190789F700825934 /* MIAuthWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D208E7A3190789F700825934 /* MIAuthWindowController.xib */; };
+		D208E7A7190790EB00825934 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D208E7A6190790EB00825934 /* WebKit.framework */; };
+		D208E7A91907A9C900825934 /* Reload.png in Resources */ = {isa = PBXBuildFile; fileRef = D208E7A81907A9C900825934 /* Reload.png */; };
+		D208E7B21907D42500825934 /* Icon512.png in Resources */ = {isa = PBXBuildFile; fileRef = D208E7B01907D42500825934 /* Icon512.png */; };
+		D208E7B31907D42500825934 /* Icon1024.png in Resources */ = {isa = PBXBuildFile; fileRef = D208E7B11907D42500825934 /* Icon1024.png */; };
 		D225738818E3029300D0C276 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D225738718E3029300D0C276 /* Cocoa.framework */; };
 		D225739218E3029300D0C276 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D225739018E3029300D0C276 /* InfoPlist.strings */; };
 		D225739418E3029300D0C276 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D225739318E3029300D0C276 /* main.m */; };
@@ -28,6 +40,29 @@
 		D22573CD18E3029400D0C276 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = D22573CC18E3029400D0C276 /* main.c */; };
 		D22573CF18E3029400D0C276 /* GetMetadataForFile.m in Sources */ = {isa = PBXBuildFile; fileRef = D22573CE18E3029400D0C276 /* GetMetadataForFile.m */; };
 		D22573D218E3029400D0C276 /* MySpotlightImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = D22573D118E3029400D0C276 /* MySpotlightImporter.m */; };
+		D22573E918E31F6D00D0C276 /* MIStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D22573E718E31F6D00D0C276 /* MIStartViewController.m */; };
+		D22573EA18E31F6D00D0C276 /* MIStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D22573E818E31F6D00D0C276 /* MIStartViewController.xib */; };
+		D22573ED18E31F8C00D0C276 /* MIMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D22573EC18E31F8C00D0C276 /* MIMainViewController.m */; };
+		D22573F118E320AC00D0C276 /* MIStartWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D22573F018E320AC00D0C276 /* MIStartWindowController.m */; };
+		D22573F618E3FB8B00D0C276 /* MIDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D22573F518E3FB8B00D0C276 /* MIDatabaseManager.m */; };
+		D22573FB18E3FBDC00D0C276 /* MINetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D22573FA18E3FBDC00D0C276 /* MINetworkManager.m */; };
+		D256E7A3190123EC00305329 /* MIScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7A2190123EC00305329 /* MIScrollView.m */; };
+		D256E7AE1901319100305329 /* RFOverlayScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7AB1901319100305329 /* RFOverlayScroller.m */; };
+		D256E7AF1901319100305329 /* RFOverlayScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7AD1901319100305329 /* RFOverlayScrollView.m */; };
+		D256E7C719014CE500305329 /* INAppStoreWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7BE19014CE500305329 /* INAppStoreWindow.m */; };
+		D256E7C819014CE500305329 /* INAppStoreWindowSwizzling.c in Sources */ = {isa = PBXBuildFile; fileRef = D256E7BF19014CE500305329 /* INAppStoreWindowSwizzling.c */; };
+		D256E7C919014CE500305329 /* INTitlebarView+CoreUIRendering.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7C219014CE500305329 /* INTitlebarView+CoreUIRendering.m */; };
+		D256E7CA19014CE500305329 /* INWindowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7C419014CE500305329 /* INWindowButton.m */; };
+		D256E7CB19014CE500305329 /* NSDocument+INAppStoreWindowFixes.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7C619014CE500305329 /* NSDocument+INAppStoreWindowFixes.m */; };
+		D256E7CF190151E500305329 /* MICustomWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7CE190151E500305329 /* MICustomWindow.m */; };
+		D2A089CC18FE796800B298D3 /* MIStartWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2A089CB18FE796800B298D3 /* MIStartWindowController.xib */; };
+		D2A089D018FE9B0A00B298D3 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A089CF18FE9B0A00B298D3 /* Post.m */; };
+		D2A089DC18FEBDEA00B298D3 /* MICollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A089DB18FEBDEA00B298D3 /* MICollectionView.m */; };
+		D2A089E018FEBF4D00B298D3 /* NSImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A089DF18FEBF4D00B298D3 /* NSImageView+AFNetworking.m */; };
+		D2A089E518FFC8BC00B298D3 /* MIDetailsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A089E318FFC8BC00B298D3 /* MIDetailsWindowController.m */; };
+		D2A089E618FFC8BC00B298D3 /* MIDetailsWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2A089E418FFC8BC00B298D3 /* MIDetailsWindowController.xib */; };
+		D2EAC60A1905220A0067AED3 /* MICVItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EAC6091905220A0067AED3 /* MICVItemView.m */; };
+		D2EAC60C19066DFA0067AED3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EAC60B19066DFA0067AED3 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +83,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7FBF243C994B40DAB6DE0012 /* libPods-MyInstagram.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyInstagram.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9CC38572A04645B88CCB5969 /* Pods-MyInstagram.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyInstagram.xcconfig"; path = "Pods/Pods-MyInstagram.xcconfig"; sourceTree = "<group>"; };
+		CF66904E1904128E00324BC7 /* MIImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIImageView.h; path = "Classes/View/Custom Image View/MIImageView.h"; sourceTree = "<group>"; };
+		CF66904F1904128E00324BC7 /* MIImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIImageView.m; path = "Classes/View/Custom Image View/MIImageView.m"; sourceTree = "<group>"; };
+		CF66905119041AE400324BC7 /* MIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIImage.h; path = "Classes/View/Custom Image View/MIImage.h"; sourceTree = "<group>"; };
+		CF66905219041AE400324BC7 /* MIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIImage.m; path = "Classes/View/Custom Image View/MIImage.m"; sourceTree = "<group>"; };
+		CFF64A7B1903A65B0048AC93 /* Instagram1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Instagram1.png; sourceTree = "<group>"; };
+		D208E79A190688A800825934 /* ITProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITProgressIndicator.h; sourceTree = "<group>"; };
+		D208E79B190688A800825934 /* ITProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITProgressIndicator.m; sourceTree = "<group>"; };
+		D208E79C190688A800825934 /* NSBezierPath+Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBezierPath+Geometry.h"; sourceTree = "<group>"; };
+		D208E79D190688A800825934 /* NSBezierPath+Geometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBezierPath+Geometry.m"; sourceTree = "<group>"; };
+		D208E7A1190789F700825934 /* MIAuthWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIAuthWindowController.h; path = "Classes/Controllers/Auth Window Controller/MIAuthWindowController.h"; sourceTree = "<group>"; };
+		D208E7A2190789F700825934 /* MIAuthWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIAuthWindowController.m; path = "Classes/Controllers/Auth Window Controller/MIAuthWindowController.m"; sourceTree = "<group>"; };
+		D208E7A3190789F700825934 /* MIAuthWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MIAuthWindowController.xib; path = "Classes/Controllers/Auth Window Controller/MIAuthWindowController.xib"; sourceTree = "<group>"; };
+		D208E7A6190790EB00825934 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		D208E7A81907A9C900825934 /* Reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Reload.png; sourceTree = "<group>"; };
+		D208E7B01907D42500825934 /* Icon512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon512.png; sourceTree = "<group>"; };
+		D208E7B11907D42500825934 /* Icon1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon1024.png; sourceTree = "<group>"; };
 		D225738418E3029300D0C276 /* MyInstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyInstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D225738718E3029300D0C276 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D225738A18E3029300D0C276 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -81,6 +134,49 @@
 		D22573D118E3029400D0C276 /* MySpotlightImporter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySpotlightImporter.m; sourceTree = "<group>"; };
 		D22573D318E3029400D0C276 /* Importer Read Me.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Importer Read Me.txt"; sourceTree = "<group>"; };
 		D22573D418E3029400D0C276 /* MyInstagramImporter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyInstagramImporter-Prefix.pch"; sourceTree = "<group>"; };
+		D22573E618E31F6D00D0C276 /* MIStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIStartViewController.h; path = "Classes/Controllers/Start View Controller/MIStartViewController.h"; sourceTree = "<group>"; };
+		D22573E718E31F6D00D0C276 /* MIStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIStartViewController.m; path = "Classes/Controllers/Start View Controller/MIStartViewController.m"; sourceTree = "<group>"; };
+		D22573E818E31F6D00D0C276 /* MIStartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MIStartViewController.xib; path = "Classes/Controllers/Start View Controller/MIStartViewController.xib"; sourceTree = "<group>"; };
+		D22573EB18E31F8C00D0C276 /* MIMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIMainViewController.h; path = "Classes/Controllers/Main View Controller/MIMainViewController.h"; sourceTree = "<group>"; };
+		D22573EC18E31F8C00D0C276 /* MIMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIMainViewController.m; path = "Classes/Controllers/Main View Controller/MIMainViewController.m"; sourceTree = "<group>"; };
+		D22573EF18E320AC00D0C276 /* MIStartWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIStartWindowController.h; path = "Classes/Controllers/Start Window Controller/MIStartWindowController.h"; sourceTree = "<group>"; };
+		D22573F018E320AC00D0C276 /* MIStartWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIStartWindowController.m; path = "Classes/Controllers/Start Window Controller/MIStartWindowController.m"; sourceTree = "<group>"; };
+		D22573F418E3FB8B00D0C276 /* MIDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIDatabaseManager.h; path = "Classes/Model/Database Manager/MIDatabaseManager.h"; sourceTree = "<group>"; };
+		D22573F518E3FB8B00D0C276 /* MIDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIDatabaseManager.m; path = "Classes/Model/Database Manager/MIDatabaseManager.m"; sourceTree = "<group>"; };
+		D22573F918E3FBDC00D0C276 /* MINetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MINetworkManager.h; path = "Classes/Model/Network Manager/MINetworkManager.h"; sourceTree = "<group>"; };
+		D22573FA18E3FBDC00D0C276 /* MINetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MINetworkManager.m; path = "Classes/Model/Network Manager/MINetworkManager.m"; sourceTree = "<group>"; };
+		D256E79F18FFF6C300305329 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		D256E7A1190123EC00305329 /* MIScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIScrollView.h; path = "Classes/View/Scroll View/MIScrollView.h"; sourceTree = "<group>"; };
+		D256E7A2190123EC00305329 /* MIScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIScrollView.m; path = "Classes/View/Scroll View/MIScrollView.m"; sourceTree = "<group>"; };
+		D256E7AA1901319100305329 /* RFOverlayScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFOverlayScroller.h; sourceTree = "<group>"; };
+		D256E7AB1901319100305329 /* RFOverlayScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFOverlayScroller.m; sourceTree = "<group>"; };
+		D256E7AC1901319100305329 /* RFOverlayScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFOverlayScrollView.h; sourceTree = "<group>"; };
+		D256E7AD1901319100305329 /* RFOverlayScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFOverlayScrollView.m; sourceTree = "<group>"; };
+		D256E7BD19014CE500305329 /* INAppStoreWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAppStoreWindow.h; sourceTree = "<group>"; };
+		D256E7BE19014CE500305329 /* INAppStoreWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAppStoreWindow.m; sourceTree = "<group>"; };
+		D256E7BF19014CE500305329 /* INAppStoreWindowSwizzling.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = INAppStoreWindowSwizzling.c; sourceTree = "<group>"; };
+		D256E7C019014CE500305329 /* INAppStoreWindowSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAppStoreWindowSwizzling.h; sourceTree = "<group>"; };
+		D256E7C119014CE500305329 /* INTitlebarView+CoreUIRendering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "INTitlebarView+CoreUIRendering.h"; sourceTree = "<group>"; };
+		D256E7C219014CE500305329 /* INTitlebarView+CoreUIRendering.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "INTitlebarView+CoreUIRendering.m"; sourceTree = "<group>"; };
+		D256E7C319014CE500305329 /* INWindowButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INWindowButton.h; sourceTree = "<group>"; };
+		D256E7C419014CE500305329 /* INWindowButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INWindowButton.m; sourceTree = "<group>"; };
+		D256E7C519014CE500305329 /* NSDocument+INAppStoreWindowFixes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDocument+INAppStoreWindowFixes.h"; sourceTree = "<group>"; };
+		D256E7C619014CE500305329 /* NSDocument+INAppStoreWindowFixes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDocument+INAppStoreWindowFixes.m"; sourceTree = "<group>"; };
+		D256E7CD190151E500305329 /* MICustomWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MICustomWindow.h; path = "Classes/View/Custom Window/MICustomWindow.h"; sourceTree = "<group>"; };
+		D256E7CE190151E500305329 /* MICustomWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MICustomWindow.m; path = "Classes/View/Custom Window/MICustomWindow.m"; sourceTree = "<group>"; };
+		D2A089CB18FE796800B298D3 /* MIStartWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MIStartWindowController.xib; path = "Classes/Controllers/Start Window Controller/MIStartWindowController.xib"; sourceTree = "<group>"; };
+		D2A089CE18FE9B0A00B298D3 /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Post.h; path = Classes/Model/Entities/Post.h; sourceTree = "<group>"; };
+		D2A089CF18FE9B0A00B298D3 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Post.m; path = Classes/Model/Entities/Post.m; sourceTree = "<group>"; };
+		D2A089DA18FEBDEA00B298D3 /* MICollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MICollectionView.h; path = "Classes/View/Colleciton View/MICollectionView.h"; sourceTree = "<group>"; };
+		D2A089DB18FEBDEA00B298D3 /* MICollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MICollectionView.m; path = "Classes/View/Colleciton View/MICollectionView.m"; sourceTree = "<group>"; };
+		D2A089DE18FEBF4D00B298D3 /* NSImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSImageView+AFNetworking.h"; path = "Classes/View/NSImageView+AFNetworking/NSImageView+AFNetworking.h"; sourceTree = "<group>"; };
+		D2A089DF18FEBF4D00B298D3 /* NSImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSImageView+AFNetworking.m"; path = "Classes/View/NSImageView+AFNetworking/NSImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		D2A089E218FFC8BC00B298D3 /* MIDetailsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIDetailsWindowController.h; path = "Classes/Controllers/Details Window Controller/MIDetailsWindowController.h"; sourceTree = "<group>"; };
+		D2A089E318FFC8BC00B298D3 /* MIDetailsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIDetailsWindowController.m; path = "Classes/Controllers/Details Window Controller/MIDetailsWindowController.m"; sourceTree = "<group>"; };
+		D2A089E418FFC8BC00B298D3 /* MIDetailsWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MIDetailsWindowController.xib; path = "Classes/Controllers/Details Window Controller/MIDetailsWindowController.xib"; sourceTree = "<group>"; };
+		D2EAC6081905220A0067AED3 /* MICVItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MICVItemView.h; path = "Classes/View/Colleciton View/MICVItemView.h"; sourceTree = "<group>"; };
+		D2EAC6091905220A0067AED3 /* MICVItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MICVItemView.m; path = "Classes/View/Colleciton View/MICVItemView.m"; sourceTree = "<group>"; };
+		D2EAC60B19066DFA0067AED3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +184,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D208E7A7190790EB00825934 /* WebKit.framework in Frameworks */,
+				D2EAC60C19066DFA0067AED3 /* QuartzCore.framework in Frameworks */,
 				D225738818E3029300D0C276 /* Cocoa.framework in Frameworks */,
+				47CB232EDB9F41D6A40A340A /* libPods-MyInstagram.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +214,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF66904A190410DC00324BC7 /* Image View */ = {
+			isa = PBXGroup;
+			children = (
+				CF66904E1904128E00324BC7 /* MIImageView.h */,
+				CF66904F1904128E00324BC7 /* MIImageView.m */,
+				CF66905119041AE400324BC7 /* MIImage.h */,
+				CF66905219041AE400324BC7 /* MIImage.m */,
+			);
+			name = "Image View";
+			sourceTree = "<group>";
+		};
+		D208E7A0190789C300825934 /* Auth Window Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D208E7A1190789F700825934 /* MIAuthWindowController.h */,
+				D208E7A2190789F700825934 /* MIAuthWindowController.m */,
+				D208E7A3190789F700825934 /* MIAuthWindowController.xib */,
+			);
+			name = "Auth Window Controller";
+			sourceTree = "<group>";
+		};
 		D225737B18E3029300D0C276 = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +243,7 @@
 				D22573C618E3029400D0C276 /* MyInstagramImporter */,
 				D225738618E3029300D0C276 /* Frameworks */,
 				D225738518E3029300D0C276 /* Products */,
+				9CC38572A04645B88CCB5969 /* Pods-MyInstagram.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,6 +260,8 @@
 		D225738618E3029300D0C276 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D208E7A6190790EB00825934 /* WebKit.framework */,
+				D2EAC60B19066DFA0067AED3 /* QuartzCore.framework */,
 				D225738718E3029300D0C276 /* Cocoa.framework */,
 				D22573A918E3029400D0C276 /* XCTest.framework */,
 				D22573BE18E3029400D0C276 /* CoreServices.framework */,
@@ -146,6 +269,7 @@
 				D22573C218E3029400D0C276 /* CoreData.framework */,
 				D22573C418E3029400D0C276 /* Foundation.framework */,
 				D225738918E3029300D0C276 /* Other Frameworks */,
+				7FBF243C994B40DAB6DE0012 /* libPods-MyInstagram.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -163,8 +287,10 @@
 		D225738D18E3029300D0C276 /* MyInstagram */ = {
 			isa = PBXGroup;
 			children = (
+				D256E7A81901318900305329 /* Ext */,
 				D225739918E3029300D0C276 /* MIAppDelegate.h */,
 				D225739A18E3029300D0C276 /* MIAppDelegate.m */,
+				D22573E018E31E1300D0C276 /* Classes */,
 				D225739C18E3029300D0C276 /* MainMenu.xib */,
 				D22573A218E3029400D0C276 /* Images.xcassets */,
 				D225739F18E3029300D0C276 /* MyInstagram.xcdatamodeld */,
@@ -176,11 +302,13 @@
 		D225738E18E3029300D0C276 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D256E7D019015BD800305329 /* PNG */,
 				D225738F18E3029300D0C276 /* MyInstagram-Info.plist */,
 				D225739018E3029300D0C276 /* InfoPlist.strings */,
 				D225739318E3029300D0C276 /* main.m */,
 				D225739518E3029300D0C276 /* MyInstagram-Prefix.pch */,
 				D225739618E3029300D0C276 /* Credits.rtf */,
+				D256E79F18FFF6C300305329 /* Common.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -226,6 +354,217 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		D22573E018E31E1300D0C276 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D2A089D118FEBBB000B298D3 /* View */,
+				D22573F318E3FB4D00D0C276 /* Contorllers */,
+				D22573F218E3FB4200D0C276 /* Model */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		D22573E118E31E1C00D0C276 /* Main View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D22573EB18E31F8C00D0C276 /* MIMainViewController.h */,
+				D22573EC18E31F8C00D0C276 /* MIMainViewController.m */,
+			);
+			name = "Main View Controller";
+			sourceTree = "<group>";
+		};
+		D22573E518E31F4A00D0C276 /* Start View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D22573E618E31F6D00D0C276 /* MIStartViewController.h */,
+				D22573E718E31F6D00D0C276 /* MIStartViewController.m */,
+				D22573E818E31F6D00D0C276 /* MIStartViewController.xib */,
+			);
+			name = "Start View Controller";
+			sourceTree = "<group>";
+		};
+		D22573EE18E3208000D0C276 /* Start Window Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D22573EF18E320AC00D0C276 /* MIStartWindowController.h */,
+				D22573F018E320AC00D0C276 /* MIStartWindowController.m */,
+				D2A089CB18FE796800B298D3 /* MIStartWindowController.xib */,
+			);
+			name = "Start Window Controller";
+			sourceTree = "<group>";
+		};
+		D22573F218E3FB4200D0C276 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D2A089CD18FE98F400B298D3 /* Entities */,
+				D22573F818E3FBAC00D0C276 /* Network Manager */,
+				D22573F718E3FB9000D0C276 /* Database Manager */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		D22573F318E3FB4D00D0C276 /* Contorllers */ = {
+			isa = PBXGroup;
+			children = (
+				D208E7A0190789C300825934 /* Auth Window Controller */,
+				D22573EE18E3208000D0C276 /* Start Window Controller */,
+				D2A089E118FFC88100B298D3 /* Details Window Controller */,
+				D22573E518E31F4A00D0C276 /* Start View Controller */,
+				D22573E118E31E1C00D0C276 /* Main View Controller */,
+			);
+			name = Contorllers;
+			sourceTree = "<group>";
+		};
+		D22573F718E3FB9000D0C276 /* Database Manager */ = {
+			isa = PBXGroup;
+			children = (
+				D22573F418E3FB8B00D0C276 /* MIDatabaseManager.h */,
+				D22573F518E3FB8B00D0C276 /* MIDatabaseManager.m */,
+			);
+			name = "Database Manager";
+			sourceTree = "<group>";
+		};
+		D22573F818E3FBAC00D0C276 /* Network Manager */ = {
+			isa = PBXGroup;
+			children = (
+				D22573F918E3FBDC00D0C276 /* MINetworkManager.h */,
+				D22573FA18E3FBDC00D0C276 /* MINetworkManager.m */,
+			);
+			name = "Network Manager";
+			sourceTree = "<group>";
+		};
+		D256E7A0190123BA00305329 /* MIScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				D256E7A1190123EC00305329 /* MIScrollView.h */,
+				D256E7A2190123EC00305329 /* MIScrollView.m */,
+			);
+			name = MIScrollView;
+			sourceTree = "<group>";
+		};
+		D256E7A81901318900305329 /* Ext */ = {
+			isa = PBXGroup;
+			children = (
+				D2EAC615190674820067AED3 /* ITProgressIndicator */,
+				D256E7B01901391900305329 /* INAppStoreWindow */,
+				D256E7A91901319100305329 /* RFOverlayScrollView */,
+			);
+			name = Ext;
+			sourceTree = "<group>";
+		};
+		D256E7A91901319100305329 /* RFOverlayScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				D256E7AA1901319100305329 /* RFOverlayScroller.h */,
+				D256E7AB1901319100305329 /* RFOverlayScroller.m */,
+				D256E7AC1901319100305329 /* RFOverlayScrollView.h */,
+				D256E7AD1901319100305329 /* RFOverlayScrollView.m */,
+			);
+			name = RFOverlayScrollView;
+			path = Ext/RFOverlayScrollView;
+			sourceTree = "<group>";
+		};
+		D256E7B01901391900305329 /* INAppStoreWindow */ = {
+			isa = PBXGroup;
+			children = (
+				D256E7BD19014CE500305329 /* INAppStoreWindow.h */,
+				D256E7BE19014CE500305329 /* INAppStoreWindow.m */,
+				D256E7BF19014CE500305329 /* INAppStoreWindowSwizzling.c */,
+				D256E7C019014CE500305329 /* INAppStoreWindowSwizzling.h */,
+				D256E7C119014CE500305329 /* INTitlebarView+CoreUIRendering.h */,
+				D256E7C219014CE500305329 /* INTitlebarView+CoreUIRendering.m */,
+				D256E7C319014CE500305329 /* INWindowButton.h */,
+				D256E7C419014CE500305329 /* INWindowButton.m */,
+				D256E7C519014CE500305329 /* NSDocument+INAppStoreWindowFixes.h */,
+				D256E7C619014CE500305329 /* NSDocument+INAppStoreWindowFixes.m */,
+			);
+			name = INAppStoreWindow;
+			path = Ext/INWindowTitle;
+			sourceTree = "<group>";
+		};
+		D256E7CC190151BA00305329 /* Start Window */ = {
+			isa = PBXGroup;
+			children = (
+				D256E7CD190151E500305329 /* MICustomWindow.h */,
+				D256E7CE190151E500305329 /* MICustomWindow.m */,
+			);
+			name = "Start Window";
+			sourceTree = "<group>";
+		};
+		D256E7D019015BD800305329 /* PNG */ = {
+			isa = PBXGroup;
+			children = (
+				D208E7B01907D42500825934 /* Icon512.png */,
+				D208E7B11907D42500825934 /* Icon1024.png */,
+				D208E7A81907A9C900825934 /* Reload.png */,
+				CFF64A7B1903A65B0048AC93 /* Instagram1.png */,
+			);
+			path = PNG;
+			sourceTree = SOURCE_ROOT;
+		};
+		D2A089CD18FE98F400B298D3 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				D2A089CE18FE9B0A00B298D3 /* Post.h */,
+				D2A089CF18FE9B0A00B298D3 /* Post.m */,
+			);
+			name = Entities;
+			sourceTree = "<group>";
+		};
+		D2A089D118FEBBB000B298D3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CF66904A190410DC00324BC7 /* Image View */,
+				D256E7CC190151BA00305329 /* Start Window */,
+				D256E7A0190123BA00305329 /* MIScrollView */,
+				D2A089DD18FEBF0B00B298D3 /* NSImageView+AFNetworking */,
+				D2A089D918FEBDC300B298D3 /* Collection View */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		D2A089D918FEBDC300B298D3 /* Collection View */ = {
+			isa = PBXGroup;
+			children = (
+				D2A089DA18FEBDEA00B298D3 /* MICollectionView.h */,
+				D2A089DB18FEBDEA00B298D3 /* MICollectionView.m */,
+				D2EAC6081905220A0067AED3 /* MICVItemView.h */,
+				D2EAC6091905220A0067AED3 /* MICVItemView.m */,
+			);
+			name = "Collection View";
+			sourceTree = "<group>";
+		};
+		D2A089DD18FEBF0B00B298D3 /* NSImageView+AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				D2A089DE18FEBF4D00B298D3 /* NSImageView+AFNetworking.h */,
+				D2A089DF18FEBF4D00B298D3 /* NSImageView+AFNetworking.m */,
+			);
+			name = "NSImageView+AFNetworking";
+			sourceTree = "<group>";
+		};
+		D2A089E118FFC88100B298D3 /* Details Window Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D2A089E218FFC8BC00B298D3 /* MIDetailsWindowController.h */,
+				D2A089E318FFC8BC00B298D3 /* MIDetailsWindowController.m */,
+				D2A089E418FFC8BC00B298D3 /* MIDetailsWindowController.xib */,
+			);
+			name = "Details Window Controller";
+			sourceTree = "<group>";
+		};
+		D2EAC615190674820067AED3 /* ITProgressIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				D208E79A190688A800825934 /* ITProgressIndicator.h */,
+				D208E79B190688A800825934 /* ITProgressIndicator.m */,
+				D208E79C190688A800825934 /* NSBezierPath+Geometry.h */,
+				D208E79D190688A800825934 /* NSBezierPath+Geometry.m */,
+			);
+			name = ITProgressIndicator;
+			path = Ext/ITProgressIndicator;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -233,9 +572,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D22573DA18E3029400D0C276 /* Build configuration list for PBXNativeTarget "MyInstagram" */;
 			buildPhases = (
+				CAF517B70A984F2A99B5C9B5 /* Check Pods Manifest.lock */,
 				D225738018E3029300D0C276 /* Sources */,
 				D225738118E3029300D0C276 /* Frameworks */,
 				D225738218E3029300D0C276 /* Resources */,
+				F5B8D67178AE4FDF84053996 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -292,6 +633,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = self;
 				TargetAttributes = {
+					D225738318E3029300D0C276 = {
+						DevelopmentTeam = GDTL7HS4E2;
+					};
 					D22573A718E3029400D0C276 = {
 						TestTargetID = D225738318E3029300D0C276;
 					};
@@ -322,10 +666,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2A089CC18FE796800B298D3 /* MIStartWindowController.xib in Resources */,
 				D225739218E3029300D0C276 /* InfoPlist.strings in Resources */,
+				D208E7A5190789F700825934 /* MIAuthWindowController.xib in Resources */,
+				D22573EA18E31F6D00D0C276 /* MIStartViewController.xib in Resources */,
+				CFF64A7D1903A65B0048AC93 /* Instagram1.png in Resources */,
 				D22573BD18E3029400D0C276 /* MyInstagramImporter.mdimporter in Resources */,
 				D22573A318E3029400D0C276 /* Images.xcassets in Resources */,
+				D208E7A91907A9C900825934 /* Reload.png in Resources */,
+				D208E7B21907D42500825934 /* Icon512.png in Resources */,
 				D225739818E3029300D0C276 /* Credits.rtf in Resources */,
+				D2A089E618FFC8BC00B298D3 /* MIDetailsWindowController.xib in Resources */,
+				D208E7B31907D42500825934 /* Icon1024.png in Resources */,
 				D225739E18E3029300D0C276 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,13 +700,70 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		CAF517B70A984F2A99B5C9B5 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F5B8D67178AE4FDF84053996 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-MyInstagram-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D225738018E3029300D0C276 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D256E7C719014CE500305329 /* INAppStoreWindow.m in Sources */,
+				D208E79E190688A800825934 /* ITProgressIndicator.m in Sources */,
+				D22573FB18E3FBDC00D0C276 /* MINetworkManager.m in Sources */,
+				D256E7CA19014CE500305329 /* INWindowButton.m in Sources */,
+				D22573F618E3FB8B00D0C276 /* MIDatabaseManager.m in Sources */,
+				D22573E918E31F6D00D0C276 /* MIStartViewController.m in Sources */,
+				D256E7AF1901319100305329 /* RFOverlayScrollView.m in Sources */,
+				CF6690501904128E00324BC7 /* MIImageView.m in Sources */,
 				D225739B18E3029300D0C276 /* MIAppDelegate.m in Sources */,
+				D2A089D018FE9B0A00B298D3 /* Post.m in Sources */,
+				D208E79F190688A800825934 /* NSBezierPath+Geometry.m in Sources */,
+				D22573F118E320AC00D0C276 /* MIStartWindowController.m in Sources */,
+				D2EAC60A1905220A0067AED3 /* MICVItemView.m in Sources */,
+				D256E7AE1901319100305329 /* RFOverlayScroller.m in Sources */,
+				D2A089DC18FEBDEA00B298D3 /* MICollectionView.m in Sources */,
+				CF66905319041AE400324BC7 /* MIImage.m in Sources */,
+				D2A089E518FFC8BC00B298D3 /* MIDetailsWindowController.m in Sources */,
+				D256E7C919014CE500305329 /* INTitlebarView+CoreUIRendering.m in Sources */,
+				D256E7CF190151E500305329 /* MICustomWindow.m in Sources */,
+				D256E7CB19014CE500305329 /* NSDocument+INAppStoreWindowFixes.m in Sources */,
+				D256E7A3190123EC00305329 /* MIScrollView.m in Sources */,
 				D22573A118E3029300D0C276 /* MyInstagram.xcdatamodeld in Sources */,
+				D22573ED18E31F8C00D0C276 /* MIMainViewController.m in Sources */,
+				D2A089E018FEBF4D00B298D3 /* NSImageView+AFNetworking.m in Sources */,
+				D256E7C819014CE500305329 /* INAppStoreWindowSwizzling.c in Sources */,
+				D208E7A4190789F700825934 /* MIAuthWindowController.m in Sources */,
 				D225739418E3029300D0C276 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -460,6 +869,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
+					"CA_DEBUG_TRANSACTIONS=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -544,8 +954,10 @@
 		};
 		D22573DB18E3029400D0C276 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9CC38572A04645B88CCB5969 /* Pods-MyInstagram.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyInstagram/MyInstagram-Prefix.pch";
@@ -557,8 +969,10 @@
 		};
 		D22573DC18E3029400D0C276 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9CC38572A04645B88CCB5969 /* Pods-MyInstagram.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyInstagram/MyInstagram-Prefix.pch";
@@ -627,6 +1041,7 @@
 				D22573D918E3029400D0C276 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D22573DA18E3029400D0C276 /* Build configuration list for PBXNativeTarget "MyInstagram" */ = {
 			isa = XCConfigurationList;
@@ -635,6 +1050,7 @@
 				D22573DC18E3029400D0C276 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D22573DD18E3029400D0C276 /* Build configuration list for PBXNativeTarget "MyInstagramTests" */ = {
 			isa = XCConfigurationList;
@@ -643,6 +1059,7 @@
 				D22573DF18E3029400D0C276 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
