@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @class MIStartWindowController;
+@class MIAuthWindowController;
 
 @interface MIAppDelegate : NSObject <NSApplicationDelegate>
 
@@ -18,8 +19,10 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
-@property (nonatomic, strong) MIStartWindowController *startWC;
+@property (nonatomic, strong) NSWindowController *currentWindowController;
 
 - (IBAction)saveAction:(id)sender;
+- (void)showMainWindow;
+- (IBAction)logout:(id)sender;
 
 @end

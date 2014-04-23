@@ -77,7 +77,7 @@
     // scrolling notification turning ON
 //    [[self.collectionView superview] setPostsBoundsChangedNotifications:YES];
 //    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(check:)
+//                                             selector:@selector(getNextPage:)
 //                                                 name:NSViewBoundsDidChangeNotification object:[self.collectionView superview]];
     
     // selection handling
@@ -116,10 +116,29 @@
     // collection view items sizing
     [self windowDidEndLiveResize:nil];
     [self.collectionView setNeedsDisplay:YES];
+    
+    [self.window setFrame:self.window.frame display:YES animate:YES];
 }
 
 - (void)close:(id)sender {
     [detailsWindowController.window close];
+    detailsWindowController = nil;
+}
+
+- (void)showWindow:(id)sender {
+    [super showWindow:sender];
+    
+    if (detailsWindowController) {
+        [detailsWindowController showWindow:self];
+    }
+}
+
+- (void)windowWillMiniaturize:(NSNotification *)notification {
+    if ([[detailsWindowController window] isVisible]) {
+        [detailsWindowController close];
+    } else {
+        detailsWindowController = nil;
+    }
 }
 
 #pragma mark - Observing
@@ -218,10 +237,13 @@
             [[MINetworkManager sharedInstance] getFeedAndExecute: ^(BOOL success, NSArray *resultArray) {
                 if (success) {
                     dispatch_async(dispatch_get_main_queue(), ^{
+                        loadingInProgress = NO;
                         [arrayController setContent:resultArray];
                         [self.progressBar setHidden:YES];
                         [self.check setHidden:NO];
                         [timer invalidate];
+                        
+                        [self checkIfWeNeedToContinueLoading];
                     });
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -231,6 +253,19 @@
                 });
             }];
         });
+    }
+}
+
+- (void)checkIfWeNeedToContinueLoading {
+    // проверяем, не нужно ли загрузить следующую страницу
+    NSUInteger itemsCount = [self.collectionView.content count];
+    if (itemsCount != 0) {
+        int countOfItemsInRaw = (int)(self.collectionView.frame.size.width/self.collectionView.maxItemSize.width);
+        int numberOfRaws = (int)itemsCount/countOfItemsInRaw;
+        float contentHeight = self.collectionView.maxItemSize.height*numberOfRaws;
+        if (self.collectionView.superview.frame.size.height > contentHeight) {
+            [self getNextPage:self];
+        }
     }
 }
 
@@ -254,8 +289,8 @@
 #pragma mark - Next Page Receiving
 
 // load next page
-- (IBAction)check:(id)sender {
-    if (!loadingInProgress) {
+- (IBAction)getNextPage:(id)sender {
+    if (!loadingInProgress && [[MINetworkManager sharedInstance] nextPageURL]) {
         loadingInProgress = YES;
         NSProgressIndicator *indicator = [[NSProgressIndicator alloc] initWithFrame:CGRectZero];
         [indicator setStyle:NSProgressIndicatorSpinningStyle];
@@ -280,6 +315,8 @@
                             [self.check setEnabled:YES];
                             [self.check setTitle:@"Get next page"];
                             [timer invalidate];
+                            
+                            [self checkIfWeNeedToContinueLoading];
                         }
                     });
                 } else {
@@ -305,7 +342,7 @@
     [timer invalidate];
     [self.check setEnabled:YES];
     [self.check setTitle:@"Get next page"];
-    [self.check setAction:@selector(check:)];
+    [self.check setAction:@selector(getNextPage:)];
     loadingInProgress = NO;
     NSMutableArray *ar = [NSMutableArray arrayWithArray:arrayController.content];
     [ar removeLastObject];
@@ -340,29 +377,30 @@
 
 #pragma mark - Mouse handling
 
-- (void)mouseDown:(NSEvent *)theEvent {
-    NSPoint locationInView = [self.tapView convertPoint:[theEvent locationInWindow]
-                                         fromView:[[self.tapView window] contentView]];
-    if (locationInView.y > 0) {
-//        windowOrigin = self.window.frame.origin;
-        NSScrollView *scrollView = (NSScrollView *)self.collectionView.superview.superview;
-        NSPoint pt = NSMakePoint(0.0, 0.0);
-        [[scrollView documentView] scrollPoint:pt];
-    }
-}
-
-- (void)mouseUp:(NSEvent *)theEvent {
-//    if (windowOrigin.x != self.window.frame.origin.x || windowOrigin.y != self.window.frame.origin.y) {
+// scroll to top behavior
+//- (void)mouseDown:(NSEvent *)theEvent {
+//    NSPoint locationInView = [self.tapView convertPoint:[theEvent locationInWindow]
+//                                         fromView:[[self.tapView window] contentView]];
+//    if (locationInView.y > 0) {
+////        windowOrigin = self.window.frame.origin;
 //        NSScrollView *scrollView = (NSScrollView *)self.collectionView.superview.superview;
 //        NSPoint pt = NSMakePoint(0.0, 0.0);
 //        [[scrollView documentView] scrollPoint:pt];
-//    } else {
-//        windowOrigin = CGPointMake(100000.0, 100000.0);
 //    }
-}
+//}
+//
+//- (void)mouseUp:(NSEvent *)theEvent {
+////    if (windowOrigin.x != self.window.frame.origin.x || windowOrigin.y != self.window.frame.origin.y) {
+////        NSScrollView *scrollView = (NSScrollView *)self.collectionView.superview.superview;
+////        NSPoint pt = NSMakePoint(0.0, 0.0);
+////        [[scrollView documentView] scrollPoint:pt];
+////    } else {
+////        windowOrigin = CGPointMake(100000.0, 100000.0);
+////    }
+//}
 
 - (void)didScrollToEnd {
-    [self check:self];
+    [self getNextPage:self];
 }
 
 @end

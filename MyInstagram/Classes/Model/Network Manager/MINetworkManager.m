@@ -22,7 +22,7 @@
 
 @implementation MINetworkManager
 
-@synthesize token, manager;
+@synthesize token, manager, nextPageURL;
 
 + (MINetworkManager *)sharedInstance {
 	static dispatch_once_t pred;
@@ -93,7 +93,7 @@
 //                          @autoreleasepool {
                               for (id element in mappingResult.array) {
                                 if ([element isKindOfClass:[NSDictionary class]]) {
-                                    nextPageURL = [NSURL URLWithString:element[@"next_url"]];
+                                    self.nextPageURL = [NSURL URLWithString:element[@"next_url"]];
                                 }
                                 
                                 if ([element isKindOfClass:[RKErrorMessage class]]) {
@@ -121,11 +121,11 @@
                                success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
                 // success
                                     // если страница последняя, next_url будет пустой
-                                   nextPageURL = nil;
+                                   self.nextPageURL = nil;
                                    NSMutableArray *resultArray = [NSMutableArray array];
                                    for (id element in mappingResult.array) {
                                        if ([element isKindOfClass:[NSDictionary class]]) {
-                                           nextPageURL = [NSURL URLWithString:element[@"next_url"]];
+                                           self.nextPageURL = [NSURL URLWithString:element[@"next_url"]];
                                        }
                                        
                                        if ([element isKindOfClass:[RKErrorMessage class]]) {

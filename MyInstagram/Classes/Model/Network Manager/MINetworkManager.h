@@ -23,6 +23,7 @@ typedef enum {
 
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) RKObjectManager *manager;
+@property (nonatomic, strong) NSURL *nextPageURL;
 
 + (MINetworkManager *)sharedInstance;
 - (BOOL)performInstagramAuthorization;

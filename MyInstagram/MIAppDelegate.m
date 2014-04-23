@@ -10,6 +10,7 @@
 #import "MIStartViewController.h"
 #import "MIStartWindowController.h"
 #import <RKLog.h>
+#import "MIAuthWindowController.h"
 
 @implementation MIAppDelegate
 
@@ -17,24 +18,43 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize managedObjectContext = _managedObjectContext;
 
-@synthesize startWC;
-
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
     
+    // showing auth window
+    [self logout:self];
+    
+    // showing main window
+//    [self showMainWindow];
+}
+
+- (void)showMainWindow {
+    [self.currentWindowController close];
+    
     // загружаем окно программно, потому что при загрузке из xib`а не вызывается -loadWindow
-    self.startWC = [[MIStartWindowController alloc] init];
-    self.window = startWC.window;
-    [startWC showWindow:self];
+    self.currentWindowController = [[MIStartWindowController alloc] init];
+    self.window = self.currentWindowController.window;
+    [self.currentWindowController showWindow:self];
+}
+
+- (IBAction)logout:(id)sender {
+    if (![self.currentWindowController isKindOfClass:[MIAuthWindowController class]]) {
+        [self.currentWindowController close];
+        
+        // показываем окно авторизации
+        self.currentWindowController = [[MIAuthWindowController alloc] init];
+        self.window = self.currentWindowController.window;
+        [self.currentWindowController showWindow:self];
+    }
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag {
-    if (flag) {
-        return NO;
-    }
+//    if (flag) {
+//        return NO;
+//    }
     
-    [self.startWC showWindow:self];
+    [self.currentWindowController showWindow:self];
     return YES;
 }
 

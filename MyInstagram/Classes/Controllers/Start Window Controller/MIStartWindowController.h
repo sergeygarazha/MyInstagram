@@ -22,6 +22,6 @@
 
 - (IBAction)reconnect:(id)sender;
 - (IBAction)getFeed:(id)sender;
-- (IBAction)check:(id)sender;
+- (IBAction)getNextPage:(id)sender;
 
 @end

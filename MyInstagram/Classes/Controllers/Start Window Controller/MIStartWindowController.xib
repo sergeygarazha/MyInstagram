@@ -89,7 +89,7 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="check:" target="-2" id="xSH-ro-qFu"/>
+                            <action selector="getNextPage:" target="-2" id="Rai-Ki-1lw"/>
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="To6-dd-1lA" userLabel="Get feed Button">
