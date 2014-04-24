@@ -10,7 +10,7 @@
 		47CB232EDB9F41D6A40A340A /* libPods-MyInstagram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBF243C994B40DAB6DE0012 /* libPods-MyInstagram.a */; };
 		CF6690501904128E00324BC7 /* MIImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF66904F1904128E00324BC7 /* MIImageView.m */; };
 		CF66905319041AE400324BC7 /* MIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = CF66905219041AE400324BC7 /* MIImage.m */; };
-		CFF64A7D1903A65B0048AC93 /* Instagram1.png in Resources */ = {isa = PBXBuildFile; fileRef = CFF64A7B1903A65B0048AC93 /* Instagram1.png */; };
+		CFF64A7D1903A65B0048AC93 /* Instagram.png in Resources */ = {isa = PBXBuildFile; fileRef = CFF64A7B1903A65B0048AC93 /* Instagram.png */; };
 		D208E79E190688A800825934 /* ITProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = D208E79B190688A800825934 /* ITProgressIndicator.m */; };
 		D208E79F190688A800825934 /* NSBezierPath+Geometry.m in Sources */ = {isa = PBXBuildFile; fileRef = D208E79D190688A800825934 /* NSBezierPath+Geometry.m */; };
 		D208E7A4190789F700825934 /* MIAuthWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D208E7A2190789F700825934 /* MIAuthWindowController.m */; };
@@ -89,7 +89,7 @@
 		CF66904F1904128E00324BC7 /* MIImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIImageView.m; path = "Classes/View/Custom Image View/MIImageView.m"; sourceTree = "<group>"; };
 		CF66905119041AE400324BC7 /* MIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIImage.h; path = "Classes/View/Custom Image View/MIImage.h"; sourceTree = "<group>"; };
 		CF66905219041AE400324BC7 /* MIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIImage.m; path = "Classes/View/Custom Image View/MIImage.m"; sourceTree = "<group>"; };
-		CFF64A7B1903A65B0048AC93 /* Instagram1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Instagram1.png; sourceTree = "<group>"; };
+		CFF64A7B1903A65B0048AC93 /* Instagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Instagram.png; sourceTree = "<group>"; };
 		D208E79A190688A800825934 /* ITProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITProgressIndicator.h; sourceTree = "<group>"; };
 		D208E79B190688A800825934 /* ITProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITProgressIndicator.m; sourceTree = "<group>"; };
 		D208E79C190688A800825934 /* NSBezierPath+Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBezierPath+Geometry.h"; sourceTree = "<group>"; };
@@ -497,7 +497,7 @@
 				D208E7B01907D42500825934 /* Icon512.png */,
 				D208E7B11907D42500825934 /* Icon1024.png */,
 				D208E7A81907A9C900825934 /* Reload.png */,
-				CFF64A7B1903A65B0048AC93 /* Instagram1.png */,
+				CFF64A7B1903A65B0048AC93 /* Instagram.png */,
 			);
 			path = PNG;
 			sourceTree = SOURCE_ROOT;
@@ -670,7 +670,7 @@
 				D225739218E3029300D0C276 /* InfoPlist.strings in Resources */,
 				D208E7A5190789F700825934 /* MIAuthWindowController.xib in Resources */,
 				D22573EA18E31F6D00D0C276 /* MIStartViewController.xib in Resources */,
-				CFF64A7D1903A65B0048AC93 /* Instagram1.png in Resources */,
+				CFF64A7D1903A65B0048AC93 /* Instagram.png in Resources */,
 				D22573BD18E3029400D0C276 /* MyInstagramImporter.mdimporter in Resources */,
 				D22573A318E3029400D0C276 /* Images.xcassets in Resources */,
 				D208E7A91907A9C900825934 /* Reload.png in Resources */,
