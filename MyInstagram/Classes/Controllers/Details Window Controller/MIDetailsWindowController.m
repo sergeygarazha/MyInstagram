@@ -9,13 +9,7 @@
 #import "MIDetailsWindowController.h"
 #import "Post.h"
 #import "NSImageView+AFNetworking.h"
-
-@interface MIDetailsWindowController () {
-    BOOL trigger;
-    CGPoint mouseLocationChanged;
-}
-
-@end
+#import "MIDetailsCustomWindow.h"
 
 @implementation MIDetailsWindowController
 
@@ -24,71 +18,35 @@
 - (instancetype)initWithPost:(Post *)post_ {
 	self = [super initWithWindowNibName:@"MIDetailsWindowController"];
 	if (self) {
-        self.post = post_;
-        trigger = NO;
+		self.post = post_;
 	}
 	return self;
-}
-
-- (id)initWithWindow:(NSWindow *)window {
-	self = [super initWithWindow:window];
-	if (self) {
-		// Initialization code here.
-	}
-	return self;
-}
-
-- (void)mouseDown:(NSEvent *)theEvent {
-    if (theEvent.window == self.window) {
-        trigger = YES;
-    }
-}
-
-- (void)mouseDragged:(NSEvent *)theEvent {
-    mouseLocationChanged = CGPointMake(theEvent.deltaX, theEvent.deltaY);
-    trigger = NO;
-    
-    CGRect rect = self.window.frame;
-    rect.origin.x += theEvent.deltaX;
-    rect.origin.y -= theEvent.deltaY;
-    
-    [self.window setFrame:rect display:YES animate:NO];
-}
-
-- (void)mouseUp:(NSEvent *)theEvent {
-    if (trigger && theEvent.window == self.window) {
-        [self.window close];
-    }
-    trigger = NO;
 }
 
 - (void)loadWindow {
-    [super loadWindow];
-    
-    [self.window setAspectRatio: self.image.frame.size];
-    [self.image setImageFromURL:[NSURL URLWithString:post.standard] withThumbnailURL:[NSURL URLWithString:post.thumbnail]];
-    
-    self.window.delegate = self;
-}
+	[super loadWindow];
 
-- (void)windowDidLoad {
-	[super windowDidLoad];
-
-	// Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-}
-
-- (void)windowDidEndLiveResize:(NSNotification *)notification {
-}
-
-- (void)windowWillClose:(NSNotification *)notification {
-    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f,%f,%f,%f", self.window.frame.origin.x,self.window.frame.origin.y, self.window.frame.size.width, self.window.frame.size.height] forKey:@"detailsWindow"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+	[[(MIDetailsCustomWindow *)self.window imageView] setImageFromURL:[NSURL URLWithString:post.standard] withThumbnailURL:[NSURL URLWithString:post.thumbnail]];
+	self.window.delegate = self;
 }
 
 - (void)updateWithPost:(Post *)post_ {
-    self.post = post_;
-    
-    [self.image setImageFromURL:[NSURL URLWithString:post.standard] withThumbnailURL:[NSURL URLWithString:post.thumbnail]];
+	self.post = post_;
+	[[(MIDetailsCustomWindow *)self.window imageView] setImageFromURL:[NSURL URLWithString:post.standard] withThumbnailURL:[NSURL URLWithString:post.thumbnail]];
+}
+
+#pragma mark - Actions
+
+- (IBAction)transitionLeft:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(showPreviousPost)]) {
+        [self.delegate performSelector:@selector(showPreviousPost)];
+    }
+}
+
+- (IBAction)transitionRight:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(showNextPost)]) {
+        [self.delegate performSelector:@selector(showNextPost)];
+    }
 }
 
 @end

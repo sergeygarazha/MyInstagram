@@ -10,7 +10,6 @@
 #import "MINetworkManager.h"
 #import "MICollectionView.h"
 #import "MIDatabaseManager.h"
-#import "MIDetailsWindowController.h"
 #import "Post.h"
 #import "INAppStoreWindow.h"
 #import "NSImageView+AFNetworking.h"
@@ -173,6 +172,7 @@
             [detailsWindowController updateWithPost:selectedPost];
         } else {
             detailsWindowController = [[MIDetailsWindowController alloc] initWithPost:selectedPost];
+            detailsWindowController.delegate = self;
             NSString *str = [[NSUserDefaults standardUserDefaults] objectForKey:@"detailsWindow"];
             if (str) {
                 [detailsWindowController.window setFrame:NSRectFromString(str) display:YES animate:NO];
@@ -350,9 +350,30 @@
     [[RKObjectManager sharedManager] cancelAllObjectRequestOperationsWithMethod:RKRequestMethodAny matchingPathPattern:@""];
 }
 
+#pragma mark - MIDetailsWindowController Delegate
+
+- (void)showPreviousPost
+{
+    NSUInteger currentIndex = [arrayController.content indexOfObject:detailsWindowController.post];
+    if (currentIndex > 0) {
+        [detailsWindowController updateWithPost:arrayController.content[--currentIndex]];
+    }
+}
+
+- (void)showNextPost
+{
+    NSUInteger currentIndex = [arrayController.content indexOfObject:detailsWindowController.post];
+    NSArray *ar = arrayController.arrangedObjects;
+    NSUInteger count = [ar count];
+    if (count > ++currentIndex) {
+        [detailsWindowController updateWithPost:arrayController.content[currentIndex]];
+    }
+}
+
 #pragma mark - Window resizing
 
-- (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize {
+- (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize
+{
     // положение изображения заголовка
     INAppStoreWindow *window = (INAppStoreWindow *)self.window;
     float height = 55.0;
@@ -362,8 +383,10 @@
     return frameSize;
 }
 
-- (void)windowDidEndLiveResize:(NSNotification *)notification {
-    if (!alignment) {
+- (void)windowDidEndLiveResize:(NSNotification *)notification
+{
+    if (!alignment)
+    {
         float collectionViewWidth = self.collectionView.superview.frame.size.width;
         
         int count = (int)(collectionViewWidth/100.0);

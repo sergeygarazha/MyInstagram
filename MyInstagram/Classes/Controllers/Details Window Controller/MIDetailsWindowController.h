@@ -10,12 +10,22 @@
 
 @class Post;
 
+@protocol MIDetailsWindowControllerDelegate <NSObject>
+
+@required
+- (void)showNextPost;
+- (void)showPreviousPost;
+
+@end
+
 @interface MIDetailsWindowController : NSWindowController <NSWindowDelegate>
 
-@property (weak) IBOutlet NSImageView *image;
 @property (strong) Post *post;
+@property (weak) id<MIDetailsWindowControllerDelegate> delegate;
 
 - (instancetype)initWithPost:(Post *)post_;
 - (void)updateWithPost:(Post *)post;
+- (IBAction)transitionLeft:(id)sender;
+- (IBAction)transitionRight:(id)sender;
 
 @end

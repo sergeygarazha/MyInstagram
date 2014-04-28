@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MIDetailsWindowController">
             <connections>
-                <outlet property="image" destination="D9v-ky-OVF" id="mou-pz-NRP"/>
-                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="muh-JD-Ei3"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application"/>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5" customClass="MIDetailsCustomWindow">
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <windowPositionMask key="initialPositionMask" rightStrut="YES" topStrut="YES"/>
-            <rect key="contentRect" x="748" y="211" width="500" height="500"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
+            <windowPositionMask key="initialPositionMask" topStrut="YES"/>
+            <rect key="contentRect" x="1175" y="383" width="500" height="500"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <view key="contentView" autoresizesSubviews="NO" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="500" height="500"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -26,16 +25,56 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="iNo-Rj-Ka1"/>
                     </imageView>
+                    <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Un-rG-yk2" userLabel="Left transition" customClass="MITranslucentButton">
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="500"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="wgF-Gj-Z3p"/>
+                        </constraints>
+                        <connections>
+                            <action selector="transitionLeft:" target="-2" id="4dS-US-N3J"/>
+                        </connections>
+                    </customView>
+                    <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xks-2n-xif" userLabel="Right transition" customClass="MITranslucentButton">
+                        <rect key="frame" x="400" y="0.0" width="100" height="500"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="n3t-Yk-0LU"/>
+                        </constraints>
+                        <connections>
+                            <action selector="transitionRight:" target="-2" id="d1K-ls-Ob2"/>
+                        </connections>
+                    </customView>
+                    <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cd7-s2-h1S" userLabel="Bottom view">
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="100"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="100" id="rJ9-t7-O6A"/>
+                        </constraints>
+                    </customView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="6Un-rG-yk2" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="4ZQ-b1-CFa"/>
                     <constraint firstAttribute="trailing" secondItem="D9v-ky-OVF" secondAttribute="trailing" id="6WW-tf-wte"/>
                     <constraint firstItem="D9v-ky-OVF" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="95M-BT-uer"/>
+                    <constraint firstAttribute="trailing" secondItem="Cd7-s2-h1S" secondAttribute="trailing" id="HJC-Az-0bu"/>
+                    <constraint firstItem="Cd7-s2-h1S" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="IBM-dm-211"/>
+                    <constraint firstAttribute="bottom" secondItem="xks-2n-xif" secondAttribute="bottom" id="Mv1-Ys-6On"/>
+                    <constraint firstItem="6Un-rG-yk2" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="RCL-Zd-OV4"/>
                     <constraint firstItem="D9v-ky-OVF" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="aTm-Aq-i4l"/>
+                    <constraint firstAttribute="bottom" secondItem="6Un-rG-yk2" secondAttribute="bottom" id="fSb-oG-b86"/>
                     <constraint firstAttribute="bottom" secondItem="D9v-ky-OVF" secondAttribute="bottom" id="j7h-bN-lDp"/>
+                    <constraint firstAttribute="trailing" secondItem="xks-2n-xif" secondAttribute="trailing" id="okf-sK-Ksc"/>
+                    <constraint firstItem="xks-2n-xif" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="s2Z-V4-BhN"/>
+                    <constraint firstAttribute="bottom" secondItem="Cd7-s2-h1S" secondAttribute="bottom" id="wAf-fK-vCw"/>
                 </constraints>
             </view>
             <connections>
+                <outlet property="bottomView" destination="Cd7-s2-h1S" id="1rA-gw-nka"/>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+                <outlet property="imageView" destination="D9v-ky-OVF" id="Zzk-H8-VMI"/>
+                <outlet property="leftTransitionView" destination="6Un-rG-yk2" id="JIa-EO-RNy"/>
+                <outlet property="rightTransitionView" destination="xks-2n-xif" id="vBV-gY-5wg"/>
             </connections>
         </window>
     </objects>
