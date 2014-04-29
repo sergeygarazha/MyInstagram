@@ -107,10 +107,10 @@
 
 - (void)mouseEntered:(NSEvent *)theEvent
 {
-	if (theEvent.trackingArea == leftTrackingArea) {
+	if (theEvent.trackingArea == leftTrackingArea && self.previousPageAvailable) {
 		[self.leftTransitionView setHidden:NO];
 	}
-	if (theEvent.trackingArea == rightTrackingArea) {
+	if (theEvent.trackingArea == rightTrackingArea && self.nextPageAvailable) {
 		[self.rightTransitionView setHidden:NO];
 	}
 	if (theEvent.trackingArea == bottomTrackingArea) {
@@ -120,13 +120,13 @@
 
 - (void)mouseExited:(NSEvent *)theEvent
 {
-	if (theEvent.trackingArea == leftTrackingArea && theEvent.type == NSMouseExited) {
+	if (theEvent.trackingArea == leftTrackingArea) {
 		[self.leftTransitionView setHidden:YES];
 	}
-	if (theEvent.trackingArea == rightTrackingArea && theEvent.type == NSMouseExited) {
+	if (theEvent.trackingArea == rightTrackingArea) {
 		[self.rightTransitionView setHidden:YES];
 	}
-	if (theEvent.trackingArea == bottomTrackingArea && theEvent.type == NSMouseExited) {
+	if (theEvent.trackingArea == bottomTrackingArea) {
 		[self.bottomView setHidden:YES];
 	}
 }

@@ -16,5 +16,7 @@
 @property (weak) IBOutlet MITranslucentButton *rightTransitionView;
 @property (weak) IBOutlet NSView *bottomView;
 @property (weak) IBOutlet NSImageView *imageView;
+@property BOOL nextPageAvailable;
+@property BOOL previousPageAvailable;
 
 @end

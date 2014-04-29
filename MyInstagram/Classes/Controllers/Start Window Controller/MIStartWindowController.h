@@ -15,13 +15,11 @@
 @interface MIStartWindowController : NSWindowController <NSWindowDelegate, MIDetailsWindowControllerDelegate>
 
 @property (weak) IBOutlet NSProgressIndicator *progressBar;
-@property (weak) IBOutlet NSButton *reconnectButton;
 @property (weak) IBOutlet NSButton *getFeedButton;
 @property (weak) IBOutlet MICollectionView *collectionView;
 @property (weak) IBOutlet NSView *tapView;
 @property (weak) IBOutlet NSButton *check;
 
-- (IBAction)reconnect:(id)sender;
 - (IBAction)getFeed:(id)sender;
 - (IBAction)getNextPage:(id)sender;
 

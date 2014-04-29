@@ -54,7 +54,7 @@
 		D256E7C919014CE500305329 /* INTitlebarView+CoreUIRendering.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7C219014CE500305329 /* INTitlebarView+CoreUIRendering.m */; };
 		D256E7CA19014CE500305329 /* INWindowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7C419014CE500305329 /* INWindowButton.m */; };
 		D256E7CB19014CE500305329 /* NSDocument+INAppStoreWindowFixes.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7C619014CE500305329 /* NSDocument+INAppStoreWindowFixes.m */; };
-		D256E7CF190151E500305329 /* MICustomWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7CE190151E500305329 /* MICustomWindow.m */; };
+		D256E7CF190151E500305329 /* MIStartCustomWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D256E7CE190151E500305329 /* MIStartCustomWindow.m */; };
 		D29A1E6F190E6A5700AC032E /* MITranslucentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D29A1E6E190E6A5700AC032E /* MITranslucentButton.m */; };
 		D29A1E75190E8BE500AC032E /* MIDetailsCustomWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D29A1E74190E8BE500AC032E /* MIDetailsCustomWindow.m */; };
 		D2A089CC18FE796800B298D3 /* MIStartWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2A089CB18FE796800B298D3 /* MIStartWindowController.xib */; };
@@ -164,8 +164,8 @@
 		D256E7C419014CE500305329 /* INWindowButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INWindowButton.m; sourceTree = "<group>"; };
 		D256E7C519014CE500305329 /* NSDocument+INAppStoreWindowFixes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDocument+INAppStoreWindowFixes.h"; sourceTree = "<group>"; };
 		D256E7C619014CE500305329 /* NSDocument+INAppStoreWindowFixes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDocument+INAppStoreWindowFixes.m"; sourceTree = "<group>"; };
-		D256E7CD190151E500305329 /* MICustomWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MICustomWindow.h; path = "Classes/View/Custom Window/MICustomWindow.h"; sourceTree = "<group>"; };
-		D256E7CE190151E500305329 /* MICustomWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MICustomWindow.m; path = "Classes/View/Custom Window/MICustomWindow.m"; sourceTree = "<group>"; };
+		D256E7CD190151E500305329 /* MIStartCustomWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIStartCustomWindow.h; path = "Classes/View/Custom Window/MIStartCustomWindow.h"; sourceTree = "<group>"; };
+		D256E7CE190151E500305329 /* MIStartCustomWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIStartCustomWindow.m; path = "Classes/View/Custom Window/MIStartCustomWindow.m"; sourceTree = "<group>"; };
 		D29A1E6D190E6A5700AC032E /* MITranslucentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MITranslucentButton.h; path = "Classes/View/Translucent Button/MITranslucentButton.h"; sourceTree = "<group>"; };
 		D29A1E6E190E6A5700AC032E /* MITranslucentButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MITranslucentButton.m; path = "Classes/View/Translucent Button/MITranslucentButton.m"; sourceTree = "<group>"; };
 		D29A1E73190E8BE500AC032E /* MIDetailsCustomWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIDetailsCustomWindow.h; path = "Classes/View/Details Custom Window/MIDetailsCustomWindow.h"; sourceTree = "<group>"; };
@@ -491,8 +491,8 @@
 		D256E7CC190151BA00305329 /* Start Window */ = {
 			isa = PBXGroup;
 			children = (
-				D256E7CD190151E500305329 /* MICustomWindow.h */,
-				D256E7CE190151E500305329 /* MICustomWindow.m */,
+				D256E7CD190151E500305329 /* MIStartCustomWindow.h */,
+				D256E7CE190151E500305329 /* MIStartCustomWindow.m */,
 			);
 			name = "Start Window";
 			sourceTree = "<group>";
@@ -783,7 +783,7 @@
 				CF66905319041AE400324BC7 /* MIImage.m in Sources */,
 				D2A089E518FFC8BC00B298D3 /* MIDetailsWindowController.m in Sources */,
 				D256E7C919014CE500305329 /* INTitlebarView+CoreUIRendering.m in Sources */,
-				D256E7CF190151E500305329 /* MICustomWindow.m in Sources */,
+				D256E7CF190151E500305329 /* MIStartCustomWindow.m in Sources */,
 				D256E7CB19014CE500305329 /* NSDocument+INAppStoreWindowFixes.m in Sources */,
 				D256E7A3190123EC00305329 /* MIScrollView.m in Sources */,
 				D29A1E6F190E6A5700AC032E /* MITranslucentButton.m in Sources */,

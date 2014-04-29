@@ -14,16 +14,15 @@
 #import "INAppStoreWindow.h"
 #import "NSImageView+AFNetworking.h"
 #import "RKObjectManager.h"
+#import "MIDetailsCustomWindow.h"
 
 @interface MIStartWindowController () {
 	NSArray *feed;
     MIDetailsWindowController *detailsWindowController;
     CGPoint windowOrigin;
-    NSImageView *titleImage;
     NSArrayController *arrayController;
     BOOL loadingInProgress;
     NSTimer *timer;
-    BOOL alignment;
 }
 
 @end
@@ -38,10 +37,6 @@
         windowOrigin = CGPointMake(100000.0, 100000.0);
         
         arrayController = [[NSArrayController alloc] initWithContent:[NSArray array]];
-        
-        titleImage = [[NSImageView alloc] initWithFrame:CGRectMake(500.0, 0.0, 50.0, 70.0)];
-        [titleImage setImage:[NSImage imageNamed:@"Instagram.png"]];
-        [[(INAppStoreWindow *)self.window titleBarView] addSubview:titleImage];
 	}
 	return self;
 }
@@ -54,30 +49,14 @@
 
 #pragma mark - Window controller lifecycle
 
-- (void)windowWillLoad {
-	[super windowWillLoad];
-}
-
 - (void)loadWindow {
 	[super loadWindow];
-    
-    [self.check setHidden:YES];
     
     // extracting cache from DB
 //    [arrayController setContent:[[MIDatabaseManager sharedInstance] extractFeedFromDatabase]];
     
     // reconneciton
     [self getFeed:self];
-    
-    NSScrollView *scrollView = (NSScrollView *)self.collectionView.superview.superview;
-    scrollView.backgroundColor = [NSColor clearColor];
-    [(MIScrollView *)scrollView setDelegate:self];
-    
-    // scrolling notification turning ON
-//    [[self.collectionView superview] setPostsBoundsChangedNotifications:YES];
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(getNextPage:)
-//                                                 name:NSViewBoundsDidChangeNotification object:[self.collectionView superview]];
     
     // selection handling
     [self.collectionView bind:NSContentBinding toObject:arrayController withKeyPath:@"arrangedObjects" options:nil];
@@ -88,35 +67,11 @@
     // window apperience configuration
     INAppStoreWindow *window = (INAppStoreWindow *)self.window;
     window.delegate = self;
-    window.titleBarHeight = 50.0f;
     
-    window.titleBarDrawingBlock = ^(BOOL drawsAsMainWindow, CGRect drawingRect, CGPathRef clippingPath) {
-		CGContextRef ctx = [[NSGraphicsContext currentContext] graphicsPort];
-		CGContextAddPath(ctx, clippingPath);
-		CGContextClip(ctx);
-        
-		NSGradient *gradient = nil;
-		if (drawsAsMainWindow) {
-			gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedRed:36.0/256.0 green:98.0/256.0 blue:131.0/256.0 alpha:1.0]
-													 endingColor:[NSColor colorWithCalibratedRed:71.0/256.0 green:129.0/256.0 blue:162.0/256.0 alpha:1.0]];
-			[[NSColor darkGrayColor] setFill];
-		} else {
-			// set the default non-main window gradient colors
-			gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedWhite:0.851f alpha:1]
-													 endingColor:[NSColor colorWithCalibratedWhite:0.929f alpha:1]];
-			[[NSColor colorWithCalibratedWhite:0.6f alpha:1] setFill];
-		}
-		[gradient drawInRect:drawingRect angle:90];
-		NSRectFill(NSMakeRect(NSMinX(drawingRect), NSMinY(drawingRect), NSWidth(drawingRect), 1));
-	};
-    
-    // title bar image positioning
-    [self windowWillResize:self.window toSize:self.window.frame.size];
-    // collection view items sizing
-    [self windowDidEndLiveResize:nil];
-    [self.collectionView setNeedsDisplay:YES];
-    
-    [self.window setFrame:self.window.frame display:YES animate:YES];
+    // scroll view
+    NSScrollView *scrollView = (NSScrollView *)self.collectionView.superview.superview;
+    scrollView.backgroundColor = [NSColor clearColor];
+    [(MIScrollView *)scrollView setDelegate:self];
 }
 
 - (void)close:(id)sender {
@@ -173,6 +128,13 @@
         } else {
             detailsWindowController = [[MIDetailsWindowController alloc] initWithPost:selectedPost];
             detailsWindowController.delegate = self;
+            // indicators of the next and privious triggers visibility
+            NSUInteger currentIndex = [arrayController.content indexOfObject:detailsWindowController.post];
+            NSArray *ar = arrayController.arrangedObjects;
+            NSUInteger count = [ar count];
+            [(MIDetailsCustomWindow *)detailsWindowController.window setNextPageAvailable:!(currentIndex+1 == count)];
+            [(MIDetailsCustomWindow *)detailsWindowController.window setPreviousPageAvailable:!(currentIndex-1 == 0)];
+            
             NSString *str = [[NSUserDefaults standardUserDefaults] objectForKey:@"detailsWindow"];
             if (str) {
                 [detailsWindowController.window setFrame:NSRectFromString(str) display:YES animate:NO];
@@ -186,39 +148,6 @@
         // ничего не выбрано
 //		NSLog(@"Observer called but no objects where selected.");
 	}
-}
-
-#pragma mark - Methods
-
-- (IBAction)reconnect:(id)sender {
-//	NSLog(@"Token request started");
-//	[self.progressBar startAnimation:self];
-//	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-//	    BOOL result = [[MINetworkManager sharedInstance] performInstagramAuthorization];
-//	    dispatch_async(dispatch_get_main_queue(), ^{
-//	        if (result) {   //success
-//	            NSLog(@"Token received");
-//	            [self.progressBar setHidden:YES];
-//	            [self.reconnectButton setHidden:YES];
-//	            [self.getFeedButton setHidden:NO];
-//			}
-//	        else {          // failure
-//	            NSLog(@"Failed to receive token");
-//	            [self.reconnectButton setEnabled:YES];
-//	            [self.reconnectButton setTitle:@"Retry to connect"];
-//	            [self.reconnectButton sizeToFit];
-//			}
-//	        [self.progressBar stopAnimation:self];
-//		});
-//	});
-    
-    alignment = !alignment;
-    if (alignment) {
-        [self.collectionView setMinItemSize:CGSizeMake(100.0, 100.0)];
-        [self.collectionView setMaxItemSize:CGSizeMake(200.0, 200.0)];
-    } else {
-        [self windowDidEndLiveResize:nil];
-    }
 }
 
 #pragma mark - Initial feed receiving
@@ -357,6 +286,9 @@
     NSUInteger currentIndex = [arrayController.content indexOfObject:detailsWindowController.post];
     if (currentIndex > 0) {
         [detailsWindowController updateWithPost:arrayController.content[--currentIndex]];
+        // indicators of the next and privious triggers visibility
+        [(MIDetailsCustomWindow *)detailsWindowController.window setNextPageAvailable:YES];
+        [(MIDetailsCustomWindow *)detailsWindowController.window setPreviousPageAvailable:!(currentIndex-1 == 0)];
     }
 }
 
@@ -367,60 +299,25 @@
     NSUInteger count = [ar count];
     if (count > ++currentIndex) {
         [detailsWindowController updateWithPost:arrayController.content[currentIndex]];
+        // indicators of the next and privious triggers visibility
+        [(MIDetailsCustomWindow *)detailsWindowController.window setNextPageAvailable:!(currentIndex+1 == count)];
+        [(MIDetailsCustomWindow *)detailsWindowController.window setPreviousPageAvailable:YES];
     }
 }
 
 #pragma mark - Window resizing
 
-- (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize
-{
-    // положение изображения заголовка
-    INAppStoreWindow *window = (INAppStoreWindow *)self.window;
-    float height = 55.0;
-    float width = 80.0;
-    [titleImage setFrame:CGRectMake(frameSize.width/2.0-width/2.0, window.titleBarView.frame.size.height-height, width, height)];
-
-    return frameSize;
-}
-
 - (void)windowDidEndLiveResize:(NSNotification *)notification
 {
-    if (!alignment)
-    {
-        float collectionViewWidth = self.collectionView.superview.frame.size.width;
-        
-        int count = (int)(collectionViewWidth/100.0);
-        float dif = collectionViewWidth - count*100.0;
-        float width = 100.0 + dif/count - 1;
-        
-        [self.collectionView setMinItemSize:CGSizeMake(width, width)];
-        [self.collectionView setMaxItemSize:CGSizeMake(width, width)];
-    }
+    float collectionViewWidth = self.collectionView.superview.frame.size.width;
+    
+    int count = (int)(collectionViewWidth/100.0);
+    float dif = collectionViewWidth - count*100.0;
+    float width = 100.0 + dif/count - 1;
+    
+    [self.collectionView setMinItemSize:CGSizeMake(width, width)];
+    [self.collectionView setMaxItemSize:CGSizeMake(width, width)];
 }
-
-#pragma mark - Mouse handling
-
-// scroll to top behavior
-//- (void)mouseDown:(NSEvent *)theEvent {
-//    NSPoint locationInView = [self.tapView convertPoint:[theEvent locationInWindow]
-//                                         fromView:[[self.tapView window] contentView]];
-//    if (locationInView.y > 0) {
-////        windowOrigin = self.window.frame.origin;
-//        NSScrollView *scrollView = (NSScrollView *)self.collectionView.superview.superview;
-//        NSPoint pt = NSMakePoint(0.0, 0.0);
-//        [[scrollView documentView] scrollPoint:pt];
-//    }
-//}
-//
-//- (void)mouseUp:(NSEvent *)theEvent {
-////    if (windowOrigin.x != self.window.frame.origin.x || windowOrigin.y != self.window.frame.origin.y) {
-////        NSScrollView *scrollView = (NSScrollView *)self.collectionView.superview.superview;
-////        NSPoint pt = NSMakePoint(0.0, 0.0);
-////        [[scrollView documentView] scrollPoint:pt];
-////    } else {
-////        windowOrigin = CGPointMake(100000.0, 100000.0);
-////    }
-//}
 
 - (void)didScrollToEnd {
     [self getNextPage:self];
