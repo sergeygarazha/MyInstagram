@@ -19,6 +19,7 @@
 	self = [super initWithWindowNibName:@"MIDetailsWindowController"];
 	if (self) {
 		self.post = post_;
+        self.windowIsLoaded = NO;
 	}
 	return self;
 }
@@ -28,6 +29,8 @@
 
 	[[(MIDetailsCustomWindow *)self.window imageView] setImageFromURL:[NSURL URLWithString:post.standard] withThumbnailURL:[NSURL URLWithString:post.thumbnail]];
 	self.window.delegate = self;
+    
+    self.windowIsLoaded = YES;
 }
 
 - (void)updateWithPost:(Post *)post_ {

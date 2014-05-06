@@ -10,27 +10,18 @@
 
 @implementation MITranslucentButton
 
-- (id)initWithFrame:(NSRect)frame
+- (void)awakeFromNib
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code here.
-    }
-    return self;
+    [super awakeFromNib];
+    
+    self.color = [NSColor colorWithCalibratedRed:0.000 green:0.514 blue:0.735 alpha:0.250];
 }
 
 - (void) drawRect:(NSRect)dirtyRect
 {
     [self setBordered:NO];
-    
-    //REMED since it has same effect as NSRectFill below
-    //[[self cell] setBackgroundColor:[NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0.2]];
-    
-    NSColor* backgroundColor = [NSColor colorWithCalibratedRed:0.000 green:0.514 blue:0.735 alpha:0.250];
-    [backgroundColor setFill];
-//    NSRectFill(dirtyRect);
+    [self.color setFill];
     NSRectFillUsingOperation(dirtyRect, NSCompositeSourceAtop);
-    
     [super drawRect:dirtyRect];
 }
 

@@ -9,12 +9,14 @@
 #import "INAppStoreWindow.h"
 
 @class MICollectionView;
+@class MITranslucentButton;
 
 @interface MIStartCustomWindow : INAppStoreWindow
 
-@property (weak) IBOutlet NSButton *getNextPage;
-@property (weak) IBOutlet NSProgressIndicator *progressIndicator;
-@property (weak) IBOutlet NSButton *getFeed;
 @property (weak) IBOutlet MICollectionView *collectionView;
+@property (weak) IBOutlet MITranslucentButton *updateButton;
+
+- (void)showProgressIndicator;
+- (void)hideProgressIndicator;
 
 @end

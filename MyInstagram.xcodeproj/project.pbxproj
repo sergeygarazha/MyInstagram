@@ -19,6 +19,9 @@
 		D208E7A91907A9C900825934 /* Reload.png in Resources */ = {isa = PBXBuildFile; fileRef = D208E7A81907A9C900825934 /* Reload.png */; };
 		D208E7B21907D42500825934 /* Icon512.png in Resources */ = {isa = PBXBuildFile; fileRef = D208E7B01907D42500825934 /* Icon512.png */; };
 		D208E7B31907D42500825934 /* Icon1024.png in Resources */ = {isa = PBXBuildFile; fileRef = D208E7B11907D42500825934 /* Icon1024.png */; };
+		D22325FE1918E3D70022D702 /* Reload1.png in Resources */ = {isa = PBXBuildFile; fileRef = D22325FD1918E3D70022D702 /* Reload1.png */; };
+		D22326001918EC7B0022D702 /* Cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = D22325FF1918EC7B0022D702 /* Cancel.png */; };
+		D22326031918F5D60022D702 /* MIButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D22326021918F5D60022D702 /* MIButtonCell.m */; };
 		D225738818E3029300D0C276 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D225738718E3029300D0C276 /* Cocoa.framework */; };
 		D225739218E3029300D0C276 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D225739018E3029300D0C276 /* InfoPlist.strings */; };
 		D225739418E3029300D0C276 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D225739318E3029300D0C276 /* main.m */; };
@@ -103,6 +106,10 @@
 		D208E7A81907A9C900825934 /* Reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Reload.png; sourceTree = "<group>"; };
 		D208E7B01907D42500825934 /* Icon512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon512.png; sourceTree = "<group>"; };
 		D208E7B11907D42500825934 /* Icon1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon1024.png; sourceTree = "<group>"; };
+		D22325FD1918E3D70022D702 /* Reload1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Reload1.png; sourceTree = "<group>"; };
+		D22325FF1918EC7B0022D702 /* Cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cancel.png; sourceTree = "<group>"; };
+		D22326011918F5D60022D702 /* MIButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIButtonCell.h; path = "Classes/View/Translucent Button/MIButtonCell.h"; sourceTree = "<group>"; };
+		D22326021918F5D60022D702 /* MIButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIButtonCell.m; path = "Classes/View/Translucent Button/MIButtonCell.m"; sourceTree = "<group>"; };
 		D225738418E3029300D0C276 /* MyInstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyInstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D225738718E3029300D0C276 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D225738A18E3029300D0C276 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -500,9 +507,11 @@
 		D256E7D019015BD800305329 /* PNG */ = {
 			isa = PBXGroup;
 			children = (
+				D22325FF1918EC7B0022D702 /* Cancel.png */,
 				D208E7B01907D42500825934 /* Icon512.png */,
 				D208E7B11907D42500825934 /* Icon1024.png */,
 				D208E7A81907A9C900825934 /* Reload.png */,
+				D22325FD1918E3D70022D702 /* Reload1.png */,
 				CFF64A7B1903A65B0048AC93 /* Instagram.png */,
 			);
 			path = PNG;
@@ -513,6 +522,8 @@
 			children = (
 				D29A1E6D190E6A5700AC032E /* MITranslucentButton.h */,
 				D29A1E6E190E6A5700AC032E /* MITranslucentButton.m */,
+				D22326011918F5D60022D702 /* MIButtonCell.h */,
+				D22326021918F5D60022D702 /* MIButtonCell.m */,
 			);
 			name = "Translucent Button";
 			sourceTree = "<group>";
@@ -538,13 +549,13 @@
 		D2A089D118FEBBB000B298D3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D256E7CC190151BA00305329 /* Start Window */,
+				D2A089D918FEBDC300B298D3 /* Collection View */,
 				D29A1E72190E8B9B00AC032E /* Details Custom Window */,
 				D29A1E6C190E69FB00AC032E /* Translucent Button */,
 				CF66904A190410DC00324BC7 /* Image View */,
-				D256E7CC190151BA00305329 /* Start Window */,
 				D256E7A0190123BA00305329 /* MIScrollView */,
 				D2A089DD18FEBF0B00B298D3 /* NSImageView+AFNetworking */,
-				D2A089D918FEBDC300B298D3 /* Collection View */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -692,12 +703,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D22325FE1918E3D70022D702 /* Reload1.png in Resources */,
 				D2A089CC18FE796800B298D3 /* MIStartWindowController.xib in Resources */,
 				D225739218E3029300D0C276 /* InfoPlist.strings in Resources */,
 				D208E7A5190789F700825934 /* MIAuthWindowController.xib in Resources */,
 				D22573EA18E31F6D00D0C276 /* MIStartViewController.xib in Resources */,
 				CFF64A7D1903A65B0048AC93 /* Instagram.png in Resources */,
 				D22573BD18E3029400D0C276 /* MyInstagramImporter.mdimporter in Resources */,
+				D22326001918EC7B0022D702 /* Cancel.png in Resources */,
 				D22573A318E3029400D0C276 /* Images.xcassets in Resources */,
 				D208E7A91907A9C900825934 /* Reload.png in Resources */,
 				D208E7B21907D42500825934 /* Icon512.png in Resources */,
@@ -777,6 +790,7 @@
 				D2A089D018FE9B0A00B298D3 /* Post.m in Sources */,
 				D208E79F190688A800825934 /* NSBezierPath+Geometry.m in Sources */,
 				D22573F118E320AC00D0C276 /* MIStartWindowController.m in Sources */,
+				D22326031918F5D60022D702 /* MIButtonCell.m in Sources */,
 				D2EAC60A1905220A0067AED3 /* MICVItemView.m in Sources */,
 				D256E7AE1901319100305329 /* RFOverlayScroller.m in Sources */,
 				D2A089DC18FEBDEA00B298D3 /* MICollectionView.m in Sources */,

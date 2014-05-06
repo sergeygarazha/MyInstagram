@@ -22,6 +22,7 @@
 
 @property (strong) Post *post;
 @property (weak) id<MIDetailsWindowControllerDelegate> delegate;
+@property BOOL windowIsLoaded;
 
 - (instancetype)initWithPost:(Post *)post_;
 - (void)updateWithPost:(Post *)post;

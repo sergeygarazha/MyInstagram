@@ -10,4 +10,6 @@
 
 @interface MITranslucentButton : NSButton
 
+@property (strong) NSColor *color;
+
 @end

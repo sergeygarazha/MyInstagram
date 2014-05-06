@@ -8,6 +8,7 @@
 
 #import "MIDetailsCustomWindow.h"
 #import "MITranslucentButton.h"
+#import "MIDetailsWindowController.h"
 
 @interface MIDetailsCustomWindow () {
     NSTrackingArea *leftTrackingArea;
@@ -32,8 +33,8 @@
 	[centredStyle setAlignment:NSCenterTextAlignment];
 	NSDictionary *attributes = @{ NSForegroundColorAttributeName: [NSColor whiteColor],
 		                          NSParagraphStyleAttributeName: centredStyle };
-	[self.leftTransitionView setAttributedTitle:[[NSAttributedString alloc] initWithString:@"Назад" attributes:attributes]];
-	[self.rightTransitionView setAttributedTitle:[[NSAttributedString alloc] initWithString:@"Вперед" attributes:attributes]];
+	[self.leftTransitionView setAttributedTitle:[[NSAttributedString alloc] initWithString:@"Back" attributes:attributes]];
+	[self.rightTransitionView setAttributedTitle:[[NSAttributedString alloc] initWithString:@"Forward" attributes:attributes]];
 }
 
 - (void)setFrame:(NSRect)frameRect display:(BOOL)flag
@@ -52,6 +53,8 @@
 
 - (void)close
 {
+    [(MIDetailsWindowController *)self.windowController setWindowIsLoaded:NO];
+    
     CGPoint origin = self.frame.origin;
     CGSize size = self.frame.size;
     [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f,%f,%f,%f",

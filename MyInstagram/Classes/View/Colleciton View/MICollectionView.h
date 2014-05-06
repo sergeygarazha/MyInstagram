@@ -10,4 +10,6 @@
 
 @interface MICollectionView : NSCollectionView
 
+- (void)adjustItemsSize;
+
 @end

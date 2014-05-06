@@ -15,13 +15,11 @@
 #import "NSImageView+AFNetworking.h"
 #import "RKObjectManager.h"
 #import "MIDetailsCustomWindow.h"
+#import "MIStartCustomWindow.h"
 
 @interface MIStartWindowController () {
-	NSArray *feed;
     MIDetailsWindowController *detailsWindowController;
-    CGPoint windowOrigin;
     NSArrayController *arrayController;
-    BOOL loadingInProgress;
     NSTimer *timer;
 }
 
@@ -32,9 +30,7 @@
 - (instancetype)init {
 	self = [super initWithWindowNibName:@"MIStartWindowController"];
 	if (self) {
-		feed = [NSArray array];
-        loadingInProgress = NO;
-        windowOrigin = CGPointMake(100000.0, 100000.0);
+        self.loadingInProgress = NO;
         
         arrayController = [[NSArrayController alloc] initWithContent:[NSArray array]];
 	}
@@ -76,13 +72,13 @@
 
 - (void)close:(id)sender {
     [detailsWindowController.window close];
-    detailsWindowController = nil;
+    detailsWindowController.windowIsLoaded = NO;
 }
 
 - (void)showWindow:(id)sender {
     [super showWindow:sender];
     
-    if (detailsWindowController) {
+    if (detailsWindowController.windowIsLoaded) {
         [detailsWindowController showWindow:self];
     }
 }
@@ -155,30 +151,26 @@
 - (IBAction)getFeed:(id)sender {
     [[MIDatabaseManager sharedInstance] deleteOldEntries];
     
-    if (!loadingInProgress) {
-        [self.progressBar setHidden:NO];
-        [self.progressBar startAnimation:self];
-        [self.getFeedButton setEnabled:NO];
-        loadingInProgress = YES;
+    if (!self.loadingInProgress) {
+        // UI behaviour
+        [self.updateButton setEnabled:NO];
+        [(MIStartCustomWindow *)self.window showProgressIndicator];
+        self.loadingInProgress = YES;
         
         timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(showCancelForGetFeed) userInfo:nil repeats:NO];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             [[MINetworkManager sharedInstance] getFeedAndExecute: ^(BOOL success, NSArray *resultArray) {
-                if (success) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        loadingInProgress = NO;
-                        [arrayController setContent:resultArray];
-                        [self.progressBar setHidden:YES];
-                        [self.check setHidden:NO];
-                        [timer invalidate];
-                        
-                        [self checkIfWeNeedToContinueLoading];
-                    });
-                }
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    loadingInProgress = NO;
-                    [self.progressBar stopAnimation:self];
-                    [self.getFeedButton setEnabled:YES];
+                    if (success) {
+                        self.loadingInProgress = NO;
+                        [arrayController setContent:resultArray];
+                        [timer invalidate];
+                        [self checkIfWeNeedToContinueLoading];
+                    }
+                    self.loadingInProgress = NO;
+                    [self.updateButton setEnabled:YES];
+                    [self.updateButton setHidden:YES];
+                    [(MIStartCustomWindow *)self.window hideProgressIndicator];
                 });
             }];
         });
@@ -199,35 +191,30 @@
 }
 
 - (void)showCancelForGetFeed {
-    [self.getFeedButton setEnabled:YES];
-    [self.getFeedButton setTitle:@"Cancel"];
-    [self.getFeedButton setAction:@selector(cancelGetFeedOperation)];
+    [self.updateButton setEnabled:YES];
+    [self.updateButton setAction:@selector(cancelGetFeedOperation)];
     timer = [NSTimer scheduledTimerWithTimeInterval:20.0 target:self selector:@selector(cancelGetFeedOperation) userInfo:nil repeats:NO];
 }
 
 - (void)cancelGetFeedOperation {
     [timer invalidate];
-    [self.progressBar stopAnimation:self];
-    [self.getFeedButton setEnabled:YES];
-    [self.getFeedButton setTitle:@"Get feed"];
-    [self.getFeedButton setAction:@selector(getFeed:)];
-    loadingInProgress = NO;
+//    [self.progressBar stopAnimation:self];
+    [self.updateButton setEnabled:YES];
+    [self.updateButton setAction:@selector(getFeed:)];
+    self.loadingInProgress = NO;
     [[RKObjectManager sharedManager] cancelAllObjectRequestOperationsWithMethod:RKRequestMethodAny matchingPathPattern:@""];
 }
 
 #pragma mark - Next Page Receiving
 
-// load next page
 - (IBAction)getNextPage:(id)sender {
-    if (!loadingInProgress && [[MINetworkManager sharedInstance] nextPageURL]) {
-        loadingInProgress = YES;
+    if (!self.loadingInProgress && [[MINetworkManager sharedInstance] nextPageURL]) {
+        self.loadingInProgress = YES;
         NSProgressIndicator *indicator = [[NSProgressIndicator alloc] initWithFrame:CGRectZero];
         [indicator setStyle:NSProgressIndicatorSpinningStyle];
         NSMutableArray *ar = [NSMutableArray arrayWithArray:arrayController.content];
         [ar addObject:indicator];
         [arrayController setContent:[ar copy]];
-        [self.check setEnabled:NO];
-        [self.check setTitle:@"Cancel"];
         timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(showCancelLable) userInfo:nil repeats:NO];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
@@ -240,9 +227,7 @@
                             [ar removeLastObject];
                             [ar addObjectsFromArray:resultArray];
                             [arrayController setContent:[ar copy]];
-                            loadingInProgress = NO;
-                            [self.check setEnabled:YES];
-                            [self.check setTitle:@"Get next page"];
+                            self.loadingInProgress = NO;
                             [timer invalidate];
                             
                             [self checkIfWeNeedToContinueLoading];
@@ -251,7 +236,7 @@
                 } else {
                     [self cancelNextPageReceiving];
                     if (resultArray) {
-                        [self.check setEnabled:NO];
+//                        [self.check setEnabled:NO];
                     }
                 }
                 
@@ -261,18 +246,16 @@
 }
 
 - (void)showCancelLable {
-    [self.check setEnabled:YES];
-    [self.check setTitle:@"Cancel"];
-    [self.check setAction:@selector(cancelNextPageReceiving)];
+//    [self.check setEnabled:YES];
+//    [self.check setAction:@selector(cancelNextPageReceiving)];
     timer = [NSTimer scheduledTimerWithTimeInterval:20.0 target:self selector:@selector(cancelNextPageReceiving) userInfo:nil repeats:NO];
 }
 
 - (void)cancelNextPageReceiving {
     [timer invalidate];
-    [self.check setEnabled:YES];
-    [self.check setTitle:@"Get next page"];
-    [self.check setAction:@selector(getNextPage:)];
-    loadingInProgress = NO;
+//    [self.check setEnabled:YES];
+//    [self.check setAction:@selector(getNextPage:)];
+    self.loadingInProgress = NO;
     NSMutableArray *ar = [NSMutableArray arrayWithArray:arrayController.content];
     [ar removeLastObject];
     [arrayController setContent:[ar copy]];
@@ -309,14 +292,7 @@
 
 - (void)windowDidEndLiveResize:(NSNotification *)notification
 {
-    float collectionViewWidth = self.collectionView.superview.frame.size.width;
-    
-    int count = (int)(collectionViewWidth/100.0);
-    float dif = collectionViewWidth - count*100.0;
-    float width = 100.0 + dif/count - 1;
-    
-    [self.collectionView setMinItemSize:CGSizeMake(width, width)];
-    [self.collectionView setMaxItemSize:CGSizeMake(width, width)];
+    [(MICollectionView *)self.collectionView adjustItemsSize];
 }
 
 - (void)didScrollToEnd {

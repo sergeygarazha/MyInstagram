@@ -11,7 +11,20 @@
 #import "NSImageView+AFNetworking.h"
 #import <AFNetworking/AFImageRequestOperation.h>
 
+@interface MICollectionView ()
+{
+    BOOL firstStart;
+}
+
+@end
+
 @implementation MICollectionView
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    firstStart = YES;
+}
 
 - (NSCollectionViewItem *)newItemForRepresentedObject:(id)object {
     NSCollectionViewItem *item = [super newItemForRepresentedObject:object];
@@ -31,8 +44,24 @@
     return item;
 }
 
-- (NSRect)frameForItemAtIndex:(NSUInteger)index {
-    return [super frameForItemAtIndex:index];
+- (void)setFrame:(NSRect)frameRect {
+    [super setFrame:frameRect];
+    
+    if (firstStart) {
+        [self adjustItemsSize];
+        firstStart = NO;
+    }
+}
+
+- (void)adjustItemsSize {
+    float collectionViewWidth = self.superview.frame.size.width;
+    
+    int count = (int)(collectionViewWidth/100.0);
+    float dif = collectionViewWidth - count*100.0;
+    float width = 100.0 + dif/count - 1;
+    
+    [self setMinItemSize:CGSizeMake(width, width)];
+    [self setMaxItemSize:CGSizeMake(width, width)];
 }
 
 @end
