@@ -16,6 +16,7 @@
 #import "RKObjectManager.h"
 #import "MIDetailsCustomWindow.h"
 #import "MIStartCustomWindow.h"
+#import "MITranslucentButton.h"
 
 @interface MIStartWindowController () {
     MIDetailsWindowController *detailsWindowController;
@@ -124,12 +125,6 @@
         } else {
             detailsWindowController = [[MIDetailsWindowController alloc] initWithPost:selectedPost];
             detailsWindowController.delegate = self;
-            // indicators of the next and privious triggers visibility
-            NSUInteger currentIndex = [arrayController.content indexOfObject:detailsWindowController.post];
-            NSArray *ar = arrayController.arrangedObjects;
-            NSUInteger count = [ar count];
-            [(MIDetailsCustomWindow *)detailsWindowController.window setNextPageAvailable:!(currentIndex+1 == count)];
-            [(MIDetailsCustomWindow *)detailsWindowController.window setPreviousPageAvailable:!(currentIndex-1 == 0)];
             
             NSString *str = [[NSUserDefaults standardUserDefaults] objectForKey:@"detailsWindow"];
             if (str) {
@@ -137,6 +132,14 @@
             }
             [detailsWindowController showWindow:self];
         }
+        
+        // indicators of the next and privious triggers visibility
+        NSUInteger currentIndex = [arrayController.content indexOfObject:detailsWindowController.post];
+        NSArray *ar = arrayController.arrangedObjects;
+        NSUInteger count = [ar count];
+        [(MIDetailsCustomWindow *)detailsWindowController.window setPreviousPageAvailable:!(currentIndex == 0)];
+        [(MIDetailsCustomWindow *)detailsWindowController.window setNextPageAvailable:!(currentIndex+1 == count)];
+        
         [detailsWindowController.window makeKeyAndOrderFront:self];
         [detailsWindowController.window setOrderedIndex:0];
 	}
@@ -267,12 +270,15 @@
 - (void)showPreviousPost
 {
     NSUInteger currentIndex = [arrayController.content indexOfObject:detailsWindowController.post];
-    if (currentIndex > 0) {
-        [detailsWindowController updateWithPost:arrayController.content[--currentIndex]];
-        // indicators of the next and privious triggers visibility
-        [(MIDetailsCustomWindow *)detailsWindowController.window setNextPageAvailable:YES];
-        [(MIDetailsCustomWindow *)detailsWindowController.window setPreviousPageAvailable:!(currentIndex-1 == 0)];
+    
+    BOOL condition = (currentIndex == 1);
+    [(MIDetailsCustomWindow *)detailsWindowController.window setPreviousPageAvailable:condition];
+    if (condition) {
+        [[(MIDetailsCustomWindow *)detailsWindowController.window leftTransitionView] setHidden:YES];
     }
+    
+    [detailsWindowController updateWithPost:arrayController.content[--currentIndex]];
+    [(MIDetailsCustomWindow *)detailsWindowController.window setNextPageAvailable:YES];
 }
 
 - (void)showNextPost
@@ -280,12 +286,15 @@
     NSUInteger currentIndex = [arrayController.content indexOfObject:detailsWindowController.post];
     NSArray *ar = arrayController.arrangedObjects;
     NSUInteger count = [ar count];
-    if (count > ++currentIndex) {
-        [detailsWindowController updateWithPost:arrayController.content[currentIndex]];
-        // indicators of the next and privious triggers visibility
-        [(MIDetailsCustomWindow *)detailsWindowController.window setNextPageAvailable:!(currentIndex+1 == count)];
-        [(MIDetailsCustomWindow *)detailsWindowController.window setPreviousPageAvailable:YES];
+    
+    BOOL condition = (currentIndex+2 == count);
+    [(MIDetailsCustomWindow *)detailsWindowController.window setNextPageAvailable:!condition];
+    if (condition) {
+        [[(MIDetailsCustomWindow *)detailsWindowController.window rightTransitionView] setHidden:YES];
     }
+    
+    [detailsWindowController updateWithPost:arrayController.content[currentIndex+1]];
+    [(MIDetailsCustomWindow *)detailsWindowController.window setPreviousPageAvailable:YES];
 }
 
 #pragma mark - Window resizing
