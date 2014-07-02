@@ -7,10 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MAAttachedWindow.h"
 
 @class MITranslucentButton;
 
-@interface MIDetailsCustomWindow : NSWindow
+@interface MIDetailsCustomWindow : MAAttachedWindow
 
 @property (weak) IBOutlet MITranslucentButton *leftTransitionView;
 @property (weak) IBOutlet MITranslucentButton *rightTransitionView;

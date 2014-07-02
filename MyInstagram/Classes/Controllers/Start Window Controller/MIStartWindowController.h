@@ -12,6 +12,8 @@
 
 @class MICollectionView;
 
+typedef void(^completionBlock)(BOOL result);
+
 @interface MIStartWindowController : NSWindowController <NSWindowDelegate, MIDetailsWindowControllerDelegate>
 
 @property (weak) IBOutlet MICollectionView *collectionView;
@@ -20,6 +22,13 @@
 @property BOOL loadingInProgress;
 
 - (IBAction)getFeed:(id)sender;
-- (IBAction)getNextPage:(id)sender;
+
+/**
+ *  Load next portion of posts
+ *
+ *  @param sender   IBAction's default parameter (accepts self or nil)
+ *  @param block    Block to execute afted downloading completion
+ */
+- (IBAction)getNextBatchOfPosts:(id)sender andExecute:(completionBlock)block;
 
 @end

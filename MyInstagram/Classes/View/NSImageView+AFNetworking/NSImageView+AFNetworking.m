@@ -22,13 +22,31 @@ NSTimer *timer;
 
 #pragma mark - Publick methods
 
-- (void)setImageFromURL:(NSURL *)url {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-//    request.cachePolicy = NSURLRequestReturnCacheDataDontLoad;
-    
+- (void)setImageFromURL:(NSURL *)url withThumbnailURL:(NSURL *)thumbnail {
     if (self.image && [currentOperation isExecuting]) {
         [currentOperation cancel];
     }
+    [timer invalidate];
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(showProgressIndicator) userInfo:nil repeats:NO];
+    NSURLRequest *request = [NSURLRequest requestWithURL:thumbnail];
+    currentOperation = [AFImageRequestOperation imageRequestOperationWithRequest:request
+                                                                         success:^(NSImage *image) {
+                                                                             [self setImageFromURL:url withThumbnail:image];
+                                                                         }];
+    [currentOperation start];
+}
+
+- (void)setImageFromURL:(NSURL *)url withThumbnail:(NSImage *)image {
+    self.image = image;
+    [self setImageFromURL:url];
+}
+
+- (void)setImageFromURL:(NSURL *)url {
+    if (self.image && [currentOperation isExecuting]) {
+        [currentOperation cancel];
+    }
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
     currentOperation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:^(NSImage *image) {
         self.image = image;
@@ -38,21 +56,6 @@ NSTimer *timer;
         [timer invalidate];
     }];
     [currentOperation start];
-}
-
-- (void)setImageFromURL:(NSURL *)url withThumbnailURL:(NSURL *)thumbnail {
-    timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(showProgressIndicator) userInfo:nil repeats:NO];
-    NSURLRequest *request = [NSURLRequest requestWithURL:thumbnail];
-    AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request
-                                                      success:^(NSImage *image) {
-                                                          [self setImageFromURL:url withThumbnail:image];
-                                                      }];
-    [operation start];
-}
-
-- (void)setImageFromURL:(NSURL *)url withThumbnail:(NSImage *)image {
-    self.image = image;
-    [self setImageFromURL:url];
 }
 
 #pragma mark - Progress Indicator handling

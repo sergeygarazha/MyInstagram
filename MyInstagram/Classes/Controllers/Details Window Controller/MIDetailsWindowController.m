@@ -17,6 +17,7 @@
 
 - (instancetype)initWithPost:(Post *)post_ {
 	self = [super initWithWindowNibName:@"MIDetailsWindowController"];
+
 	if (self) {
 		self.post = post_;
         self.windowIsLoaded = NO;

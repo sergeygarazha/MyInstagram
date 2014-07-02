@@ -10,12 +10,32 @@
 #import "MITranslucentButton.h"
 #import "MIDetailsWindowController.h"
 
+#define MAATTACHEDWINDOW_SCALE_FACTOR [[NSScreen mainScreen] userSpaceScaleFactor]
+
 @interface MIDetailsCustomWindow () {
     NSTrackingArea *leftTrackingArea;
 	NSTrackingArea *rightTrackingArea;
 	NSTrackingArea *bottomTrackingArea;
     BOOL windowClosingTrigger;
     CGPoint mouseLocation;
+    NSPoint _point;
+    float _distance;
+    
+    NSColor *borderColor;
+    float borderWidth;
+    float arrowBaseWidth;
+    float arrowHeight;
+    BOOL hasArrow;
+    float cornerRadius;
+    BOOL drawsRoundCornerBesideArrow;
+    
+@private
+    NSColor *_MABackgroundColor;
+    __weak NSView *_view;
+    __weak NSWindow *_window;
+    MAWindowPosition _side;
+    NSRect _viewFrame;
+    BOOL _resizing;
 }
 
 @end
@@ -24,15 +44,64 @@
 
 - (void)awakeFromNib
 {
-    windowClosingTrigger = NO;
+    [super awakeFromNib];
+    
+    MIDetailsWindowController *controller = (MIDetailsWindowController *)self.windowController;
     
     [self setAspectRatio:self.imageView.frame.size];
+    _view = self.imageView;
+    [self setAspectRatio:self.imageView.frame.size];
+    
+    // MAAttachedWindow configurartion
+    _point = [controller attachingPoint];
+    _distance = 10.0;
+    borderWidth = 0.0;
+    windowClosingTrigger = NO;
+    self.viewMargin = 10.0f;
+    arrowBaseWidth = 20.0;
+    arrowHeight = 16.0;
+    arrowBaseWidth = 10.0;
+    hasArrow = YES;
+    drawsRoundCornerBesideArrow = YES;
+    self.styleMask = NSBorderlessWindowMask;
+    self.backingType = NSBackingStoreBuffered;
+    [self setExcludedFromWindowsMenu:YES];
+    [self setMovableByWindowBackground:YES];
+    [self useOptimizedDrawing:YES];
+    [self setCornerRadius:8.0];
+    [self setBackgroundColor:[NSColor whiteColor]];
+    
+//    // Configure our initial geometry.
+//    [self _updateGeometry];
+//    
+//    // Update the background.
+//    [super _updateBackground];
     
     // titles
-	NSMutableParagraphStyle *centredStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    NSMutableParagraphStyle *centredStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    [centredStyle setAlignment:NSCenterTextAlignment];
+    NSDictionary *attributes = @{ NSForegroundColorAttributeName: [NSColor whiteColor],
+                                  NSParagraphStyleAttributeName: centredStyle };
+    [self.leftTransitionView setAttributedTitle:[[NSAttributedString alloc] initWithString:@"Back" attributes:attributes]];
+    [self.rightTransitionView setAttributedTitle:[[NSAttributedString alloc] initWithString:@"Forward" attributes:attributes]];
+    
+    // rounded corners
+//    self.imageView.wantsLayer = YES;
+//    self.imageView.layer.masksToBounds = YES;
+//    [self.imageView.layer setCornerRadius:25.0];
+    
+//    [self.contentView setWantsLayer:YES];
+//    [self.contentView layer].masksToBounds = YES;
+//    [[self.contentView layer] setCornerRadius:25.0];
+    
+    // end of new implementation
+    windowClosingTrigger = NO;
+    
+    // titles
+	centredStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	[centredStyle setAlignment:NSCenterTextAlignment];
-	NSDictionary *attributes = @{ NSForegroundColorAttributeName: [NSColor whiteColor],
-		                          NSParagraphStyleAttributeName: centredStyle };
+	attributes = @{ NSForegroundColorAttributeName: [NSColor whiteColor],
+                    NSParagraphStyleAttributeName: centredStyle };
 	[self.leftTransitionView setAttributedTitle:[[NSAttributedString alloc] initWithString:@"Back" attributes:attributes]];
 	[self.rightTransitionView setAttributedTitle:[[NSAttributedString alloc] initWithString:@"Forward" attributes:attributes]];
 }

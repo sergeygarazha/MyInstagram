@@ -18,11 +18,16 @@
 #import "MIStartCustomWindow.h"
 #import "MITranslucentButton.h"
 
+#import "MIDetailsView.h"
+#import "MAAttachedWindow.h"
+
 @interface MIStartWindowController () {
     MIDetailsWindowController *detailsWindowController;
     NSArrayController *arrayController;
     NSTimer *timer;
 }
+
+@property (nonatomic) MAAttachedWindow *detailsWindow;
 
 @end
 
@@ -40,7 +45,7 @@
 
 - (void)dealloc {
 	[self.collectionView removeObserver:self
-	                     forKeyPath:@"selectionIndexes"];
+                             forKeyPath:@"selectionIndexes"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -50,10 +55,10 @@
 	[super loadWindow];
     
     // extracting cache from DB
-//    [arrayController setContent:[[MIDatabaseManager sharedInstance] extractFeedFromDatabase]];
+    [arrayController setContent:[[MIDatabaseManager sharedInstance] extractFeedFromDatabase]];
     
     // reconneciton
-    [self getFeed:self];
+//    [self getFeed:self];
     
     // selection handling
     [self.collectionView bind:NSContentBinding toObject:arrayController withKeyPath:@"arrangedObjects" options:nil];
@@ -101,51 +106,79 @@
     
 	if ([[self.collectionView selectionIndexes] count] > 0) {
         NSUInteger index = [[self.collectionView selectionIndexes] lastIndex];
-        NSCollectionViewItem *item = [self.collectionView itemAtIndex:index];
+////        NSCollectionViewItem *item = [self.collectionView itemAtIndex:index];
         Post *selectedPost = arrayController.content[index];
+//
+//        //!!: resetting indexes
+//        [self.collectionView setSelectionIndexes:[NSIndexSet indexSet]];
+//        
+////        // check if there is existen window with such post
+////        if (detailsWindowController && detailsWindowController.post == selectedPost) {
+////            if (![detailsWindowController.window isVisible]) {
+////                [detailsWindowController showWindow:self];
+////                [detailsWindowController.window becomeKeyWindow];
+////            }
+////            return;
+////        }
+////        
+////        if (!item.imageView.image) {
+////            [item.imageView setImageFromURL:[NSURL URLWithString:selectedPost.thumbnail]];
+////        }
+////        
+////        if ([detailsWindowController.window isVisible]) {
+////            [detailsWindowController updateWithPost:selectedPost];
+////        } else {
+//            // creating new details window
+//            detailsWindowController = [[MIDetailsWindowController alloc] initWithPost:selectedPost];
+//            detailsWindowController.delegate = self;
+//
+//            // loading saved from old session frame for window
+////            NSString *str = [[NSUserDefaults standardUserDefaults] objectForKey:@"detailsWindow"];
+////            if (str) {
+////                [detailsWindowController.window setFrame:NSRectFromString(str) display:YES animate:NO];
+////            }
+////            [detailsWindowController showWindow:self];
+
         
-        //!!: обнуляем индексы
-        [self.collectionView setSelectionIndexes:[NSIndexSet indexSet]];
         
-        // проверяем, нету ли уже готового окна с таким постом
-        if (detailsWindowController && detailsWindowController.post == selectedPost) {
-            if (![detailsWindowController.window isVisible]) {
-                [detailsWindowController showWindow:self];
-                [detailsWindowController.window becomeKeyWindow];
-            }
-            return;
-        }
         
-        if (!item.imageView.image) {
-            [item.imageView setImageFromURL:[NSURL URLWithString:selectedPost.thumbnail]];
-        }
+			[self.window removeChildWindow:self.detailsWindow];
+			self.detailsWindow = nil;
+
+			NSRect rect = [self.collectionView frameForItemAtIndex:index];
+			NSPoint point = rect.origin;
+
+			point.y = self.window.frame.origin.y + self.window.frame.size.height - point.y - rect.size.height - 10.0;
+			point.x += self.window.frame.origin.x + rect.size.width + 15.0;
+
+			MIDetailsView *detailsView = [[MIDetailsView alloc] initWithFrame:CGRectMake(0.0, 0.0, 500.0, 500.0)];
+			self.detailsWindow = [[MAAttachedWindow alloc] initWithView:detailsView attachedToPoint:point onSide:MAPositionAutomatic];
+			[self.detailsWindow setViewMargin:10.0];
+			[self.detailsWindow setCornerRadius:23.0];
+
+			[detailsView.imageView setImageFromURL:[NSURL URLWithString:selectedPost.standard] withThumbnailURL:[NSURL URLWithString:selectedPost.thumbnail]];
+
+			[[self window] addChildWindow:self.detailsWindow ordered:NSWindowAbove];
         
-        if ([detailsWindowController.window isVisible]) {
-            [detailsWindowController updateWithPost:selectedPost];
-        } else {
-            detailsWindowController = [[MIDetailsWindowController alloc] initWithPost:selectedPost];
-            detailsWindowController.delegate = self;
-            
-            NSString *str = [[NSUserDefaults standardUserDefaults] objectForKey:@"detailsWindow"];
-            if (str) {
-                [detailsWindowController.window setFrame:NSRectFromString(str) display:YES animate:NO];
-            }
-            [detailsWindowController showWindow:self];
-        }
         
-        // indicators of the next and privious triggers visibility
-        NSUInteger currentIndex = [arrayController.content indexOfObject:detailsWindowController.post];
-        NSArray *ar = arrayController.arrangedObjects;
-        NSUInteger count = [ar count];
-        [(MIDetailsCustomWindow *)detailsWindowController.window setPreviousPageAvailable:!(currentIndex == 0)];
-        [(MIDetailsCustomWindow *)detailsWindowController.window setNextPageAvailable:!(currentIndex+1 == count)];
         
-        [detailsWindowController.window makeKeyAndOrderFront:self];
-        [detailsWindowController.window setOrderedIndex:0];
+        
+        
+        
+//            detailsWindowController.attachingPoint = point;
+//            
+//            [[self window] addChildWindow:detailsWindowController.window ordered:NSWindowAbove];
+//        }
+//        
+//        // indicators of the next and privious triggers visibility
+//        NSUInteger currentIndex = [arrayController.content indexOfObject:detailsWindowController.post];
+//        [(MIDetailsCustomWindow *)detailsWindowController.window setPreviousPageAvailable:!(currentIndex == 0)];
+//        [(MIDetailsCustomWindow *)detailsWindowController.window setNextPageAvailable:YES];
+//        [detailsWindowController.window makeKeyAndOrderFront:self];
+//        [detailsWindowController.window setOrderedIndex:0];
 	}
 	else {
-        // ничего не выбрано
-//		NSLog(@"Observer called but no objects where selected.");
+        
 	}
 }
 
@@ -161,7 +194,7 @@
         self.loadingInProgress = YES;
         
         timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(showCancelForGetFeed) userInfo:nil repeats:NO];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [[MINetworkManager sharedInstance] getFeedAndExecute: ^(BOOL success, NSArray *resultArray) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (success) {
@@ -181,14 +214,14 @@
 }
 
 - (void)checkIfWeNeedToContinueLoading {
-    // проверяем, не нужно ли загрузить следующую страницу
+    // check if we need to load next page
     NSUInteger itemsCount = [self.collectionView.content count];
     if (itemsCount != 0) {
         int countOfItemsInRaw = (int)(self.collectionView.frame.size.width/self.collectionView.maxItemSize.width);
         int numberOfRaws = (int)itemsCount/countOfItemsInRaw;
         float contentHeight = self.collectionView.maxItemSize.height*numberOfRaws;
         if (self.collectionView.superview.frame.size.height > contentHeight) {
-            [self getNextPage:self];
+            [self getNextBatchOfPosts:self andExecute:nil];
         }
     }
 }
@@ -201,16 +234,15 @@
 
 - (void)cancelGetFeedOperation {
     [timer invalidate];
-//    [self.progressBar stopAnimation:self];
     [self.updateButton setEnabled:YES];
     [self.updateButton setAction:@selector(getFeed:)];
     self.loadingInProgress = NO;
     [[RKObjectManager sharedManager] cancelAllObjectRequestOperationsWithMethod:RKRequestMethodAny matchingPathPattern:@""];
 }
 
-#pragma mark - Next Page Receiving
+#pragma mark - Next Batch Receiving
 
-- (IBAction)getNextPage:(id)sender {
+- (IBAction)getNextBatchOfPosts:(id)sender andExecute:(completionBlock)block {
     if (!self.loadingInProgress && [[MINetworkManager sharedInstance] nextPageURL]) {
         self.loadingInProgress = YES;
         NSProgressIndicator *indicator = [[NSProgressIndicator alloc] initWithFrame:CGRectZero];
@@ -220,7 +252,7 @@
         [arrayController setContent:[ar copy]];
         timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(showCancelLable) userInfo:nil repeats:NO];
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [[MINetworkManager sharedInstance] getNextPageAndExecute:^(BOOL success, NSArray *resultArray) {
                 if (success) {
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -237,27 +269,25 @@
                         }
                     });
                 } else {
-                    [self cancelNextPageReceiving];
-                    if (resultArray) {
-//                        [self.check setEnabled:NO];
-                    }
+                    [self cancelNextBatchReceiving];
                 }
                 
+                if (block) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        block(success);
+                    });
+                }
             }];
         });
     }
 }
 
 - (void)showCancelLable {
-//    [self.check setEnabled:YES];
-//    [self.check setAction:@selector(cancelNextPageReceiving)];
-    timer = [NSTimer scheduledTimerWithTimeInterval:20.0 target:self selector:@selector(cancelNextPageReceiving) userInfo:nil repeats:NO];
+    timer = [NSTimer scheduledTimerWithTimeInterval:20.0 target:self selector:@selector(cancelNextBatchReceiving) userInfo:nil repeats:NO];
 }
 
-- (void)cancelNextPageReceiving {
+- (void)cancelNextBatchReceiving {
     [timer invalidate];
-//    [self.check setEnabled:YES];
-//    [self.check setAction:@selector(getNextPage:)];
     self.loadingInProgress = NO;
     NSMutableArray *ar = [NSMutableArray arrayWithArray:arrayController.content];
     [ar removeLastObject];
@@ -272,7 +302,7 @@
     NSUInteger currentIndex = [arrayController.content indexOfObject:detailsWindowController.post];
     
     BOOL condition = (currentIndex == 1);
-    [(MIDetailsCustomWindow *)detailsWindowController.window setPreviousPageAvailable:condition];
+    [(MIDetailsCustomWindow *)detailsWindowController.window setPreviousPageAvailable:!condition];
     if (condition) {
         [[(MIDetailsCustomWindow *)detailsWindowController.window leftTransitionView] setHidden:YES];
     }
@@ -287,14 +317,19 @@
     NSArray *ar = arrayController.arrangedObjects;
     NSUInteger count = [ar count];
     
-    BOOL condition = (currentIndex+2 == count);
-    [(MIDetailsCustomWindow *)detailsWindowController.window setNextPageAvailable:!condition];
-    if (condition) {
-        [[(MIDetailsCustomWindow *)detailsWindowController.window rightTransitionView] setHidden:YES];
+    BOOL nextPostAvailable = (currentIndex+1 < count);
+    [(MIDetailsCustomWindow *)detailsWindowController.window setPreviousPageAvailable:count>1];
+    if (nextPostAvailable) {
+        if ([[arrayController.content lastObject] isKindOfClass:[Post class]]) {
+            [detailsWindowController updateWithPost:arrayController.content[currentIndex+1]];
+        }
+    } else {
+        [self getNextBatchOfPosts:self andExecute:^(BOOL result) {
+            if (result && [detailsWindowController windowIsLoaded]) {
+                [detailsWindowController updateWithPost:arrayController.content[currentIndex+1]];
+            }
+        }];
     }
-    
-    [detailsWindowController updateWithPost:arrayController.content[currentIndex+1]];
-    [(MIDetailsCustomWindow *)detailsWindowController.window setPreviousPageAvailable:YES];
 }
 
 #pragma mark - Window resizing
@@ -305,7 +340,7 @@
 }
 
 - (void)didScrollToEnd {
-    [self getNextPage:self];
+    [self getNextBatchOfPosts:self andExecute:nil];
 }
 
 @end
